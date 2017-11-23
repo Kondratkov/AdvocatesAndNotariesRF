@@ -1,0 +1,211 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:weightSum="1" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:id="@+id/linearLayout8"
+                android:layout_weight="0.1" >
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="назад"
+                    android:id="@+id/but_map_close"
+                    android:onClick="onClickMap"
+                    android:background="#00d7c0c0"
+                    android:layout_weight="0.75"
+                    android:textColor="#ffffff" />
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#ffffff" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="на карте"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textColor="#ffffff"
+                        android:layout_weight="0.2" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:background="#ffffff"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="1dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="53dp">
+
+            </LinearLayout>
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:id="@+id/fragment_map"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="1dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="135dp"
+        android:layout_marginRight="40dp"
+        android:gravity="right"
+        android:layout_marginLeft="3333dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="2dp"
+            android:layout_height="140dp"
+            android:layout_alignTop="@+id/but_map_filter"
+            android:layout_toLeftOf="@+id/but_map_filter"
+            android:background="#c00f1629"
+            android:id="@+id/lila_map_filter"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="растояние поиска"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#fecb4a" />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/map_seekBar"
+                android:layout_marginTop="10dp"
+                android:progress="25" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/et_dist"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="5000"
+                android:textColor="#fec026"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="135dp"
+        android:gravity="right"
+        android:layout_marginLeft="3333dp">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="150dp"
+            android:text="ф и л ь т р"
+            android:id="@+id/but_map_filter"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="#0d0f27"
+            android:textSize="20dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:onClick="onClickMap"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|right">
+
+        <LinearLayout
+            android:id="@+id/lilamapone"
+            android:orientation="vertical"
+            android:layout_height="200dp"
+            android:layout_gravity="bottom|right"
+            android:background="@color/pr80"
+            android:layout_width="200dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_m_adress"
+                android:layout_weight="0.13"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="121dp"
+                android:id="@+id/tv_m_dopinfo"
+                android:gravity="center_horizontal"
+                android:paddingTop="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

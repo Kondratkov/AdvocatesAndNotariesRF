@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="300dp"
+    android:layout_height="70dp"
+    android:weightSum="1"
+    android:background="#cac6def4">
+
+    <TextView
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:text="Коновалов А. C."
+        android:id="@+id/title"
+        android:gravity="center"
+        android:textColor="#000744"
+        android:textSize="22dp"
+        android:singleLine="false"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="адрес: "
+            android:layout_marginLeft="5dp"
+            android:textColor="#363636" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Воронеж ул.Артамонова д. 30А"
+            android:id="@+id/snippet"
+            android:textColor="#000744"
+            android:textSize="15dp"
+            android:textIsSelectable="true"
+            android:gravity="center"
+            android:layout_marginRight="5dp" />
+    </LinearLayout>
+
+</LinearLayout>

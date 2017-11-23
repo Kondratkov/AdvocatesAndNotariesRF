@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/Theme.AppCompat.Light.NoActionBar"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_gray_fon"
+              android:orientation="vertical"
+              app:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerPadding="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <Button
+                android:id="@+id/but_dialog_chat"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+
+                android:layout_marginTop="15dp"
+                android:background="@color/color_button_orange"
+                android:text="на форум"
+                android:textColor="@color/color_white"/>
+
+            <Button
+                android:id="@+id/but_dialog_jur"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+
+                android:background="@color/color_button_orange"
+                android:text="выбрать адвоката"
+                android:textColor="@color/color_white"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/but_dialog_cancel"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_button_gray"
+            android:text="отмена"
+            android:textColor="@color/color_white"/>
+    </LinearLayout>
+
+</LinearLayout>

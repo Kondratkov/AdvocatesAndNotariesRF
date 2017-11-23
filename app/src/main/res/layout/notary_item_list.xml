@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#16000000"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/tv_item_notary_fio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Нет данных"
+                    android:textColor="@color/color_bluedark_for_bar"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lila_item_notary_adres"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/color_white"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.24"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="адрес:"
+                    android:textColor="#fec024"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_item_notary_adres_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/color_bluedark_for_bar"
+                    android:textSize="14dp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/x_marker_not" />
+
+                    <ImageButton
+                        android:id="@+id/not_but_maps"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="0.85"
+                        android:background="@drawable/xbut_menu"
+                        android:onClick="onClick" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.24"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="телефон:"
+                    android:textColor="#fec024"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_item_notary_phone_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/color_bluedark_for_bar"
+                    android:textSize="15dp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7">
+
+                    <Button
+                        android:id="@+id/not_but_phone"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="0.8"
+                        android:background="@drawable/ain_ic_icon_phone" />
+                </FrameLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/item_but_notary"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@drawable/xbut_menu" />
+
+        <Button
+            android:id="@+id/but_item_notary_adres"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom"
+            android:background="@color/color_menubar_l"
+            android:text="информация"
+            android:textColor="@color/color_white"
+            android:textSize="8dp" />
+
+        <TextView
+            android:id="@+id/tv_item_notary_dist_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:textColor="@color/color_bluedark_for_bar"
+            android:textSize="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tv_item_notary_holiday"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_weight="0.17"
+                android:gravity="center"
+                android:text="пн-пт"
+                android:textColor="@color/color_bluedark_for_bar" />
+
+            <ImageView
+                android:id="@+id/iv_item_notary_zapic"
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.17" />
+
+            <ImageView
+                android:id="@+id/iv_item_notary_vyezd"
+                android:layout_width="12dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="15dp"
+                android:layout_weight="0.10"
+                android:background="@drawable/exit_not_no" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

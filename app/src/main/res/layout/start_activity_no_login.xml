@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/common_google_signin_btn_text_dark_default"
+             android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/start_no_tv_fsar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="75dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:longClickable="true"
+            android:onClick="onClickSidebar"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:text="@string/start_no_main_pod1"
+            android:textColor="@color/color_bluedark_for_text"
+            android:textIsSelectable="true"
+            android:textSize="16dp"
+            android:typeface="normal"/>
+
+        <TextView
+            android:id="@+id/start_no_tv_msr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:longClickable="true"
+            android:onClick="onClickSidebar"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:text="@string/start_no_main_pod2"
+            android:textColor="@color/color_bluedark_for_text"
+            android:textIsSelectable="true"
+            android:textSize="13dp"
+            android:typeface="normal"/>
+
+        <ScrollView
+            android:id="@+id/start_no_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ScrollView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/color_bluedark_for_bar"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="1dp"
+                android:layout_marginTop="1dp"
+                android:src="@drawable/z_layer12"/>
+
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical|right">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/xbut_menu_12"/>
+
+                <ImageButton
+                    android:id="@+id/start_no_but_menu"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="#00ffffff"
+                    android:onClick="onClick_on"/>
+            </FrameLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ScrollView
+            android:id="@+id/start_no_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="55dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="60dp"
+                    android:layout_marginTop="70dp"
+                    android:layout_weight="0.3"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginLeft="31dp"
+                        android:layout_marginRight="31dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/frameOff"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="65dp"
+                                    android:layout_height="65dp"
+                                    android:src="@drawable/xicon_22"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/start_no_tv_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="0.3"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:longClickable="true"
+                                android:onClick="onClickSidebar"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="5"
+                                android:text="@string/start_no_main_3"
+                                android:textColor="@color/color_text_button_main_activity"
+                                android:textIsSelectable="false"
+                                android:textSize="25dp" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/start_no_but_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/button_for_main_activity"
+                            android:onClick="onClick_on"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginLeft="31dp"
+                        android:layout_marginRight="31dp"
+                        android:layout_marginTop="15dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="65dp"
+                                    android:layout_height="65dp"
+                                    android:src="@drawable/xicon_21"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/start_no_tv_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="0.3"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:longClickable="true"
+                                android:onClick="onClickSidebar"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="5"
+                                android:text="@string/start_no_main_4"
+                                android:textColor="@color/color_text_button_main_activity"
+                                android:textIsSelectable="true"
+                                android:textSize="25dp" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/start_no_but_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/button_for_main_activity"
+                            android:onClick="onClick_on"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginLeft="31dp"
+                        android:layout_marginRight="31dp"
+                        android:layout_marginTop="20dp"
+                        android:elevation="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="65dp"
+                                    android:layout_height="65dp"
+                                    android:src="@drawable/ain_ic_question" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/start_no_tv_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="0.3"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:longClickable="true"
+                                android:onClick="onClickSidebar"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="5"
+                                android:text="@string/start_no_main_1"
+                                android:textColor="@color/color_text_button_main_activity"
+                                android:textIsSelectable="true"
+                                android:textSize="25dp" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/start_no_but_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/button_for_main_activity"
+                            android:onClick="onClick_on"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="75dp"
+                        android:layout_marginLeft="31dp"
+                        android:layout_marginRight="31dp"
+                        android:layout_marginTop="15dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.7"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="65dp"
+                                    android:layout_height="65dp"
+                                    android:src="@drawable/ain_ic_iconforum"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/start_no_tv_4"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="0.3"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:gravity="center"
+                                android:longClickable="true"
+                                android:onClick="onClickSidebar"
+                                android:shadowDx="3"
+                                android:shadowDy="3"
+                                android:shadowRadius="5"
+                                android:text="@string/start_no_main_2"
+                                android:textColor="@color/color_text_button_main_activity"
+                                android:textIsSelectable="true"
+                                android:textSize="25dp" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/start_no_but_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/button_for_main_activity"
+                            android:onClick="onClick_on"/>
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+
+</FrameLayout>
+

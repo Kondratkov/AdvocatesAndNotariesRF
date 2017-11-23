@@ -1,0 +1,359 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_gray_fon"
+    tools:context="com.example.modest.jurdeside.Map">
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="85dp"
+        android:layout_height="26dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="12dp"
+        android:nestedScrollingEnabled="true"
+        android:src="@drawable/z_layer789" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/color_menubar_l"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/but_doc_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.75"
+                    android:background="#00d7c0c0"
+                    android:onClick="onClick"
+                    android:text="назад"
+                    android:textColor="#ffffff" />
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#ffffff" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="заявка для получения документов"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8">
+
+                        <ImageView
+                            android:id="@+id/imageView12"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/xbut_menu_12" />
+
+                        <ImageButton
+                            android:id="@+id/but_doc_menu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:background="#00ffffff"
+                            android:onClick="onClick" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="1dp"
+            android:background="#ffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:orientation="horizontal" />
+
+        <ScrollView
+            android:id="@+id/doc_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.09"
+            android:paddingRight="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.18"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:orientation="vertical">
+
+                        <ScrollView
+                            android:id="@+id/scrollView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
+                                android:orientation="vertical"
+
+                                android:showDividers="middle"
+                                android:weightSum="1">
+
+                                <!--komu -->
+
+                                <!--tip -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="30dp"
+                                    android:layout_weight="0.2"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvDocTip"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="25dp"
+                                        android:text="@string/name_docTip"
+                                        android:textAppearance="?android:attr/textAppearanceLarge"
+                                        android:textColor="@color/color_bluedark_for_bar"
+                                        android:textSize="15dp"
+                                        android:textStyle="italic" />
+
+                                    <Spinner
+                                        android:id="@+id/spinnerDocTip"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="25dp"
+                                        android:layout_marginRight="25dp"
+                                        android:layout_marginTop="5dp" />
+
+                                </LinearLayout>
+
+                                <!--vid -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_weight="0.2"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvDocVid"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="25dp"
+                                        android:text="@string/name_docVid"
+                                        android:textAppearance="?android:attr/textAppearanceLarge"
+                                        android:textColor="@color/color_bluedark_for_bar"
+                                        android:textSize="15dp"
+                                        android:textStyle="italic" />
+
+                                    <Spinner
+                                        android:id="@+id/spinnerDokVid"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:layout_marginLeft="25dp"
+                                        android:layout_marginRight="25dp"
+                                        android:layout_marginTop="5dp" />
+                                </LinearLayout>
+
+                                <!--form -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_weight="0.2"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/tvDocForm"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
+                                        android:layout_marginLeft="25dp"
+                                        android:text="@string/name_docForm"
+                                        android:textAppearance="?android:attr/textAppearanceLarge"
+                                        android:textColor="@color/color_bluedark_for_bar"
+                                        android:textSize="15dp"
+                                        android:textStyle="italic" />
+
+                                    <ScrollView
+                                        android:id="@+id/scrollView6"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="horizontal"
+                                            android:weightSum="1">
+
+                                            <EditText
+                                                android:id="@+id/tvmulDocForm"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginBottom="10dp"
+                                                android:layout_marginLeft="20dp"
+                                                android:layout_marginRight="20dp"
+                                                android:layout_marginTop="5dp"
+                                                android:layout_weight="0.15"
+                                                android:background="@color/color_white"
+                                                android:ems="10"
+                                                android:hint="@string/name_docAddText"
+                                                android:inputType="textMultiLine"
+                                                android:singleLine="true"
+                                                android:text=""
+                                                android:textColor="@color/color_bluedark_for_bar"
+                                                android:textColorHint="@color/color_button_gray" />
+
+                                        </LinearLayout>
+                                    </ScrollView>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="0.2"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvDocAttach"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="25dp"
+                                            android:layout_marginTop="15dp"
+                                            android:text="@string/name_docAttach"
+                                            android:textAppearance="?android:attr/textAppearanceLarge"
+                                            android:textColor="@color/color_bluedark_for_bar"
+                                            android:textSize="15dp"
+                                            android:textStyle="italic" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginTop="10dp"
+                                            android:orientation="horizontal"
+                                            android:weightSum="1">
+
+                                            <ImageButton
+                                                android:id="@+id/butAddDoc"
+                                                android:layout_width="50dp"
+                                                android:layout_height="50dp"
+                                                android:layout_marginBottom="5dp"
+                                                android:layout_marginLeft="10dp"
+                                                android:background="@drawable/xbut_menu"
+                                                android:onClick="onClick"
+                                                android:src="@android:drawable/ic_input_add" />
+
+                                            <TextView
+                                                android:id="@+id/tvDocFail"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginLeft="5dp"
+                                                android:layout_marginRight="10dp"
+                                                android:layout_weight="0.8"
+                                                android:text=""
+                                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                                android:textColor="@color/color_bluedark_for_bar" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <!--attach -->
+
+                            </LinearLayout>
+                        </ScrollView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.85"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <Button
+                            android:id="@+id/butToSend"
+                            android:layout_width="200dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@color/color_button_orange"
+                            android:onClick="onClick"
+                            android:text="@string/tosend"
+                            android:textColor="@color/color_white" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</FrameLayout>

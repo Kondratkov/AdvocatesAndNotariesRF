@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Theme.AppCompat.Light.NoActionBar"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:background="@color/color_gray_fon"
+    android:orientation="vertical"
+    app:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/but_dialog_reg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:background="@color/color_button_orange"
+            android:text="ВХОД"
+            android:textColor="@color/color_white" />
+
+        <Button
+            android:id="@+id/but_dialog_reg_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:allowUndo="true"
+            android:background="@color/color_button_gray"
+            android:text="отмена"
+            android:textColor="@color/color_white" />
+
+    </LinearLayout>
+
+</LinearLayout>

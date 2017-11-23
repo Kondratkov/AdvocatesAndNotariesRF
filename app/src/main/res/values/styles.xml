@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.AiN.Dark.NoActionBar" parent="Theme.AppCompat.NoActionBar" />
+
+    <style name="Theme.AiN.Dark.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.AiN.Dark.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme._apperror.Light.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimaryDark">@color/color_bluedark_for_bar</item>
+        <item name="colorAccent">@color/color_button_orange</item>
+    </style>
+
+    <style name="AiNWhite.Light.NoActionBar.Light.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimaryDark">@color/color_bluedark_for_bar</item>
+        <item name="colorAccent">@color/color_button_orange</item>
+        <item name="android:colorBackground">@color/background_material_light</item>
+    </style>
+
+    <style name="Aaa.Light.NoActionBar.Light.NoActionBar.Light.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/br_q13</item>
+        <item name="android:colorBackground">@color/background_material_light</item>
+        <item name="android:colorForeground">@color/foreground_material_light</item>
+        <item name="android:textColorPrimary">@color/pay_zag_1</item>
+        <item name="android:textColorPrimaryInverse">@color/black_g</item>
+    </style>
+
+</resources>

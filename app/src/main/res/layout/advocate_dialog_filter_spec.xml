@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/color_darkgray"
+             android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/scrollView5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="1dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#0f040404"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="специализация"
+                android:textColor="#fec12c"
+                android:textSize="18dp"/>
+
+            <LinearLayout
+                android:id="@+id/filter_spec_lila_spec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Арбитраж и защита бизнеса"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Административное и трудовое право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Гражданское и наследственное право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Страховые споры и ГИБДД"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Уголовное право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Обращения в органы власти РФ"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Авторское право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Жилищное и семейное право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Исполнительное производство (долги)"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Кадастровые и земельные споры"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Конституционное право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Медиация"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Медицинское право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Миграционное право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Налоговые споры (бухгалтерия)"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Обращения в ЕСПЧ (ООН) – это международное право"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Права потребителей"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Регистрация фирм"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Сделки и споры с недвижимостью"/>
+
+                <CheckBox
+                    android:id="@+id/filter_spec_check_spc_20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:checked="false"
+                    android:text="Таможенное право"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:background="#16345b"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/filter_spec_but_start_sort"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="0.5"
+            android:background="@color/color_button_orange"
+            android:text="принять"/>
+
+        <Button
+            android:id="@+id/filter_spec_but_close"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_weight="0.5"
+            android:background="@color/color_button_gray"
+            android:text="отменить"/>
+    </LinearLayout>
+</FrameLayout>

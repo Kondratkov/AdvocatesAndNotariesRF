@@ -1,0 +1,862 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rubiroid.jurbeside.my_info.My_profile"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <Button
+        android:id="@+id/jur_prof_but_add"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="3dp"
+        android:layout_weight="0.9"
+        android:background="@color/color_button_orange"
+        android:longClickable="true"
+        android:onClick="onClickProfileJur"
+        android:text="Начать диалог онлайн" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/color_menubar_l"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/jur_prof_but_close"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.75"
+                    android:background="#00d7c0c0"
+                    android:onClick="onClickProfileJur"
+                    android:singleLine="true"
+                    android:text="@string/project_ago"
+                    android:textColor="#ffffff" />
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#ffffff" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="@string/profile_advocate_header"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="1dp"
+            android:background="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="54dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView7"
+            android:layout_weight="0.1"
+            android:layout_marginBottom="60dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="on line"
+                            android:id="@+id/jur_prof_tv_online"
+                            android:layout_weight="1.03"
+                            android:gravity="center"
+                            android:textSize="21dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:background="#0fffffff"
+                            android:textColor="#76cd63"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="7dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <FrameLayout
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginBottom="5dp">
+
+                                <ImageView
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:id="@+id/jur_prof_image_icon"
+                                    />
+
+                                <ImageView
+                                    android:layout_width="100dp"
+                                    android:layout_height="100dp"
+                                    android:id="@+id/jur_prof_image_fff"
+                                    android:src="@drawable/ricfas"
+                                    android:onClick="onClickProfileJur" />
+
+                            </FrameLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/jur_prof_tv_fio"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/re_prof"
+                                    android:textIsSelectable="false"
+                                    android:textSize="23dp" />
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="103dp"
+                                    android:gravity="center"
+                                    android:layout_marginTop="5dp">
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <RatingBar
+                        android:id="@+id/jur_prof_ratingbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:rating="0.0"
+                        android:stepSize="0.1"
+                        android:numStars="5"
+                        android:nestedScrollingEnabled="false"
+                        android:scrollIndicators="start"
+                        android:clickable="false"
+                        android:isIndicator="true"
+                    />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/jur_prof_tv_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp"
+                            android:text="3.5"
+                            android:textColor="@color/re_prof" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="/ рейтинг"
+                            android:textSize="16dp"
+                            android:textColor="@color/re_prof" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/jur_prof_lila_my_ld"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1"
+                        android:gravity="right"
+                        android:layout_marginTop="23dp">
+
+                        <Button
+                            android:id="@+id/but_jaloba_prof"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="0.97"
+                            android:background="@color/color_text_button_main_activity"
+                            android:onClick="onClickProfileJur"
+                            android:singleLine="true"
+                            android:text="пожаловаться на адвоката"
+                            android:textColor="@color/color_white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:weightSum="1"
+                        android:gravity="center_vertical"
+                        android:id="@+id/phone1"
+                        android:background="#19ffffff">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.15">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/profile_advocate_p_1"
+                                android:textColor="@color/re_prof"
+                                android:textSize="16dp" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_weight="0.82"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="22dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.85"
+                            android:gravity="right">
+
+                            <Button
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:id="@+id/jur_prof_but_phone"
+                                android:background="@drawable/ain_ic_icon_phone"
+                                android:onClick="onClickProfileJur" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:id="@+id/email1"
+                        android:background="#19ffffff">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/profile_advocate_p_2"
+                            android:textSize="16dp"
+                            android:singleLine="true"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/re_prof" />
+
+                        <TextView
+                            android:id="@+id/jur_prof_tv_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:textColor="@color/re_prof"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/kolot1"
+                        android:layout_marginTop="10dp"
+                        android:background="#19ffffff">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/profile_advocate_p_3"
+                                android:textSize="16dp"
+                                android:gravity="center|right"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_reply"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:text="3434"
+                                android:textColor="@color/re_prof"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:id="@+id/jur_prof_but_reply"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/xbut_menu"
+                            android:textColor="@color/re_prof" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="0dp"
+                        android:id="@+id/kolbl1"
+                        android:background="#19ffffff">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:layout_marginRight="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/profile_advocate_p_4"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_thanks"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:text="22"
+                                android:textColor="@color/re_prof"
+                                android:textSize="17sp" />
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:id="@+id/jur_prof_but_thanks"
+                            android:background="#00ffffff"
+                            android:gravity="center_vertical" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:id="@+id/jur_prof_lila_data"
+                        android:layout_marginTop="14dp">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:text="@string/profile_advocate_p_5"
+                            android:id="@+id/jur_prof_but_data"
+                            android:onClick="onClickProfileJur"
+                            android:background="#29ffffff" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/jur_prof_lila_info"
+                        android:layout_marginBottom="15dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="10dp"
+                            android:id="@+id/adres1"
+                            android:background="#19ffffff">
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.15">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="@string/profile_advocate_p_6"
+                                    android:textSize="16dp"
+                                    android:gravity="center"
+                                    android:layout_marginLeft="5dp"
+                                    android:textColor="@color/re_prof" />
+
+                                <TextView
+                                    android:id="@+id/jur_prof_tv_adres"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="45dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/re_prof"
+                                    android:textSize="18dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.85"
+                                android:gravity="center">
+
+                                <FrameLayout
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp">
+
+                                    <ImageView
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView3"
+                                        android:layout_marginLeft="5dp"
+                                        android:layout_marginTop="5dp"
+                                        android:src="@drawable/x_marker_jur" />
+
+                                    <ImageButton
+                                        android:layout_width="45dp"
+                                        android:layout_height="45dp"
+                                        android:id="@+id/jur_prof_but_maps"
+                                        android:background="@drawable/xbut_menu"
+                                        android:onClick="onClickProfileJur" />
+                                </FrameLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/stag"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_advocate_p_7"
+                                android:textSize="16dp"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_stag"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/t331"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:text="@string/my_profile_m15"
+                                android:textSize="16dp"
+                                android:singleLine="false"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof"
+                                android:layout_weight="0.6" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.4"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/st2"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/my_profile_m16"
+                                android:textSize="16dp"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/firm"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_advocate_p_8"
+                                android:textSize="16dp"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof" />
+
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_firm"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.6"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/site"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_advocate_p_9"
+                                android:textSize="16dp"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_site"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/kvalif"
+                            android:background="#19ffffff"
+                            android:layout_marginTop="14dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="@string/profile_advocate_p_10"
+                                android:id="@+id/textView4"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof" />
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:id="@+id/jur_prof_lila_kvalif">
+
+                                <TextView
+                                    android:id="@+id/jur_prof_tv_specializ"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="15dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/re_prof"
+                                    android:textIsSelectable="true"
+                                    android:textSize="18dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/sv"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_advocate_p_11"
+                                android:textSize="16dp"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_srv"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/fsar"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_advocate_p_12"
+                                android:textSize="16dp"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_fsar"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginTop="14dp"
+                            android:id="@+id/gr"
+                            android:background="#19ffffff" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/profile_advocate_p_13"
+                                android:textSize="16dp"
+                                android:singleLine="true"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/re_prof" />
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_job"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dop"
+                            android:background="#19ffffff"
+                            android:layout_marginTop="14dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:text="Дополнительная информация"
+                                android:textSize="16dp"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof" />
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/jur_prof_lila_kvalif1">
+
+                                <TextView
+                                    android:id="@+id/jur_prof_tv_3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/re_prof"
+                                    android:textSize="18dp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/profj_frameProg"
+        android:clickable="true">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profj_progressBar"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+</FrameLayout>

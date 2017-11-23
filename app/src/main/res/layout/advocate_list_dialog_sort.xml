@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Theme.AppCompat.Light.NoActionBar"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:background="@color/color_darkgray"
+    android:orientation="vertical"
+    app:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:gravity="center"
+        android:text="Сортировка адвокатов"
+        android:textColor="#ffffff"
+        android:textSize="18dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:id="@+id/adv_sort_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:checked="false"
+            android:text="по имени" />
+
+        <CheckBox
+            android:id="@+id/adv_sort_checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:checked="false"
+            android:text="по рейтингу" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/but_adv_sort_yes"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:background="@color/color_button_orange"
+            android:onClick="onClick"
+            android:text="ПРИНЯТЬ"
+            android:textColor="@color/color_white" />
+
+        <Button
+            android:id="@+id/but_adv_sort_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="0.5"
+            android:allowUndo="true"
+            android:background="@color/color_button_gray"
+            android:text="отмена"
+            android:textColor="@color/color_white" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,679 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rubiroid.jurbeside.my_info.My_profile"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:background="@color/color_menubar_l"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/jur_prof_but_close"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.75"
+                    android:background="#00d7c0c0"
+                    android:onClick="onClick"
+                    android:singleLine="true"
+                    android:text="@string/project_ago"
+                    android:textColor="#ffffff" />
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#ffffff" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:text="@string/profile_notary_header"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="1dp"
+            android:background="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="54dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView7"
+            android:layout_weight="0.1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="7dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:id="@+id/not_tv_prof_fio"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/color_bluedark_for_bar"
+                                    android:textIsSelectable="false"
+                                    android:textSize="23dp" />
+
+                                <TextView
+                                    android:id="@+id/not_tv_prof_city"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/color_bluedark_for_bar" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/jur_prof_lila_my_ld"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:divider="@drawable/separator"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="#f6bd21" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/phone1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="9dp"
+                        android:background="#19ffffff"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.15"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="@string/profile_notary_p_1"
+                                android:textColor="@color/re_prof"
+                                android:textSize="16dp" />
+
+                            <TextView
+                                android:id="@+id/not_tv_prof_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_weight="0.82"
+                                android:gravity="center"
+                                android:textColor="@color/color_bluedark_for_bar"
+                                android:textIsSelectable="true"
+                                android:textSize="15dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.85"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/jur_prof_but_phone"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:background="@drawable/ain_ic_icon_phone"
+                                android:onClick="onClick" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/email1"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:singleLine="true"
+                            android:text="@string/profile_notary_p_2"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/adres1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.15"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="45dp"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:text="@string/profile_notary_p_3"
+                                android:textColor="@color/re_prof"
+                                android:textSize="16dp" />
+
+                            <TextView
+                                android:id="@+id/not_tv_prof_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:gravity="center"
+                                android:textColor="@color/color_bluedark_for_bar"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.85"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_gravity="right">
+
+                                <ImageView
+                                    android:id="@+id/imageView3"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:src="@drawable/x_marker_not" />
+
+                                <ImageButton
+                                    android:id="@+id/not_prof_but_maps"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="right"
+                                    android:background="@drawable/xbut_menu"
+                                    android:onClick="onClick" />
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_4"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_5"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_6"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_7"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_7"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_8"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_8"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_9"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_9"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_10"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_10"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_11"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_12"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_12"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_13"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_13"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="14dp"
+                        android:background="#19ffffff"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.6"
+                            android:gravity="center_vertical"
+                            android:singleLine="false"
+                            android:text="@string/profile_notary_p_14"
+                            android:textColor="@color/re_prof"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/not_tv_prof_14"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:textIsSelectable="true"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/jur_prof_lila_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:id="@+id/profj_frameProg"
+        android:clickable="true"
+        android:layout_marginLeft="9999dp">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profj_progressBar"
+            android:layout_gravity="center"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+</FrameLayout>

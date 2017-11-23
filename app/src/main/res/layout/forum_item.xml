@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#0affffff"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="тема:"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0.8"
+                    android:textColor="#bbd7ff" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Гражданское право  "
+                    android:id="@+id/forum_item_tv_theme"
+                    android:layout_marginLeft="5dp"
+                    android:singleLine="true"
+                    android:layout_weight="0.2"
+                    android:textColor="#bbd7ff" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="clip_vertical|right"
+                android:layout_weight="0.75">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ответов:"
+                    android:layout_marginRight="3dp"
+                    android:textSize="10dp"
+                    android:gravity="center"
+                    android:textColor="#bbd7ff"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:text="3"
+                    android:id="@+id/forum_item_tv_kol_otv"
+                    android:gravity="center"
+                    android:background="#76d67e"
+                    android:layout_marginRight="7dp"
+                    android:textColor="#00204c"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Вопрос опрос голова аа авв вадвоа ывжоа ывоа ва лоы влоа ывоа шоыв олошоывжао ваа йцукенгш фываппо яччссммимит"
+                android:id="@+id/forum_item_tv_quest"
+                android:textSize="15sp"
+                android:maxLength="85"
+                android:singleLine="true"
+                android:maxLines="2"
+                android:textIsSelectable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:typeface="serif"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="от: "
+                    android:textSize="7dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pol1"
+                    android:id="@+id/forum_item_tv_quest_nik"
+                    android:textSize="7dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12.12.2012"
+                android:id="@+id/forum_item_tv_quest_date"
+                android:textSize="7dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#ffffff"
+                android:layout_marginTop="2dp"
+                android:layout_weight="0.3"
+                android:gravity="right"
+                android:layout_marginRight="5dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,97 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rubiroid.jurbeside.my_info.My_profile"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:weightSum="1" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:id="@+id/linearLayout"
+                android:layout_weight="0.1" >
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/project_ago"
+                    android:id="@+id/my_prof_but_close"
+                    android:onClick="onClick"
+                    android:background="#00d7c0c0"
+                    android:layout_weight="0.75"
+                    android:textColor="#ffffff"
+                    android:singleLine="true" />
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#ffffff" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/my_prof_header"
+                        android:gravity="center"
+                        android:textSize="18dp"
+                        android:textColor="#ffffff"
+                        android:layout_weight="0.2" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:id="@+id/imageView3"
+                            android:src="@drawable/xbut_menu_12"
+                            android:layout_gravity="center" />
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:id="@+id/my_prof_but_menu"
+                            android:onClick="onClick"
+                            android:background="#00ffffff"
+                            android:layout_gravity="center" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:background="#ffffff"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="1dp" />
+    </LinearLayout>
+
+
+</FrameLayout>

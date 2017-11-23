@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="apperror" parent="@style/_apperror"/>
+
+  <style name="_apperror" parent="android:Theme.Holo.Light">
+
+    <item name="android:editTextBackground">@drawable/apperror_edit_text_holo_light</item>
+
+    <item name="android:textColorHighlight">#99ff4444</item>
+    <item name="android:textSelectHandleLeft">@drawable/apperror_text_select_handle_left</item>
+    <item name="android:textSelectHandleRight">@drawable/apperror_text_select_handle_right</item>
+    <item name="android:textSelectHandle">@drawable/apperror_text_select_handle_middle</item>
+
+  </style>
+
+</resources>

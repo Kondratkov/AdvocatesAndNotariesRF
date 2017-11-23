@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        applicationId "kondratkov.advocatesandnotariesrf"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 4
+        versionName "0.220.5.B"
+        vectorDrawables.useSupportLibrary = true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/fonts'] } }
+
+    //useLibrary 'org.apache.http.legacy'
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    //compile 'com.yandex.money.api:yandex-money-sdk-android:3.1.5'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.google.android.gms:play-services:8.4.0'
+    compile 'com.google.android.gms:play-services-ads:8.4.0'
+    compile 'com.google.android.gms:play-services-identity:8.4.0'
+    compile 'com.google.android.gms:play-services-gcm:8.4.0'
+    compile 'com.google.code.gson:gson:2.6.1'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    //compile 'org.apache.httpcomponents:httpclient:4.5'
+    //compile 'com.yandex.money.api:yandex-money-sdk-java:5.1.0'
+}
+
+

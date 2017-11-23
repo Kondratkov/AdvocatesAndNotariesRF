@@ -1,0 +1,411 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="rubiroid.jsonproject.input.SignUp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:weightSum="1"
+        android:background="#ffffff"
+        android:descendantFocusability="beforeDescendants"
+        android:focusable="true"
+        android:focusableInTouchMode="true">>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="@string/log_in_reg"
+            android:id="@+id/textView9"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:background="#152337"
+            android:textColor="#ffffff" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView2">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:text="@string/sign_up_pole_1"
+                    android:textSize="18dp"
+                    android:textIsSelectable="false"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:background="#bbd7ff"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginBottom="5dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvNikSign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/text_one" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/etNikSign"
+                        android:hint="@string/sign_up_p_1"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:password="false"
+                        android:textColorHint="@color/hint_text"
+                        android:inputType="textCapSentences"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="#020f5a"
+                        android:text="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvPhoneSign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_two" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/etPhoneSign"
+                        android:hint="@string/sign_up_p_2"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:textColorHint="@color/hint_text"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="@color/text_two"
+                        android:phoneNumber="false"
+                        android:inputType="phone"
+                        android:digits="0123456789" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvEmailSign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_one" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textEmailAddress"
+                        android:id="@+id/etEmailSign"
+                        android:hint="@string/sign_up_p_3"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColorHint="@color/hint_text"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="#020f5a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvPasswordSign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_one" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPassword"
+                        android:id="@+id/etPasswordSign"
+                        android:hint="@string/sign_up_p_4"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColorHint="@color/hint_text"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="#020f5a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvPassword2Sign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_one" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPassword"
+                        android:id="@+id/etPassword2Sign"
+                        android:hint="@string/sign_up_p_5"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColorHint="@color/hint_text"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="#020f5a" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:text="дополнительная информация"
+                    android:textSize="18dp"
+                    android:textIsSelectable="false"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:background="#bbd7ff"
+                    android:textColor="#ffffff"
+                    android:gravity="center"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="5dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvSurnameSign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_one" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ems="10"
+                        android:id="@+id/etSurnameSign"
+                        android:hint="@string/sign_up_p_6"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColorHint="@color/hint_text"
+                        android:inputType="textCapSentences"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="#020f5a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvNameSign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_one" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textCapSentences"
+                        android:ems="10"
+                        android:id="@+id/etNameSign"
+                        android:hint="@string/sign_up_p_7"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColorHint="@color/hint_text"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="#020f5a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tvPatronymicSign"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_one" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textCapSentences"
+                        android:ems="10"
+                        android:id="@+id/etPatronymicSign"
+                        android:hint="@string/sign_up_p_8"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:textColorHint="@color/hint_text"
+                        android:background="@drawable/regestr_et_edit_text_holo_light"
+                        android:textColor="#020f5a" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="@string/sign_up_p_10"
+                        android:layout_marginLeft="25dp"
+                        android:textColor="@color/text_one"
+                        android:textSize="18dp"
+                        android:gravity="center_vertical" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/etCitySign"
+                            android:gravity="center"
+                            android:textSize="15dp"
+                            android:textColor="@color/regestr_et_color"
+                            android:paddingTop="15dp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:id="@+id/but_city_sign"
+                            android:background="@drawable/regestr_textfield_activated_holo_light"
+                            android:onClick="onClick"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="15dp" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:foregroundGravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:foregroundGravity="center_horizontal"
+                            android:gravity="center"
+                            android:layout_gravity="center_vertical">
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/checkBoxLicen"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="5dp"
+                                android:checked="false"
+                                android:background="#bbd7ff" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@string/sign_up_l_s"
+                                android:layout_marginLeft="7dp"
+                                android:gravity="center_vertical"
+                                android:textSize="18dp"
+                                android:textColor="@color/text_one"
+                                android:layout_gravity="center_horizontal" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/but_lic"
+                            android:background="#00ffffff"
+                            android:onClick="onClick" />
+
+                    </FrameLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:text="@string/sign_up_but_reg"
+                        android:id="@+id/registr"
+                        android:onClick="onClick"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
+                        android:background="@color/hint_text"
+                        android:textColor="#ffffff"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="5dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</FrameLayout>

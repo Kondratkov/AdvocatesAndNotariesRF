@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="kondratkov.advocatesandnotariesrf">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AiN.Dark.NoActionBar">
+        <activity
+            android:name=".MainActivity"
+            android:label="Адвокаты и нотариусы рф"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".input.LogIN"
+            android:label="@string/title_activity_log_in"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".input.SignUP"
+            android:label="@string/title_activity_sign_up"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".my_info.My_profile"
+            android:label="@string/title_activity_my_profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".Sidebar"
+            android:label="@string/title_activity_sidebar"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".my_info.My_questions"
+            android:label="@string/title_activity_my_questions"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".AskAQuestion"
+            android:label="@string/title_activity_ask_aquestion"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".my_info.My_orders"
+            android:label="@string/title_activity_my_orders"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".advocates.Advocates_list"
+            android:label="@string/title_activity_advocates_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".advocates.Advocate_profile"
+            android:label="@string/title_activity_advocate_profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".AddQuestion"
+            android:label="@string/title_activity_add_question"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".advocates.Advocates_list_quest"
+            android:label="@string/title_activity_advocates_list_quest"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".consultation.consultation_online"
+            android:label="@string/title_activity_consultation_online"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".Forum"
+            android:label="@string/title_activity_forum"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".consultation.Consult_phone"
+            android:label="@string/title_activity_consult_phone"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".paid_services.Paid_services"
+            android:label="@string/title_activity_paid_services"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".doc_create.create_document"
+            android:label="@string/title_activity_create_document"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".base_he.ListFail"
+            android:label="@string/title_activity_list_fail" />
+        <activity
+            android:name=".notary.Notary_list"
+            android:label="@string/title_activity_notary_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".notary.Notary_profile"
+            android:label="@string/title_activity_notary_profile"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".maps.Map_coor"
+            android:label="@string/title_activity_map_coor"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".maps.Map_jur_and_notary"
+            android:label="@string/title_activity_map_jur_and_notary"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".maps.LocationListenerGPServices"
+            android:label="@string/title_activity_map_jur_and_notary"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".start_help.Start_activity_no_login"
+            android:label="@string/title_activity_start_activity_no_login"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".Start_activity_yes_login"
+            android:label="@string/title_activity_start_activity_yes_login"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".Settings_no_login"
+            android:label="@string/title_activity_settings_no_login"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".Form_advocates"
+            android:label="@string/title_activity_form_advocates"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".advocates.Advocate_filter"
+            android:label="@string/title_activity_advocate_filter"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".start_help.Start_one_quest"
+            android:label="@string/title_activity_start_one_quest"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".start_help.Top_quest"
+            android:label="@string/title_activity_top_quest"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".start_help.Top_quest_post"
+            android:label="@string/title_activity_top_quest_post"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".start_help.About_us"
+            android:label="@string/title_activity_about_us"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".my_info.My_frag_orders_cons"
+            android:label="@string/title_activity_my_frag_orders_cons"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".New_sidebar"
+            android:label="@string/title_activity_new_sidebar"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".consultation.Consult_phone_time"
+            android:label="@string/title_activity_consult_phone_time"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".consultation.Consult_mess"
+            android:label="@string/title_activity_consult_mess"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".my_info.My_frag_orders_doc"
+            android:label="@string/title_activity_my_frag_orders_doc"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".my_info.My_frag_orders_doc_pack"
+            android:label="@string/title_activity_my_frag_orders_doc_pack"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".my_info.My_perep_orders_mess"
+            android:label="@string/title_activity_my_perep_orders_mess"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".notary.Notary_filter"
+            android:label="@string/title_activity_notary_filter"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+        <activity
+            android:name=".doc_create.Vid_create_doc"
+            android:label="@string/title_activity_vid_create_doc"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".Pay_br_yandex"
+            android:label="@string/title_activity_pay_br_yandex"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+        <activity
+            android:name=".doc_create.Doc_package"
+            android:label="@string/title_activity_doc_package"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AiN.Dark.NoActionBar" />
+
+        <service
+            android:name=".Service_mess"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".my_info.My_profile_redaction"
+            android:label="@string/title_activity_my_profile_redaction"
+            android:screenOrientation="portrait"
+            android:theme="@style/AiNWhite.Light.NoActionBar.Light.NoActionBar" />
+
+    </application>
+
+</manifest>

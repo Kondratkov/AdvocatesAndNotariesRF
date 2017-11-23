@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#021e47</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="accent_material_dark">#fec026</color>
+    <color name="primary_dark_material_dark">#15182f</color>
+    <color name="primary_material_dark">#0b3b61</color>
+
+    <color name="transpar">#000b3b61</color>
+    <color name="sidebar_on">#b52d4d84</color>
+    <color name="sidebar_text">#1f2263</color>
+    <color name="hint_text">#f1759ed1</color>
+
+    <color name="text_one">#677ea5</color>
+    <color name="text_two">#212464</color>
+    <color name="text_three">#7da3d3</color>
+
+    <color name="read0">#e046d643</color>
+    <color name="read1">#fbffa60b</color>
+    <color name="read2">#adbf6065</color>
+    <color name="read3">#dc787373</color>
+    <color name="read_menu">#3900ff21</color>
+
+    <color name="frameOn">#ef000000</color>
+    <color name="frameOff">#00ffffff</color>
+
+    <color name="black">#00072e</color>
+    <color name="black_g">#26c437</color>
+    <color name="black_m">#001c28</color>
+
+
+    <color name="reply1">#b52d4d84</color>
+    <color name="reply2">#fcb4b4b4</color>
+
+    <color name="count1">#b538af38</color>
+    <color name="count2">#fcb4b4b4</color>
+
+    <color name="maps_color">#2adc1212</color>
+    <color name="maps_color2">#4dc11a1a</color>
+
+    <color name="menu_on">#b4000000</color>
+    <color name="menu_off">#00c11a1a</color>
+
+    <color name="tv_on">#b4ffffff</color>
+    <color name="tv_off">#55ffffff</color>
+
+    <color name="colorvip">#20ffffff</color>
+    <color name="sizi">#00ffffff</color>
+    <color name="pr80">#23000000</color>
+    <color name="pay_button_text">#ffd500</color>
+    <color name="pay_zag">#fccd63</color>
+    <color name="pay_zag_1">#e7d5ad</color>
+
+    <color name="color_text_button_main_activity">#dc1629</color>
+    <color name="color_white">#ffffff</color>
+    <color name="color_bluedark_for_text">#114184</color>
+    <color name="color_bluedark_for_bar">#062c60</color>
+    <color name="color_gray_fon">#cccccc</color>
+    <color name="color_button_gray">#ababab</color>
+    <color name="color_button_orange">#ffbf00</color>
+    <color name="color_darkgray">#767676</color>
+    <color name="color_menubar_l">#6d7895</color>
+    <color name="re_prof">#0a0656</color>
+    <color name="colot_grey_transl">#14767676</color>
+
+
+    <color name="primary_material_light">#ffffff</color>
+    <color name="background_material_light">#ffffff</color>
+    <color name="foreground_material_light">#ea13c3</color>
+
+
+</resources>

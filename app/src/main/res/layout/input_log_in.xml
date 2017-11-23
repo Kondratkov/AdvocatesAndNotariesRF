@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:autoText="false"
+            android:background="@color/color_menubar_l"
+            android:gravity="center"
+            android:text="Авторизация"
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scrollView"
+            android:focusable="true">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/tvPhoneEmail"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/sidebar_text" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etPhoneEmail"
+                        android:layout_marginBottom="15dp"
+                        android:hint="@string/log_in_email_phone"
+                        android:textSize="30dp"
+                        android:phoneNumber="false"
+                        android:inputType="textCapSentences"
+
+                        android:textColorHint="@color/hint_text"
+                        android:textColor="#031344"
+                        android:background="@drawable/regestr_et_edit_text_holo_light" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/tvPasswl"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:textColor="@color/sidebar_text" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/etPasswl"
+                        android:layout_marginBottom="15dp"
+                        android:onClick="onClick"
+                        android:hint="@string/log_in_password"
+                        android:textSize="30dp"
+                        android:inputType="textPassword"
+                        android:textColorHint="@color/hint_text"
+                        android:textColor="#031344"
+                        android:background="@drawable/regestr_et_edit_text_holo_light" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tv_log_in_error"
+                        android:textSize="25sp"
+                        android:textColor="#dd7f7f"
+                        android:layout_gravity="center"
+                        android:gravity="center" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  сохранить пароль?"
+                            android:id="@+id/log_in_cb_save"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#1f2263"
+                            android:textSize="20dp"
+                            android:background="@color/hint_text"
+                            android:layout_marginRight="10dp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:text="@string/log_in_input"
+                        android:id="@+id/butInputL"
+                        android:onClick="onClick"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/hint_text"
+                        android:textColor="#1f2263"
+                        android:typeface="normal"
+                        android:textSize="23dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/log_in_reg"
+                            android:id="@+id/butReg"
+                            android:clickable="true"
+                            android:onClick="onClick"
+                            android:gravity="center"
+                            android:layout_margin="15dp"
+                            android:textStyle="normal"
+                            android:typeface="serif"
+                            android:singleLine="false"
+                            android:textColor="@color/sidebar_text"
+                            android:layout_weight="0.5" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="@string/log_in_forget"
+                            android:id="@+id/forget_password"
+                            android:clickable="true"
+                            android:onClick="onClick"
+                            android:gravity="center"
+                            android:layout_margin="15dp"
+                            android:textStyle="normal"
+                            android:typeface="serif"
+                            android:singleLine="false"
+                            android:layout_weight="0.5"
+                            android:textColor="@color/sidebar_text" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</FrameLayout>
