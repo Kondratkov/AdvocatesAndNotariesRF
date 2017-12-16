@@ -154,7 +154,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
 
         Gson gson_Search = new Gson();
         Search_bup = gson_Search.fromJson((String)getIntent().getSerializableExtra("BUP"),Bup.class);
-        Search_id_city = (int)getIntent().getSerializableExtra("CITY");
+        //Search_id_city = (int)getIntent().getSerializableExtra("CITY");
         Search_id_JuristAreas = (int)getIntent().getSerializableExtra("SUDTER");
         Search_specialization = (String)getIntent().getSerializableExtra("SPECIALIZATION");
         Search_sortingType1 = FindJuristFilter.sortingType.Name;
@@ -196,8 +196,6 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
         jurList_tv_sort_city = (TextView)findViewById(R.id.jurList_tv_sort_city);
 
         map_idjur = new HashMap<CheckBox, Integer>();
-
-        int i = (int) getIntent().getSerializableExtra("CITY");
 
         search_jurist();
         setupSearchView();
@@ -277,8 +275,8 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             new UrlConnectionTask().execute(JSON);
         }else{
             FindByCoordinatesFilter findByCoordinatesFilter = new FindByCoordinatesFilter();
-            findByCoordinatesFilter.Latitude = in.get_latitude();//.WorkInOffDays = bool_sort[2];
-            findByCoordinatesFilter.Longitude = in.get_longitude();
+            findByCoordinatesFilter.Latitude = (double)getIntent().getSerializableExtra("LANT"); //in.get_latitude();//.WorkInOffDays = bool_sort[2];
+            findByCoordinatesFilter.Longitude = (double)getIntent().getSerializableExtra("LONG");
             findByCoordinatesFilter.Radius = 50;
             findByCoordinatesFilter.Bups = Search_bup;
             findByCoordinatesFilter.JudicialAreaId = Search_id_JuristAreas;//.WorkInOffDays = bool_sort[2];
@@ -493,6 +491,42 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
 
         lila_sort_panel =(LinearLayout)findViewById(R.id.jurList_lila_sort_panel);
         jurList_lila_city =(LinearLayout)findViewById(R.id.jurList_lila_city);
+
+        if((Boolean)getIntent().getSerializableExtra("ANSWERNEXT")){
+            List <JuristAccounClass> mJuristAccounClasses = new ArrayList<JuristAccounClass>();
+            for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
+                if(juristAccounClass.CurrentLatitude!=0 && juristAccounClass.CurrentLongitude !=0){
+                    double mx = Math.abs(in.get_latitude()- juristAccounClass.CurrentLatitude);//51.714342);
+                    double my = Math.abs(in.get_longitude() - juristAccounClass.CurrentLongitude);//39.275005);
+                    double dist = Math.sqrt(Math.pow(mx, 2) + Math.pow(my,2));
+                    if(dist< 0.15){
+                        mJuristAccounClasses.add(juristAccounClass);
+                    }
+                }
+            }
+
+            mcArrayJuristAccoun = new JuristAccounClass[mJuristAccounClasses.size()];
+            for(int i = 0; i<mJuristAccounClasses.size(); i++){
+                mcArrayJuristAccoun[i] = mJuristAccounClasses.get(i);
+            }
+        }
+
+        String city = (String)getIntent().getSerializableExtra("CITY");
+        if(city.length() != 0){
+            List <JuristAccounClass> mJuristAccounClasses = new ArrayList<JuristAccounClass>();
+            for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
+
+                if(juristAccounClass.Address.City.equals(city)){
+                    mJuristAccounClasses.add(juristAccounClass);
+                }
+
+            }
+
+            mcArrayJuristAccoun = new JuristAccounClass[mJuristAccounClasses.size()];
+            for(int i = 0; i<mJuristAccounClasses.size(); i++){
+                mcArrayJuristAccoun[i] = mJuristAccounClasses.get(i);
+            }
+        }
 
         try {
             MyAdapterJsonList mam = new MyAdapterJsonList(this, mcArrayJuristAccoun);//getjurList(jsonObjectjurList));
@@ -783,8 +817,8 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             new UrlConnectionTask().execute(JSON);
         } else{
             FindByCoordinatesFilter findByCoordinatesFilter = new FindByCoordinatesFilter();
-            findByCoordinatesFilter.Latitude = in.get_latitude();//.WorkInOffDays = bool_sort[2];
-            findByCoordinatesFilter.Longitude = in.get_longitude();
+            findByCoordinatesFilter.Latitude = (double)getIntent().getSerializableExtra("LANT"); //in.get_latitude();//.WorkInOffDays = bool_sort[2];
+            findByCoordinatesFilter.Longitude = (double)getIntent().getSerializableExtra("LONG");
             findByCoordinatesFilter.Radius = 50;
             findByCoordinatesFilter.Bups = Search_bup;
             findByCoordinatesFilter.JudicialAreaId = Search_id_JuristAreas;//.WorkInOffDays = bool_sort[2];
