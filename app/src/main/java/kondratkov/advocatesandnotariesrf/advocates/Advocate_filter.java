@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -51,6 +52,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import butterknife.BindView;
+import butterknife.BindViews;
+import butterknife.ButterKnife;
 import kondratkov.advocatesandnotariesrf.IN;
 import kondratkov.advocatesandnotariesrf.New_sidebar;
 import kondratkov.advocatesandnotariesrf.R;
@@ -72,6 +76,7 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
     public String[] s_mas = new String[]{"", "", "", "", "", ""};
     public String[] s_mas_text = new String[]{"", "", "", "", "", ""};
     public boolean but_yes = false;
+    public boolean answers_next = false;
     IN in;
     Point point;
     int view_height;
@@ -100,15 +105,26 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
 
     public Bup Filter_Bup;
     public String Filter_specialization = "";
-    public int Filter_city = 0;
+    public String Filter_city = "";
     public int Filter_SudTer = 0;
     public double Filter_lan = 0;
     public double Filter_lon = 0;
+
+    @BindView(R.id.frameLayout_advocateFilter_1)FrameLayout frameLayout_advocateFilter_1;
+    @BindView(R.id.frameLayout_advocateFilter_2)FrameLayout frameLayout_advocateFilter_2;
+    @BindView(R.id.frameLayout_advocateFilter_3)FrameLayout frameLayout_advocateFilter_3;
+    @BindView(R.id.frameLayout_advocateFilter_4)FrameLayout frameLayout_advocateFilter_4;
+    @BindView(R.id.frameLayout_advocateFilter_5)FrameLayout frameLayout_advocateFilter_5;
+    @BindView(R.id.frameLayout_advocateFilter_6)FrameLayout frameLayout_advocateFilter_6;
+
+    FrameLayout [] mFrameLayouts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.advocate_filter);
+
+        ButterKnife.bind(this);
 
         tvf1 = (TextView) findViewById(R.id.advocates_filter_tv_1);
         tvf2 = (TextView) findViewById(R.id.advocates_filter_tv_2);
@@ -119,6 +135,11 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
         tv_but_f = (TextView) findViewById(R.id.advocates_filter_tv_dbt_filter);
         tv_mas = new TextView[]{tvf1, tvf2, tvf3, tvf4, tvf5, tvf6};
         bt_filter = (Button) findViewById(R.id.advocates_filter_but_filter);
+
+        mFrameLayouts = new FrameLayout[]{
+                frameLayout_advocateFilter_1, frameLayout_advocateFilter_2,
+                frameLayout_advocateFilter_3, frameLayout_advocateFilter_4,
+                frameLayout_advocateFilter_5, frameLayout_advocateFilter_6};
 
         in = new IN();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -161,14 +182,14 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
         int bw = 0;
         for (int i = 0; i < s_mas.length; i++) {
             if (s_mas[i].equals("")) {
-                tv_mas[i].setBackgroundColor(Color.argb(255, 255, 255, 255));
+                mFrameLayouts[i].setBackgroundColor(Color.argb(255, 255, 255, 255));
                 if(i==1)tv_mas[i].setText("Выбрать город");
                 if(i==4)tv_mas[i].setText("Судебная территория");
                 bw++;
             } else {
                 but_yes = true;
                 tv_mas[i].setText(s_mas[i]);
-                tv_mas[i].setBackgroundColor(Color.argb(181, 56, 175, 56));
+                mFrameLayouts[i].setBackgroundColor(Color.argb(181, 56, 175, 56));
             }
         }
         if(bw == s_mas.length)but_yes = false;
@@ -237,7 +258,10 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
 
                 XY_set();
                 in.set_filter_tip(2);
+                Filter_city = "";
                 Filter_Bup = new Bup();
+                Filter_lan = in.get_latitude();
+                Filter_lon = in.get_longitude();
                 start_play();
                 break;
             case R.id.advocates_filter_but_2:
@@ -260,7 +284,17 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
                 //dialog_start_3();
                 break;
             case R.id.advocates_filter_but_6:
-                dialog_start_office();
+                if(answers_next){
+                    answers_next = false;
+                    s_mas[5] = "";
+                    start_play();
+                }else {
+                    XY_set();
+                    answers_next = true;
+                    s_mas[5] = getResources().getString(R.string.advocate_filter_6);
+                    start_play();
+                }
+                //dialog_start_office();
                 break;
             case R.id.advocates_filter_but_close:
                 Advocate_filter.this.finish();
@@ -277,15 +311,15 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
                 Bup bup_now = new Bup();
                 intent.putExtra("BUP", gson1.toJson(bup_now));
                 intent.putExtra("SPECIALIZATION", "");
-                intent.putExtra("CITY", 0);
+                intent.putExtra("CITY", "");
                 intent.putExtra("SUDTER", 0);
                 intent.putExtra("LANT", 0);
                 intent.putExtra("LONG", 0);
+                intent.putExtra("ANSWERNEXT", false);
                 startActivity(intent);
                 break;
             case R.id.advocates_filter_but_filter:
                 if(in.get_filter_tip()==0){in.set_filter_tip(1);}
-                int prob = Filter_city;
                 Gson gson = new Gson();
                 intent = new Intent(Advocate_filter.this, Advocates_list.class);
                 intent.putExtra("BUP", gson.toJson(Filter_Bup));
@@ -295,6 +329,7 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
                 intent.putExtra("SUDTER", Filter_SudTer);
                 intent.putExtra("LANT", Filter_lan);
                 intent.putExtra("LONG", Filter_lon);
+                intent.putExtra("ANSWERNEXT", answers_next);
                 startActivity(intent);
                 break;
         }
@@ -306,10 +341,10 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
         if(b){
             s_mas[0] = "";
             s_mas[1] = city.Name;
-            in.set_latitude(city.Latitude);
-            in.set_longitude(city.Longitude);
+            Filter_lan = city.Latitude;
+            Filter_lon =city.Longitude;
             in.set_filter_tip(1);
-            Filter_city = city.Id;
+            Filter_city = city.Name;
         }else{
            // s_mas[0] = "Текущее местоположение";
             s_mas[0] = "";
@@ -520,92 +555,7 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
         dialog.show();
     }
 
-    public void dialog_start_office() {
-        final Dialog dialog = new Dialog(Advocate_filter.this);
-        dialog.setTitle("Выбор");
-        dialog.setContentView(R.layout.advocate_dialog_filter_office);
-
-        Button btnClose = (Button) dialog.getWindow().findViewById(
-                R.id.but_office_cancel);
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-        final Button btnYes = (Button) dialog.getWindow().findViewById(
-                R.id.but_office_yes);
-
-        final CheckBox ch1 = (CheckBox) dialog.getWindow().findViewById(R.id.office_checkBox);
-        final CheckBox ch2 = (CheckBox) dialog.getWindow().findViewById(R.id.office_checkBox2);
-        final CheckBox ch3 = (CheckBox) dialog.getWindow().findViewById(R.id.office_checkBox3);
-
-        switch (v_office) {
-            case 1:
-                ch1.setChecked(true);
-                break;
-            case 2:
-                ch2.setChecked(true);
-                break;
-            case 3:
-                ch3.setChecked(true);
-                break;
-        }
-
-        ch1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ch1.isChecked()) {
-                    ch2.setChecked(false);
-                    ch3.setChecked(false);
-                }
-            }
-        });
-
-        ch2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ch2.isChecked()) {
-                    ch1.setChecked(false);
-                    ch3.setChecked(false);
-                }
-            }
-        });
-
-        ch3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ch3.isChecked()) {
-                    ch1.setChecked(false);
-                    ch2.setChecked(false);
-                }
-            }
-        });
-
-        btnYes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ch1.isChecked()) {
-                    v_office = 1;
-                    s_mas[5] = "Офис";
-                } else if (ch2.isChecked()) {
-                    v_office = 2;
-                    s_mas[5] = "Коллегия(бюро)";
-                } else if (ch3.isChecked()) {
-                    v_office = 3;
-                    s_mas[5] = "Выезд";
-                } else {
-                    v_office = 0;
-                    s_mas[5] = "";
-                }
-                dialog.dismiss();
-                start_play();
-            }
-        });
-        dialog.show();
-    }
-
+//
     @Override
     public void onStop() {
         super.onStop();
@@ -625,3 +575,91 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
         start_play();
     }
 }
+
+
+
+//   public void dialog_start_office() {
+//        final Dialog dialog = new Dialog(Advocate_filter.this);
+//        dialog.setTitle("Выбор");
+//        dialog.setContentView(R.layout.advocate_dialog_filter_office);
+//
+//        Button btnClose = (Button) dialog.getWindow().findViewById(
+//                R.id.but_office_cancel);
+//        btnClose.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.dismiss();
+//            }
+//        });
+//
+//        final Button btnYes = (Button) dialog.getWindow().findViewById(
+//                R.id.but_office_yes);
+//
+//        final CheckBox ch1 = (CheckBox) dialog.getWindow().findViewById(R.id.office_checkBox);
+//        final CheckBox ch2 = (CheckBox) dialog.getWindow().findViewById(R.id.office_checkBox2);
+//        final CheckBox ch3 = (CheckBox) dialog.getWindow().findViewById(R.id.office_checkBox3);
+//
+//        switch (v_office) {
+//            case 1:
+//                ch1.setChecked(true);
+//                break;
+//            case 2:
+//                ch2.setChecked(true);
+//                break;
+//            case 3:
+//                ch3.setChecked(true);
+//                break;
+//        }
+//
+//        ch1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (ch1.isChecked()) {
+//                    ch2.setChecked(false);
+//                    ch3.setChecked(false);
+//                }
+//            }
+//        });
+//
+//        ch2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (ch2.isChecked()) {
+//                    ch1.setChecked(false);
+//                    ch3.setChecked(false);
+//                }
+//            }
+//        });
+//
+//        ch3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (ch3.isChecked()) {
+//                    ch1.setChecked(false);
+//                    ch2.setChecked(false);
+//                }
+//            }
+//        });
+//
+//        btnYes.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (ch1.isChecked()) {
+//                    v_office = 1;
+//                    s_mas[5] = "Офис";
+//                } else if (ch2.isChecked()) {
+//                    v_office = 2;
+//                    s_mas[5] = "Коллегия(бюро)";
+//                } else if (ch3.isChecked()) {
+//                    v_office = 3;
+//                    s_mas[5] = "Выезд";
+//                } else {
+//                    v_office = 0;
+//                    s_mas[5] = "";
+//                }
+//                dialog.dismiss();
+//                start_play();s_mas[5] = "Офис";
+//            }
+//        });
+//        dialog.show();
+//    }
