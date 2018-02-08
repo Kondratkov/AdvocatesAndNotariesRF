@@ -68,6 +68,8 @@ public class JuristAccounClass {
     public Address Address;
     public double Longitude;
     public double Latitude;
+    public double CurrentLongitude;
+    public double CurrentLatitude;
     public boolean IsVip;
     public String MyLoveJurists ="";
 

@@ -86,14 +86,14 @@
                         android:autoText="true"
                         android:gravity="center"
                         android:text="сортировка"
-                        android:textColor="@color/color_white" />
+                        android:textColor="@color/color_white"/>
 
                     <Button
                         android:id="@+id/jurList_but_sort_city"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/but_grey_rect"
-                        android:onClick="onClick" />
+                        android:onClick="onClick"/>
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
@@ -203,7 +203,7 @@
                             android:layout_gravity="right"
                             android:layout_marginRight="1dp"
                             android:layout_marginTop="2dp"
-                            android:background="@color/color_menubar_l">
+                            android:background="@color/br_q12">
 
                         </SearchView>
                     </LinearLayout>

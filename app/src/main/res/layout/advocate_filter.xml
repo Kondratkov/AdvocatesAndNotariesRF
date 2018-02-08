@@ -21,7 +21,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="53dp"
-        android:background="@drawable/x_shap"
+        android:background="@color/color_menubar_l"
         android:orientation="vertical"
         android:weightSum="1">
 
@@ -40,7 +40,7 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/xbut_menu_12" />
+                    android:src="@drawable/xbut_menu_12"/>
 
                 <ImageButton
                     android:id="@+id/advocates_filter_but_menu"
@@ -48,7 +48,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="#00ffffff"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"/>
             </FrameLayout>
 
             <LinearLayout
@@ -65,7 +65,7 @@
                     android:onClick="onClick"
                     android:singleLine="true"
                     android:text="@string/project_ago"
-                    android:textColor="#ffffff" />
+                    android:textColor="#ffffff"/>
 
                 <ImageView
                     android:id="@+id/imageView13"
@@ -73,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="#ffffff" />
+                    android:background="#ffffff"/>
             </LinearLayout>
 
         </FrameLayout>
@@ -108,7 +108,7 @@
                 android:clickable="false"
                 android:onClick="onClick"
                 android:text="Применить поиск"
-                android:textColor="#55ffffff" />
+                android:textColor="@color/color_white"/>
 
             <TextView
                 android:id="@+id/advocates_filter_tv_dbt_filter"
@@ -144,6 +144,7 @@
                     android:orientation="horizontal">
 
                     <FrameLayout
+                        android:id="@+id/frameLayout_advocateFilter_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -159,21 +160,22 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.4"
                                 android:background="@drawable/ain_ic_my_loc"
-                                android:elevation="0dp"
-                                android:padding="5dp" />
+                                android:elevation="0dp"/>
 
                             <TextView
                                 android:id="@+id/advocates_filter_tv_1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.6"
                                 android:gravity="center"
                                 android:padding="3dp"
                                 android:text="@string/advocate_filter_1"
                                 android:textColor="@color/color_bluedark_for_bar"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"/>
                         </LinearLayout>
 
                         <Button
@@ -181,11 +183,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"/>
 
                     </FrameLayout>
 
                     <FrameLayout
+                        android:id="@+id/frameLayout_advocateFilter_2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -202,8 +205,9 @@
                                 android:id="@+id/imageView17"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.4"
-                                android:background="@drawable/ain_ic_add_city" />
+                                android:background="@drawable/ain_ic_add_city"/>
 
                             <TextView
                                 android:id="@+id/advocates_filter_tv_2"
@@ -215,7 +219,7 @@
                                 android:padding="3dp"
                                 android:text="@string/advocate_filter_2"
                                 android:textColor="@color/color_bluedark_for_bar"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"/>
                         </LinearLayout>
 
                         <Button
@@ -224,7 +228,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
                             android:onClick="onClick"
-                            android:padding="5dp" />
+                            android:padding="5dp"/>
 
                     </FrameLayout>
                 </LinearLayout>
@@ -236,6 +240,7 @@
                     android:orientation="horizontal">
 
                     <FrameLayout
+                        android:id="@+id/frameLayout_advocateFilter_3"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_margin="5dp"
@@ -252,20 +257,22 @@
                                 android:id="@+id/imageView18"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.4"
-                                android:background="@drawable/ain_ic_add_special" />
+                                android:background="@drawable/ain_ic_add_special"/>
 
                             <TextView
                                 android:id="@+id/advocates_filter_tv_3"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="right|center_vertical"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.6"
                                 android:gravity="center"
                                 android:padding="3dp"
                                 android:text="@string/advocate_filter_3"
                                 android:textColor="@color/color_bluedark_for_bar"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"/>
                         </LinearLayout>
 
                         <Button
@@ -274,11 +281,12 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
                             android:onClick="onClick"
-                            android:padding="5dp" />
+                            android:padding="5dp"/>
 
                     </FrameLayout>
 
                     <FrameLayout
+                        android:id="@+id/frameLayout_advocateFilter_4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -295,20 +303,22 @@
                                 android:id="@+id/imageView19"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.4"
-                                android:background="@drawable/ain_ic_bup" />
+                                android:background="@drawable/ain_ic_bup"/>
 
                             <TextView
                                 android:id="@+id/advocates_filter_tv_4"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="left|center_vertical"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.6"
                                 android:gravity="center"
                                 android:padding="3dp"
                                 android:text="@string/advocate_filter_4"
                                 android:textColor="@color/color_bluedark_for_bar"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"/>
                         </LinearLayout>
 
                         <Button
@@ -317,7 +327,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
                             android:onClick="onClick"
-                            android:padding="5dp" />
+                            android:padding="5dp"/>
 
                     </FrameLayout>
                 </LinearLayout>
@@ -329,6 +339,7 @@
                     android:orientation="horizontal">
 
                     <FrameLayout
+                        android:id="@+id/frameLayout_advocateFilter_5"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:layout_margin="5dp"
@@ -345,19 +356,21 @@
                                 android:id="@+id/imageView20"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.4"
-                                android:background="@drawable/ain_ic_sud_terr" />
+                                android:background="@drawable/ain_ic_sud_terr"/>
 
                             <TextView
                                 android:id="@+id/advocates_filter_tv_5"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.6"
                                 android:gravity="center"
                                 android:padding="3dp"
                                 android:text="@string/advocate_filter_5"
                                 android:textColor="@color/color_bluedark_for_bar"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"/>
                         </LinearLayout>
 
                         <Button
@@ -366,11 +379,12 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
                             android:onClick="onClick"
-                            android:padding="5dp" />
+                            android:padding="5dp"/>
 
                     </FrameLayout>
 
                     <FrameLayout
+                        android:id="@+id/frameLayout_advocateFilter_6"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -387,19 +401,21 @@
                                 android:id="@+id/imageView21"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.4"
-                                android:background="@drawable/ain_ic_jurist_next" />
+                                android:background="@drawable/ain_ic_jurist_next"/>
 
                             <TextView
                                 android:id="@+id/advocates_filter_tv_6"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_margin="5dp"
                                 android:layout_weight="0.6"
                                 android:gravity="center"
                                 android:padding="3dp"
                                 android:text="@string/advocate_filter_6"
                                 android:textColor="@color/color_bluedark_for_bar"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"/>
                         </LinearLayout>
 
                         <Button
@@ -408,7 +424,7 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
                             android:onClick="onClick"
-                            android:padding="5dp" />
+                            android:padding="5dp"/>
 
                     </FrameLayout>
                 </LinearLayout>

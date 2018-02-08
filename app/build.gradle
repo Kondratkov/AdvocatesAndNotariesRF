@@ -8,8 +8,8 @@ android {
         applicationId "kondratkov.advocatesandnotariesrf"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 4
-        versionName "0.220.5.B"
+        versionCode 67
+        versionName "0.321.5.B"
         vectorDrawables.useSupportLibrary = true
     }
     lintOptions {
@@ -45,6 +45,9 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:8.4.0'
     compile 'com.google.code.gson:gson:2.6.1'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //compile 'org.apache.httpcomponents:httpclient:4.5'
     //compile 'com.yandex.money.api:yandex-money-sdk-java:5.1.0'
 }

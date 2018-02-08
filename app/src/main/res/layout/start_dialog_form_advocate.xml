@@ -14,19 +14,22 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/but_grey_rect"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/imageView15"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:background="@drawable/ain_ic_findadvocate" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ain_ic_findadvocate"/>
 
                 <TextView
                     android:id="@+id/textView24"
@@ -35,7 +38,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="Найти адвоката" />
+                    android:text="Найти адвоката"/>
 
             </LinearLayout>
 
@@ -43,27 +46,29 @@
                 android:id="@+id/start_dialog_form_but_1"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/but_grey_rect"
-                android:onClick="onClick" />
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:onClick="onClick"/>
 
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/but_grey_rect"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/imageView22"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:background="@drawable/ain_ic_question" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ain_ic_question"/>
 
                 <TextView
                     android:id="@+id/textView26"
@@ -72,7 +77,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="Вопрос в чат" />
+                    android:text="Вопрос в чат"/>
 
             </LinearLayout>
 
@@ -80,27 +85,28 @@
                 android:id="@+id/start_dialog_form_but_2"
                 android:layout_width="match_parent"
                 android:layout_height="66dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/but_grey_rect"
-                android:onClick="onClick" />
+                android:background="@android:color/transparent"
+                android:onClick="onClick"/>
 
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/but_grey_rect"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/imageView23"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:background="@drawable/ain_ic_support" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ain_ic_support"/>
 
                 <TextView
                     android:id="@+id/textView27"
@@ -109,7 +115,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="Заказать консультацию" />
+                    android:text="Заказать консультацию"/>
 
             </LinearLayout>
 
@@ -117,27 +123,28 @@
                 android:id="@+id/start_dialog_form_but_3"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/but_grey_rect"
-                android:onClick="onClick" />
+                android:background="@android:color/transparent"
+                android:onClick="onClick"/>
 
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/but_grey_rect"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/imageView24"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:background="@drawable/ain_ic_document" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ain_ic_document"/>
 
                 <TextView
                     android:id="@+id/textView28"
@@ -146,7 +153,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="Заказать документ" />
+                    android:text="Заказать документ"/>
 
             </LinearLayout>
 
@@ -154,9 +161,8 @@
                 android:id="@+id/start_dialog_form_but_4"
                 android:layout_width="match_parent"
                 android:layout_height="67dp"
-                android:layout_margin="15dp"
-                android:background="@drawable/but_grey_rect"
-                android:onClick="onClick" />
+                android:background="@android:color/transparent"
+                android:onClick="onClick"/>
 
         </FrameLayout>
 
@@ -164,10 +170,10 @@
             android:id="@+id/start_dialog_form_but_close"
             android:layout_width="match_parent"
             android:layout_height="39dp"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             android:background="@color/color_button_gray"
             android:onClick="onClick"
-            android:text="назад" />
+            android:text="назад"/>
 
     </LinearLayout>
 

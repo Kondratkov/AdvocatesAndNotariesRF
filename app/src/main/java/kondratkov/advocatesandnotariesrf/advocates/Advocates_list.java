@@ -78,7 +78,7 @@ import kondratkov.advocatesandnotariesrf.start_help.Start_activity_no_login;
 
 import static android.R.id.list;
 
-public class Advocates_list extends Activity implements View.OnTouchListener, SearchView.OnQueryTextListener{
+public class Advocates_list extends Activity implements View.OnTouchListener, SearchView.OnQueryTextListener, SearchView.OnCloseListener, SearchView.OnClickListener {
 
     private static final String DEBUG_TAG = "qwerty";
     public String ADV_SEARCH = "";
@@ -495,7 +495,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
         if((Boolean)getIntent().getSerializableExtra("ANSWERNEXT")){
             List <JuristAccounClass> mJuristAccounClasses = new ArrayList<JuristAccounClass>();
             for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
-                if(juristAccounClass.CurrentLatitude!=0 && juristAccounClass.CurrentLongitude !=0){
+                if(juristAccounClass.CurrentLatitude!=0 && juristAccounClass.CurrentLongitude !=0 && juristAccounClass.IsOnline){
                     double mx = Math.abs(in.get_latitude()- juristAccounClass.CurrentLatitude);//51.714342);
                     double my = Math.abs(in.get_longitude() - juristAccounClass.CurrentLongitude);//39.275005);
                     double dist = Math.sqrt(Math.pow(mx, 2) + Math.pow(my,2));
@@ -653,6 +653,8 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
     @Override
     public boolean onQueryTextChange(String newText) {
 
+
+
         int kol_vo=0;
         for (int i = 0; i < mcArrayJuristAccounSearch.length; i++) {
             if(mcArrayJuristAccounSearch[i].Fio.toLowerCase().contains(newText.toString().toLowerCase())){
@@ -672,6 +674,12 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
         }
         start_activity();
 
+        return false;
+    }
+
+    @Override
+    public boolean onClose() {
+        searchView_adv.setBackgroundResource(R.color.br_q12);
         return false;
     }
 
