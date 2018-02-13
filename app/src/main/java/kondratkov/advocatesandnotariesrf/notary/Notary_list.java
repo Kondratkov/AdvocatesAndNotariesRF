@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -569,12 +572,14 @@ public class Notary_list extends Activity implements View.OnTouchListener,
                 tv_item_notary_holiday.setText("пн-пт");
             }
             if (arrayNotary[position].Equipage) {
-                iv_item_notary_vyezd.setBackgroundResource(R.drawable.ic_exit_not_no);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_exit_not_no);
+                iv_item_notary_vyezd.setImageBitmap(bitmap);
             } else {
                 iv_item_notary_vyezd.setBackgroundResource(R.drawable.exit_not_no);
             }
             if (arrayNotary[position].Appointments) {
-                iv_item_notary_zapic.setBackgroundResource(R.drawable.ain_ic_docrequest);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ain_ic_docrequest);
+                iv_item_notary_zapic.setImageBitmap(bitmap);
             }
 
 

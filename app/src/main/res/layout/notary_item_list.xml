@@ -198,7 +198,8 @@
                 android:id="@+id/iv_item_notary_zapic"
                 android:layout_width="10dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.17" />
+                android:layout_weight="0.17"
+                />
 
             <ImageView
                 android:id="@+id/iv_item_notary_vyezd"

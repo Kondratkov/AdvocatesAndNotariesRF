@@ -3,8 +3,10 @@ package kondratkov.advocatesandnotariesrf.my_info;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,6 +78,8 @@ public class My_frag_quest_forum extends Fragment {
 
     public int code;
 
+    public SharedPreferences sPref;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,6 +87,11 @@ public class My_frag_quest_forum extends Fragment {
 
         in = new IN();
 
+        sPref = PreferenceManager.getDefaultSharedPreferences(view.getContext());//getPreferences(MODE_PRIVATE);
+
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt("pref_new_message", 0);
+        ed.commit();
 
         context_view = in.get_context();
 

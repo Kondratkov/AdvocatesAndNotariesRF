@@ -3,8 +3,10 @@ package kondratkov.advocatesandnotariesrf.my_info;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -103,12 +105,20 @@ public class My_frag_orders_cons extends Fragment {
     public PostConsultation[] mcArrayConsultation;
     public JSONArray jsonArrayList = null;
 
+    public SharedPreferences sPref;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_orders_cons, container, false);
 
         in = new IN();
+
+        sPref = PreferenceManager.getDefaultSharedPreferences(view.getContext());//getPreferences(MODE_PRIVATE);
+
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt("pref_new_consult", 0);
+        ed.commit();
 
         context_view = in.get_context();
 

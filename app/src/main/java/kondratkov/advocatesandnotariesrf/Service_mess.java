@@ -169,7 +169,7 @@ public class Service_mess extends Service {
                 notificationIntent = new Intent(context, My_questions.class);
                 break;
             case 2:
-                notificationIntent = new Intent(context, AskAQuestion.class);
+                notificationIntent = new Intent(context,  My_questions.class);
                 in.set_idt(idt);
                 in.set_place(0);
                 break;

@@ -427,85 +427,91 @@ public class AskAQuestion extends Activity {
             if(comments1.get(position).AccountType == Comment.AccountTypes.Client){
                 rowView = inflater.inflate(R.layout.ask_item_user, parent, false);
 
-                LinearLayout lilamess_jur_tv = (LinearLayout)rowView.findViewById(R.id.lilamess_jur_tv);
+                try{
+                    LinearLayout lilamess_jur_tv = (LinearLayout)rowView.findViewById(R.id.lilamess_jur_tv);
 
-                TextView tv_mess = (TextView) rowView.findViewById(R.id.mess_user_tv);
-                tv_mess.setTextSize(in.get_font_1());
-                TextView tv_mess_date = (TextView) rowView.findViewById(R.id.mess_user_tv_date);
-                tv_mess_date.setTextSize(in.get_font_2());
-                TextView tv_nik_user_mess = (TextView) rowView.findViewById(R.id.mess_user_tv_nik);
-                tv_nik_user_mess.setTextSize(in.get_font_2());
+                    TextView tv_mess = (TextView) rowView.findViewById(R.id.mess_user_tv);
+                    tv_mess.setTextSize(in.get_font_1());
+                    TextView tv_mess_date = (TextView) rowView.findViewById(R.id.mess_user_tv_date);
+                    tv_mess_date.setTextSize(in.get_font_2());
+                    TextView tv_nik_user_mess = (TextView) rowView.findViewById(R.id.mess_user_tv_nik);
+                    tv_nik_user_mess.setTextSize(in.get_font_2());
 
-                tv_mess.setText(comments1.get(position).Message);
+                    tv_mess.setText(comments1.get(position).Message);
 
-                tv_mess_date.setText(in.dateDisplay(comments1.get(position).Date));
-                in.set_data_servise(comments1.get(position).Date);
+                    tv_mess_date.setText(in.dateDisplay(comments1.get(position).Date));
+                    in.set_data_servise(comments1.get(position).Date);
 
-                tv_nik_user_mess.setText("Вы");//list.get(position).get_name());
-                //icon_user_mess.setBackgroundResource(Integer.parseInt(list.get(position).getString("iconuser")));
+                    tv_nik_user_mess.setText("Вы");//list.get(position).get_name());
+                    //icon_user_mess.setBackgroundResource(Integer.parseInt(list.get(position).getString("iconuser")));
+                }catch (Exception e){}
+
             } else{
                 rowView = inflater.inflate(R.layout.ask_item_jur, parent, false);
-                LinearLayout lilamess_jur_tv = (LinearLayout)rowView.findViewById(R.id.lilamess_jur_tv);
-                ImageView icon_mess_jur = (ImageView)rowView.findViewById(R.id.mess_jur_icon);
-                TextView tv_surmname_mess_jur=(TextView) rowView.findViewById(R.id.mess_jur_tv_surmname);
-                tv_surmname_mess_jur.setTextSize(in.get_font_2());
-                TextView tv_name_mess_jur=(TextView)rowView.findViewById(R.id.mess_jur_tv_name);
-                TextView tv_mess_jur=(TextView)rowView.findViewById(R.id.mess_jur_tv);
-                tv_mess_jur.setTextSize(in.get_font_1());
-                TextView tv_mess_jur_date=(TextView)rowView.findViewById(R.id.mess_jur_tv_date);
-                tv_mess_jur_date.setTextSize(in.get_font_2());
-                Button but_icon = (Button)rowView.findViewById(R.id.mess_jur_but_icon);
-                mas_view[position] = but_icon.getId();
+                try{
+                    LinearLayout lilamess_jur_tv = (LinearLayout)rowView.findViewById(R.id.lilamess_jur_tv);
+                    ImageView icon_mess_jur = (ImageView)rowView.findViewById(R.id.mess_jur_icon);
+                    TextView tv_surmname_mess_jur=(TextView) rowView.findViewById(R.id.mess_jur_tv_surmname);
+                    tv_surmname_mess_jur.setTextSize(in.get_font_2());
+                    TextView tv_name_mess_jur=(TextView)rowView.findViewById(R.id.mess_jur_tv_name);
+                    TextView tv_mess_jur=(TextView)rowView.findViewById(R.id.mess_jur_tv);
+                    tv_mess_jur.setTextSize(in.get_font_1());
+                    TextView tv_mess_jur_date=(TextView)rowView.findViewById(R.id.mess_jur_tv_date);
+                    tv_mess_jur_date.setTextSize(in.get_font_2());
+                    Button but_icon = (Button)rowView.findViewById(R.id.mess_jur_but_icon);
+                    mas_view[position] = but_icon.getId();
 
-                //tv_mess_jur_date.setText(list.get(position).getString("date"));
+                    //tv_mess_jur_date.setText(list.get(position).getString("date"));
 
-                tv_surmname_mess_jur.setText(comments1.get(position).From);
+                    tv_surmname_mess_jur.setText(comments1.get(position).From);
 
-                tv_mess_jur_date.setText(in.dateDisplay(comments1.get(position).Date));
-                in.set_data_servise(comments1.get(position).Date);
+                    tv_mess_jur_date.setText(in.dateDisplay(comments1.get(position).Date));
+                    in.set_data_servise(comments1.get(position).Date);
 
-                //tv_name_mess_jur.setText(list.get(position).getString("namejur"));
-                tv_mess_jur.setText(comments1.get(position).Message);
-                tv_mess_jur.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //region.Cities[id_SudTer].Region = region;
-                        if(in.get_Tiptip()==false){
-                            if(comments1.get(position).GetAccountTypes()==1){
-                                openDialog(comments1.get(position).AccountId, comments1.get(position));
+                    //tv_name_mess_jur.setText(list.get(position).getString("namejur"));
+                    tv_mess_jur.setText(comments1.get(position).Message);
+                    tv_mess_jur.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //region.Cities[id_SudTer].Region = region;
+                            if(in.get_Tiptip()==false){
+                                if(comments1.get(position).GetAccountTypes()==1){
+                                    openDialog(comments1.get(position).AccountId, comments1.get(position));
+                                }
                             }
                         }
-                    }
-                });
-                lilamess_jur_tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //region.Cities[id_SudTer].Region = region;
-                        if(in.get_Tiptip()==false){
-                            if(comments1.get(position).GetAccountTypes()==1){
-                                openDialog(comments1.get(position).AccountId, comments1.get(position));
+                    });
+                    lilamess_jur_tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //region.Cities[id_SudTer].Region = region;
+                            if(in.get_Tiptip()==false){
+                                if(comments1.get(position).GetAccountTypes()==1){
+                                    openDialog(comments1.get(position).AccountId, comments1.get(position));
+                                }
                             }
                         }
-                    }
-                });
+                    });
 
-                //icon_mess_jur.setBackgroundResource(Integer.parseInt(list.get(position).getString("iconjur")));
+                    //icon_mess_jur.setBackgroundResource(Integer.parseInt(list.get(position).getString("iconjur")));
 
-                but_icon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int iidj = 0;
-                        for(int i=0; i<position+1; i++){
-                            if(v.getId() == mas_view[i]){
-                                iidj = i;
+                    but_icon.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int iidj = 0;
+                            for(int i=0; i<position+1; i++){
+                                if(v.getId() == mas_view[i]){
+                                    iidj = i;
+                                }
                             }
-                        }
-                        in.set_id_jur(comments1.get(position).AccountId);
+                            in.set_id_jur(comments1.get(position).AccountId);
 
-                        Intent intent = new Intent(AskAQuestion.this, Advocate_profile.class);
-                        startActivity(intent);
-                    }
-                });
+                            Intent intent = new Intent(AskAQuestion.this, Advocate_profile.class);
+                            startActivity(intent);
+                        }
+                    });
+                }catch (Exception e){}
+
             }
             return rowView;
         }

@@ -730,7 +730,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                 LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 tvDist.setText(in.sDistance(juristAccounClasses[position].Latitude, juristAccounClasses[position].Longitude, lm, Advocates_list.this));
             }catch (Exception e){
-
+                tvDist.setText("");
             }
 
             if(juristAccounClasses[position].IsVip){
@@ -889,7 +889,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                 if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
                 result = response.body().string();
-
+String d = "";
             } catch (IOException e) {
                 e.printStackTrace();
             }

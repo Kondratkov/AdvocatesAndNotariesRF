@@ -3,7 +3,9 @@ package kondratkov.advocatesandnotariesrf;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -36,7 +38,7 @@ public class New_sidebar extends Activity implements View.OnTouchListener{
     Button butSidebar, button_new_sid;
     IN in;
     public LinearLayout sidebar_lila, lila_start;
-    public TextView sidebar_tv_nik, sidebar_tv_input;
+    public TextView sidebar_tv_nik, sidebar_tv_input, textViewSidibarCall2, textViewSidibarCall3;
     public TextView tv1, tv2, tv3, tv4, tv5, tv6;
     public ImageView sidebar_image_user;
     public LinearLayout lila_side_1, lila_side_2, lila_side_3,
@@ -46,12 +48,16 @@ public class New_sidebar extends Activity implements View.OnTouchListener{
     public LinearLayout[] ff;
     public ScrollView sidebar_ss;
 
+    public SharedPreferences sPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_sidebar);
 
         in = new IN();
+
+        sPref = PreferenceManager.getDefaultSharedPreferences(this);//getPreferences(MODE_PRIVATE);
 
         Log.d("qwerty", "Start Sidebar");
 
@@ -73,6 +79,22 @@ public class New_sidebar extends Activity implements View.OnTouchListener{
         tv4 = (TextView)findViewById(R.id.sidebar_tv4);
         tv5 = (TextView)findViewById(R.id.sidebar_tv5);
         tv6 = (TextView)findViewById(R.id.sidebar_tv6);
+
+        textViewSidibarCall2 = (TextView)findViewById(R.id.textViewSidibarCall2);
+        textViewSidibarCall3 = (TextView)findViewById(R.id.textViewSidibarCall3);
+
+        if(sPref.getInt("pref_new_message",0)>0){
+            textViewSidibarCall2.setText(String.valueOf(sPref.getInt("pref_new_message",0)));
+        }else {
+            textViewSidibarCall2.setText("");
+        }
+
+        if(sPref.getInt("pref_new_consult", 0)>0){
+            textViewSidibarCall3.setText(String.valueOf(sPref.getInt("pref_new_consult",0)));
+        }else{
+            textViewSidibarCall3.setText("");
+        }
+
 
         tv_mas = new TextView[]{tv1, tv2, tv3, tv4, tv5, tv6};
         for(int i=0; i<tv_mas.length; i++){

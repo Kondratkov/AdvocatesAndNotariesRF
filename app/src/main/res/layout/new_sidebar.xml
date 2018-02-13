@@ -176,30 +176,48 @@
                                 android:layout_marginRight="5dp"
                                 android:longClickable="true"
                                 android:onClick="onClickSidebar"
-                                android:src="@drawable/xicon_1" />
+                                android:src="@drawable/xicon_1"/>
 
-                            <TextView
-                                android:id="@+id/sidebar_tv1"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:clickable="true"
-                                android:focusable="false"
-                                android:gravity="center_vertical"
-                                android:longClickable="true"
-                                android:onClick="onClickSidebar"
-                                android:shadowColor="#001974"
-                                android:shadowDx="2"
-                                android:shadowDy="2"
-                                android:shadowRadius="5"
-                                android:text="@string/sidebar_1"
-                                android:textColor="@color/color_white"
-                                android:textIsSelectable="true"
-                                android:textSize="15dp"
-                                android:textStyle="bold"
-                                android:typeface="normal" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/sidebar_tv1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:clickable="true"
+                                    android:focusable="false"
+                                    android:gravity="center_vertical"
+                                    android:longClickable="true"
+                                    android:onClick="onClickSidebar"
+                                    android:shadowColor="#001974"
+                                    android:shadowDx="2"
+                                    android:shadowDy="2"
+                                    android:shadowRadius="5"
+                                    android:text="@string/sidebar_1"
+                                    android:textColor="@color/color_white"
+                                    android:textIsSelectable="true"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold"
+                                    android:typeface="normal"/>
+
+                                <TextView
+                                    android:id="@+id/textViewSidibarCall1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    />
+
+                            </LinearLayout><![CDATA[
+
                             />
+                        ]]>
                         </LinearLayout>
 
                         <Button
@@ -234,28 +252,46 @@
                                 android:onClick="onClickSidebar"
                                 android:src="@drawable/xicon_2" />
 
-                            <TextView
-                                android:id="@+id/sidebar_tv2"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:clickable="true"
-                                android:focusable="false"
-                                android:gravity="center_vertical"
-                                android:longClickable="true"
-                                android:onClick="onClickSidebar"
-                                android:shadowColor="#001974"
-                                android:shadowDx="2"
-                                android:shadowDy="2"
-                                android:shadowRadius="5"
-                                android:text="@string/sidebar_2"
-                                android:textColor="@color/color_white"
-                                android:textIsSelectable="true"
-                                android:textSize="15dp"
-                                android:textStyle="bold"
-                                android:typeface="normal" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/sidebar_tv2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:clickable="true"
+                                    android:focusable="false"
+                                    android:gravity="center_vertical"
+                                    android:longClickable="true"
+                                    android:onClick="onClickSidebar"
+                                    android:shadowColor="#001974"
+                                    android:shadowDx="2"
+                                    android:shadowDy="2"
+                                    android:shadowRadius="5"
+                                    android:text="@string/sidebar_2"
+                                    android:textColor="@color/color_white"
+                                    android:textIsSelectable="true"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold"
+                                    android:typeface="normal"/>
+
+                                <TextView
+                                    android:id="@+id/textViewSidibarCall2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    />
+
+                            </LinearLayout><![CDATA[
+
                             />
+                        ]]>
                         </LinearLayout>
 
                         <Button
@@ -291,28 +327,45 @@
                                 android:onClick="onClickSidebar"
                                 android:src="@drawable/xicon_3" />
 
-                            <TextView
-                                android:id="@+id/sidebar_tv3"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="5dp"
-                                android:layout_marginRight="5dp"
-                                android:clickable="true"
-                                android:focusable="false"
-                                android:gravity="center_vertical"
-                                android:longClickable="true"
-                                android:onClick="onClickSidebar"
-                                android:shadowColor="#001974"
-                                android:shadowDx="2"
-                                android:shadowDy="2"
-                                android:shadowRadius="5"
-                                android:singleLine="true"
-                                android:text="@string/sidebar_3"
-                                android:textColor="@color/color_white"
-                                android:textIsSelectable="true"
-                                android:textSize="15dp"
-                                android:textStyle="bold"
-                                android:typeface="normal" />
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/sidebar_tv3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_weight="1"
+                                    android:clickable="true"
+                                    android:focusable="false"
+                                    android:gravity="center_vertical"
+                                    android:longClickable="true"
+                                    android:onClick="onClickSidebar"
+                                    android:shadowColor="#001974"
+                                    android:shadowDx="2"
+                                    android:shadowDy="2"
+                                    android:shadowRadius="5"
+                                    android:singleLine="true"
+                                    android:text="@string/sidebar_3"
+                                    android:textColor="@color/color_white"
+                                    android:textIsSelectable="true"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold"
+                                    android:typeface="normal"/>
+
+                                <TextView
+                                    android:id="@+id/textViewSidibarCall3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    />
+
+                            </LinearLayout>
+
                         </LinearLayout>
 
                         <Button

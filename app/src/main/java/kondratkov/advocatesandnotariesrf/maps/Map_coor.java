@@ -223,8 +223,9 @@ public class Map_coor extends Activity {
 
         @Override
         protected Void doInBackground(Void... params) {
-
+            String sdf = in.get_text();
             URL textUrl;
+
 
             try {
                 textUrl = new URL("http://maps.google.com/maps/api/geocode/json?address="+in.get_text().replaceAll(" ", "")+"&sensor=false&language=ru");
