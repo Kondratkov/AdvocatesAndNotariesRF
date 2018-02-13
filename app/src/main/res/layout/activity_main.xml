@@ -49,6 +49,14 @@
                     android:layout_gravity="center"
                     android:background="#00ffffff"
                     android:onClick="onClick" />
+
+                <TextView
+                    android:id="@+id/textViewNewMess"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/black"/>
             </FrameLayout>
 
         </FrameLayout>

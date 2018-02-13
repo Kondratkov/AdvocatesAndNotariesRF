@@ -235,21 +235,36 @@ try {
                     case 1:
                         if(newPushMessage[i].Date.equals(in.get_data_servise())){}
                         else newPushMessages1.add(newPushMessage[i]);
-
+                        SharedPreferences.Editor ed = sPref.edit();
+                        ed.putInt("pref_new_message", sPref.getInt("pref_new_message",0)+1);
+                        //ed.putInt("pref_new_consult", 0);
+                        ed.commit();
                         break;
                     case 2:
                         if(newPushMessage[i].Date.equals(in.get_data_servise())){}
                         else newPushMessages2.add(newPushMessage[i]);
+                        SharedPreferences.Editor ed2 = sPref.edit();
+                        ed2.putInt("pref_new_message", sPref.getInt("pref_new_message",0)+1);
+                        ed2.commit();
                         break;
                     case 3:
                         newPushMessages3.add(newPushMessage[i]);
+                        SharedPreferences.Editor ed3 = sPref.edit();
+                        ed3.putInt("pref_new_consul", sPref.getInt("pref_new_consult",0)+1);
+                        ed3.commit();
                         break;
                     case 4:
                         newPushMessages4.add(newPushMessage[i]);
+                        SharedPreferences.Editor ed4 = sPref.edit();
+                        ed4.putInt("pref_new_consul", sPref.getInt("pref_new_consult",0)+1);
+                        ed4.commit();
                         break;
                     case 5:
                         if(newPushMessage[i].Date.equals(in.get_data_servise())){}
                         else newPushMessages5.add(newPushMessage[i]);
+                        SharedPreferences.Editor ed5 = sPref.edit();
+                        ed5.putInt("pref_new_consul", sPref.getInt("pref_new_consult",0)+1);
+                        ed5.commit();
                         break;
                 }
             }
@@ -258,7 +273,7 @@ try {
                 if (sPref.getBoolean("pref_setting_push_1", true) == false) {
                 } else {
                     if(newPushMessage[0].AccountId == in.get_id_user()){
-                    sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение от ",
+                        sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение от ",
                             "У вас новое сообщение", 2,
                             newPushMessage[0].ServiceId);}
                 }

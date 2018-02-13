@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -35,6 +36,7 @@ public class MainActivity extends Activity implements View.OnTouchListener{
     public SharedPreferences sPref;
     ScrollView main_scrollView;
     IN in;
+    TextView textViewNewMess;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class MainActivity extends Activity implements View.OnTouchListener{
         in = new IN();
         main_scrollView = (ScrollView) findViewById(R.id.main_scrollView);
         main_scrollView.setOnTouchListener(this);
+
+        textViewNewMess =(TextView)findViewById(R.id.textViewNewMess);
 
         sPref = PreferenceManager.getDefaultSharedPreferences(this);// getPreferences(MODE_PRIVATE);
         //Log.d("qwerty", "Что же там "+ String.valueOf(sPref.getBoolean("one_start", true)));
@@ -69,6 +73,15 @@ public class MainActivity extends Activity implements View.OnTouchListener{
             startActivity(intent);
             MainActivity.this.finish();
         }
+
+        if( sPref.getInt("pref_new_message",0) + sPref.getInt("pref_new_consult",0)>0){
+            textViewNewMess.setText(String.valueOf(sPref.getInt("pref_new_message",0)+sPref.getInt("pref_new_consult",0)));
+            textViewNewMess.setBackgroundResource(R.drawable.ic_oval_info);
+        }else {
+            textViewNewMess.setText("");
+            textViewNewMess.setBackgroundResource(R.drawable.ic_oval_info_no);
+        }
+
         //OneStart();
     }
 

@@ -85,16 +85,17 @@ public class New_sidebar extends Activity implements View.OnTouchListener{
 
         if(sPref.getInt("pref_new_message",0)>0){
             textViewSidibarCall2.setText(String.valueOf(sPref.getInt("pref_new_message",0)));
+            textViewSidibarCall2.setBackgroundResource(R.drawable.ic_oval_info);
         }else {
             textViewSidibarCall2.setText("");
         }
 
         if(sPref.getInt("pref_new_consult", 0)>0){
             textViewSidibarCall3.setText(String.valueOf(sPref.getInt("pref_new_consult",0)));
+            textViewSidibarCall3.setBackgroundResource(R.drawable.ic_oval_info);
         }else{
             textViewSidibarCall3.setText("");
         }
-
 
         tv_mas = new TextView[]{tv1, tv2, tv3, tv4, tv5, tv6};
         for(int i=0; i<tv_mas.length; i++){
