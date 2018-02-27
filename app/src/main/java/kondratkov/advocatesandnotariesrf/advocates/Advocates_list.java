@@ -87,12 +87,6 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
     int view_height;
     public int kol;
 
-    String json_jur =
-            "{\"jurList\":{\"array\":[" +
-                    "{\"surname\":\"Иванов\",\"name\":\"Иванqqq\",\"icon\":\""+String.valueOf(R.drawable.ricfas)+"\",\"idjur\":\"1\",\"online\":\"1\",\"city\":\"Воронеж\"}," +
-                    "{\"surname\":\"Петров\",\"name\":\"Семенqq\",\"icon\":\""+String.valueOf(R.drawable.ricfas)+"\",\"idjur\":\"2\",\"online\":\"1\",\"city\":\"Москва\" }, " +
-                    "{\"surname\":\"Гродев\",\"name\":\"Петрqqq\",\"icon\":\""+String.valueOf(R.drawable.ricfas)+"\",\"idjur\":\"4\",\"online\":\"1\",\"city\":\"Калиниград\" }]}}";
-
     public ListView listViewJur;
 
     public JSONArray jsonArrayjurList = null;
@@ -113,6 +107,8 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
     public IN in = new IN();
     public int int_sort = 0;
     public int sort_list = 0;
+
+    public boolean bool_newtTo_me = false;
 
     public String SORT_CITY = "";
 
@@ -157,6 +153,9 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
         //Search_id_city = (int)getIntent().getSerializableExtra("CITY");
         Search_id_JuristAreas = (int)getIntent().getSerializableExtra("SUDTER");
         Search_specialization = (String)getIntent().getSerializableExtra("SPECIALIZATION");
+
+        bool_newtTo_me = (boolean)getIntent().getBooleanExtra("ANSWERNEXT", false);
+
         Search_sortingType1 = FindJuristFilter.sortingType.Name;
         Search_sortingType2 = FindByCoordinatesFilter.sortingType.Name;
         sort_bool_fuck = new boolean[4];
@@ -728,7 +727,12 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
 
             try{
                 LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                tvDist.setText(in.sDistance(juristAccounClasses[position].Latitude, juristAccounClasses[position].Longitude, lm, Advocates_list.this));
+                if(bool_newtTo_me){
+                    tvDist.setText(in.sDistance(juristAccounClasses[position].CurrentLatitude, juristAccounClasses[position].CurrentLongitude, lm, Advocates_list.this));
+                }else {
+                    tvDist.setText(in.sDistance(juristAccounClasses[position].Latitude, juristAccounClasses[position].Longitude, lm, Advocates_list.this));
+                }
+
             }catch (Exception e){
                 tvDist.setText("");
             }
@@ -889,7 +893,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                 if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
                 result = response.body().string();
-String d = "";
+                String d = "";
             } catch (IOException e) {
                 e.printStackTrace();
             }

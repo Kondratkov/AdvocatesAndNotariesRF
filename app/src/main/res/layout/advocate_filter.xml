@@ -283,6 +283,12 @@
                             android:onClick="onClick"
                             android:padding="5dp"/>
 
+                        <Button
+                            android:id="@+id/buttonAdFilterNo3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorvip"/>
+
                     </FrameLayout>
 
                     <FrameLayout
@@ -328,6 +334,12 @@
                             android:background="@drawable/but_red_rect"
                             android:onClick="onClick"
                             android:padding="5dp"/>
+
+                        <Button
+                            android:id="@+id/buttonAdFilterNo4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorvip"/>
 
                     </FrameLayout>
                 </LinearLayout>
@@ -381,6 +393,12 @@
                             android:onClick="onClick"
                             android:padding="5dp"/>
 
+                        <Button
+                            android:id="@+id/buttonAdFilterNo5"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorvip"/>
+
                     </FrameLayout>
 
                     <FrameLayout
@@ -426,6 +444,12 @@
                             android:onClick="onClick"
                             android:padding="5dp"/>
 
+                        <Button
+                            android:id="@+id/buttonAdFilterNo6"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorvip"/>
+
                     </FrameLayout>
                 </LinearLayout>
 
@@ -440,39 +464,40 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="10dp"/>
 
                     <TextView
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"/>
 
                     <TextView
                         android:id="@+id/textView8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"/>
 
                     <TextView
                         android:id="@+id/textView10"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"/>
 
                     <TextView
                         android:id="@+id/textView11"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"/>
 
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
+
     </FrameLayout>
 
 </FrameLayout>

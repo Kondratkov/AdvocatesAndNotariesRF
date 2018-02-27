@@ -11,6 +11,8 @@ public class NewPushMessage {
     public String Date;// { get; set; }
     public int ServiceId ;//{ get; set; }
     public PushTypes PushType;// { get; set; }
+    public int OwnerId;
+    public String OwnerName;
 
     public enum PushTypes
     {

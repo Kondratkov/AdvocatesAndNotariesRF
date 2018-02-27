@@ -272,15 +272,19 @@ try {
             if (newPushMessages1.size() == 1) {
                 if (sPref.getBoolean("pref_setting_push_1", true) == false) {
                 } else {
-                    if(newPushMessage[0].AccountId == in.get_id_user()){
+                    if(newPushMessages1.get(0).OwnerId != in.get_id_user()){
+                        String name="";
+                        try{
+                            name = newPushMessage[0].OwnerName;
+                        }catch (Exception e){}
                         sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение от ",
-                            "У вас новое сообщение", 2,
+                                "Сообщение от "+name, 2,
                             newPushMessage[0].ServiceId);}
                 }
 
             } else if (newPushMessages1.size() > 1) {
                 sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение от ",
-                        "У вас новые сообщения", 1,
+                        "У вас есть новые сообщения", 1,
                         1);//sendBigPictureStyleNotification("Вам задали вопрос!", "","", 1, 0);
             } else if (newPushMessages2.size() == 1) {
                 if (sPref.getBoolean("pref_setting_push_3", true) == false) {

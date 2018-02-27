@@ -117,6 +117,11 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
     @BindView(R.id.frameLayout_advocateFilter_5)FrameLayout frameLayout_advocateFilter_5;
     @BindView(R.id.frameLayout_advocateFilter_6)FrameLayout frameLayout_advocateFilter_6;
 
+    @BindView(R.id.buttonAdFilterNo3)Button buttonAdFilterNo3;
+    @BindView(R.id.buttonAdFilterNo4)Button buttonAdFilterNo4;
+    @BindView(R.id.buttonAdFilterNo5)Button buttonAdFilterNo5;
+    @BindView(R.id.buttonAdFilterNo6)Button buttonAdFilterNo6;
+
     FrameLayout [] mFrameLayouts;
 
     @Override
@@ -263,6 +268,11 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
                 Filter_lan = in.get_latitude();
                 Filter_lon = in.get_longitude();
                 start_play();
+
+                buttonAdFilterNo3.setVisibility(View.GONE);
+                buttonAdFilterNo4.setVisibility(View.GONE);
+                buttonAdFilterNo5.setVisibility(View.GONE);
+                buttonAdFilterNo6.setVisibility(View.GONE);
                 break;
             case R.id.advocates_filter_but_2:
                 Filter_Bup = new Bup();
@@ -345,12 +355,19 @@ public class Advocate_filter extends Activity implements Dialog_region.i_dialog_
             Filter_lon =city.Longitude;
             in.set_filter_tip(1);
             Filter_city = city.Name;
+
+            buttonAdFilterNo3.setVisibility(View.GONE);
+            buttonAdFilterNo4.setVisibility(View.GONE);
+            buttonAdFilterNo5.setVisibility(View.GONE);
+            buttonAdFilterNo6.setVisibility(View.VISIBLE);
+            answers_next = false;
+            s_mas[5] = "";
+
         }else{
            // s_mas[0] = "Текущее местоположение";
             s_mas[0] = "";
             s_mas[1] = "";
             in.set_id_city("");
-
             //XY_set();
            // in.set_filter_tip(2);
         }
