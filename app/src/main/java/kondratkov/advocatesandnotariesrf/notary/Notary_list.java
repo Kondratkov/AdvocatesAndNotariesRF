@@ -350,6 +350,30 @@ public class Notary_list extends Activity implements View.OnTouchListener,
         JSONObject jsonObject = null;
         JSONArray jsonArray = new JSONArray();
 
+        Notary [] notaries;
+
+        String notary_city_search = (String)getIntent().getSerializableExtra("CITY_SEARCH");
+
+
+        List<Notary>notariesList = new ArrayList<Notary>();
+
+//        if(notary_city_search.length() > 0){
+//
+//            for(int i = 0; i<mcArrayNotary.length; i++){
+//                String dd1 = mcArrayNotary[i].Address2;
+//                String dd = mcArrayNotary[i].Address.City;
+//                if(mcArrayNotary[i].Address.City.equals(notary_city_search)){
+//                    notariesList.add(mcArrayNotary[i]);
+//                }
+//            }
+//
+//            notaries = new Notary[notariesList.size()];
+//            for(int i =0; i<notariesList.size(); i++){
+//                notaries[i] = notariesList.get(i);
+//            }
+//            mcArrayNotary = notaries;
+//        }
+
         MyAdapterJsonList mam = new MyAdapterJsonList(this, mcArrayNotary);//getnotaryList(jsonObjectnotaryList));
         listViewnotary.setAdapter(mam);
 

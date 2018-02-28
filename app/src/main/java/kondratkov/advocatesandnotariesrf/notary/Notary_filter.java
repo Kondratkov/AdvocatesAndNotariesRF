@@ -285,6 +285,12 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
             case R.id.notary_filter_but_filter:
                 intent = new Intent(Notary_filter.this, Notary_list.class);
                 intent.putExtra("FILES_sort", 2);
+                if(tv_mas[1].equals("Другой регион/населенный пункт")){
+                    intent.putExtra("CITY_SEARCH", "");
+                }else {
+                    intent.putExtra("CITY_SEARCH", tv_mas[1].getText());
+                }
+
                 startActivity(intent);
                 break;
             case R.id.notary_filter_but_close:
