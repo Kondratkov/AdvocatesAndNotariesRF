@@ -42,10 +42,11 @@ import kondratkov.advocatesandnotariesrf.start_help.Start_activity_no_login;
 public class Notary_filter extends Activity implements Dialog_region.i_dialog_region {
 
     LinearLayout lila;
-    TextView tvf1, tvf2, tvf3, tvf4, tvf5, tvf6, tvf7, tvf8, tv_but_f;
+    TextView tvf1, tvf2, tvf3, tvf4, tvf5, tvf6, tvf7, tvf8;
     public CheckBox ch1, ch2, ch3, ch4, ch5;
-    Button bt_filter;
+    Button bt_filter, buttonNotaryFilterYesNo;
     public TextView[] tv_mas = null;
+    public Button[] mButtonsFilter = null;
     public String[] s_mas = new String[]{"", "", "", "", "", "", "", ""};
     public String[] s_mas_text = new String[]{"", "", "", "", "", "", "", ""};
     public boolean but_yes = false;
@@ -55,9 +56,7 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
     int view_height;
     int v_bup = 0;
     int v_office = 0;
-    public boolean[] bool_sort = new boolean[]{false, false, false, false, false,
-            false, false, false, false, false,
-            false, false, false};
+    public boolean[] bool_sort;
 
     private LocationManager mLocationManager;
     private LocationListener mLocationListener;
@@ -79,6 +78,11 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
 
         in = new IN();
 
+        bool_sort = new boolean[]{false, false, false, false, false,
+                false, false, false, false, false,
+                false, false, false};
+
+
         lila = (LinearLayout) findViewById(R.id.lila_notary_fil);
 
         tvf1 = (TextView) findViewById(R.id.notary_filter_tv_1);
@@ -96,11 +100,21 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
         ch4 = (CheckBox) findViewById(R.id.cb_fil_4);
         ch5 = (CheckBox) findViewById(R.id.cb_fil_5);
 
-        tv_but_f = (TextView) findViewById(R.id.notary_filter_tv_dbt_filter);
+        Button b3 = (Button)findViewById(R.id.notary_filter_but_3);
+        Button b4 = (Button)findViewById(R.id.notary_filter_but_4);
+        Button b5 = (Button)findViewById(R.id.notary_filter_but_5);
+        Button b6 = (Button)findViewById(R.id.notary_filter_but_6);
+        Button b7 = (Button)findViewById(R.id.notary_filter_but_7);
+        Button b8 = (Button)findViewById(R.id.notary_filter_but_8);
+
+        mButtonsFilter = new Button[]{b3, b4, b5, b6, b7, b8};
+
+        buttonNotaryFilterYesNo = (Button)findViewById(R.id.buttonNotaryFilterYesNo);
+
+        //tv_but_f = (TextView) findViewById(R.id.notary_filter_tv_dbt_filter);
+
         tv_mas = new TextView[]{tvf1, tvf2, tvf3, tvf4, tvf5, tvf6, tvf7, tvf8};
         bt_filter = (Button) findViewById(R.id.notary_filter_but_filter);
-
-        bool_sort = in.get_sort_notary();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -203,6 +217,11 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
                 if(bool_sort[0]){
                     bool_sort[0]=false;
                     in.set_filter_tip(1);
+                    if(bool_sort[1] = false){
+                        for (int i = 0; i <bool_sort.length ; i++) {
+                            bool_sort[i]=false;
+                        }
+                    }
                 }else{
                     bool_sort[0]=true;
                     bool_sort[1]=false;
@@ -280,11 +299,16 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
                 in.set_filter_tip(0);
                 intent = new Intent(Notary_filter.this, Notary_list.class);
                 intent.putExtra("FILES_sort", 1);
+                intent.putExtra("CITY_SEARCH", "");
+                intent.putExtra("SEARCH_NOTARY_ARRAY_BOOL", bool_sort);
                 startActivity(intent);
                 break;
             case R.id.notary_filter_but_filter:
                 intent = new Intent(Notary_filter.this, Notary_list.class);
                 intent.putExtra("FILES_sort", 2);
+
+                intent.putExtra("SEARCH_NOTARY_ARRAY_BOOL", bool_sort);
+
                 if(tv_mas[1].equals("Другой регион/населенный пункт")){
                     intent.putExtra("CITY_SEARCH", "");
                 }else {
@@ -317,13 +341,11 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
             }
         }
         if (but_yes) {
-            tv_but_f.setClickable(false);
-            bt_filter.setClickable(true);
-            bt_filter.setBackgroundColor(Color.argb(181, 56, 175, 56));//setTextColor(Color.argb(255, 255, 255, 255));
-        } else {
-            tv_but_f.setClickable(true);
-            bt_filter.setClickable(false);
-            bt_filter.setBackgroundColor(Color.argb(255, 255, 255, 255));
+            buttonNotaryFilterYesNo.setVisibility(View.GONE);
+            bt_filter.setBackgroundResource(R.color.black_g);//Color(Color.argb(255, 255, 255, 255));
+            } else {
+            buttonNotaryFilterYesNo.setVisibility(View.VISIBLE);
+            bt_filter.setBackgroundResource(R.color.color_button_gray); //;Color(Color.argb(181, 56, 175, 56));//setTextColor(Color.argb(255, 255, 255, 255));
         }
         for(int i=0; i<8; i++){
             if (bool_sort[i]) {
@@ -332,17 +354,31 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
                 tv_mas[i].setBackgroundColor(Color.argb(255, 255, 255, 255));
             }
         }
+
+        if(bool_sort[0]==false && bool_sort[1]==false){
+            for (int i = 0; i < bool_sort.length; i++) {
+                bool_sort[i] = false;
+            }
+            for (int i = 2; i < 8; i++) {
+                tv_mas[i].setBackgroundResource(R.color.common_google_signin_btn_text_light_default);
+                mButtonsFilter[i-2].setVisibility(View.GONE);
+            }
+        }else {
+            for (int i = 0; i <mButtonsFilter.length ; i++) {
+                mButtonsFilter[i].setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
     public void iv_onRegion(City city, Region region, boolean b) {
         if(b){
-            if(bool_sort[1]){
-                bool_sort[1]=false;
-                tv_mas[1].setText("Другой регион/населенный пункт");
-                in.set_id_city("");
-                in.set_filter_tip(1);
-            }else{
+//            if(bool_sort[1]){
+//                bool_sort[1]=false;
+//                tv_mas[1].setText("Другой регион/населенный пункт");
+//                in.set_id_city("");
+//                in.set_filter_tip(1);
+//            }else{
                 bool_sort[1]=true;
                 bool_sort[0]=false;
                 in.set_filter_tip(2);
@@ -351,7 +387,7 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
                 in.set_longitude(city.Longitude);
                 in.set_city(city);
                 Log.d("QWERTY", String.valueOf(in.get_latitude())+" "+String.valueOf(in.get_longitude()));
-            }
+//            }
 
         }else{
             bool_sort[1]=false;

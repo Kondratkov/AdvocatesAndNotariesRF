@@ -19,35 +19,36 @@
         android:layout_height="match_parent" >
 
         <ScrollView
+            android:id="@+id/main_scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/main_scrollView"
+            android:layout_marginBottom="50dp"
             android:layout_marginTop="53dp">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:weightSum="1">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp">
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_1"
@@ -57,21 +58,21 @@
                             android:padding="3dp"
                             android:text="@string/notary_filter_1"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp">
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_2"
@@ -81,20 +82,20 @@
                             android:padding="3dp"
                             android:text="@string/notary_filter_2"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp">
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_3"
@@ -102,169 +103,183 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
                             android:onClick="onClick"
-                            android:textColor="@color/color_bluedark_for_bar" />
+                            android:textColor="@color/color_bluedark_for_bar"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_3"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="right|center_vertical"
+                            android:background="@color/common_google_signin_btn_text_light_default"
                             android:gravity="center"
                             android:padding="3dp"
                             android:text="@string/notary_filter_3"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp">
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="left|center_vertical"
+                            android:background="@color/common_google_signin_btn_text_light_default"
                             android:gravity="center"
                             android:padding="3dp"
                             android:text="@string/notary_filter_4"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp">
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_5"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_5"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@color/common_google_signin_btn_text_light_default"
                             android:gravity="center"
                             android:padding="3dp"
                             android:text="@string/notary_filter_5"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp">
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_6"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_6"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@color/common_google_signin_btn_text_light_default"
                             android:gravity="center"
                             android:padding="3dp"
                             android:text="@string/notary_filter_6"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp" >
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_7"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@color/common_google_signin_btn_text_light_default"
+                            android:clickable="false"
                             android:gravity="center"
                             android:padding="3dp"
+
                             android:text="@string/notary_filter_7"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
-                        android:layout_margin="5dp" >
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_8"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/but_red_rect"
-                            android:onClick="onClick" />
+                            android:onClick="onClick"
+                            android:visibility="gone"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_8"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@color/common_google_signin_btn_text_light_default"
                             android:gravity="center"
                             android:padding="3dp"
                             android:text="@string/notary_filter_8"
                             android:textColor="@color/color_bluedark_for_bar"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="25dp"
                     android:layout_marginBottom="65dp"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp">
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.5"
+                        android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp">
+                        android:layout_weight="0.5">
 
                         <Button
                             android:id="@+id/notary_filter_but_9"
@@ -273,7 +288,7 @@
                             android:background="@color/color_button_gray"
                             android:onClick="onClick"
                             android:text="дополнительно"
-                            android:textColor="@color/color_white" />
+                            android:textColor="@color/color_white"/>
 
                         <TextView
                             android:id="@+id/notary_filter_tv_9"
@@ -283,57 +298,57 @@
                             android:padding="3dp"
                             android:text="дополнительно"
                             android:textColor="#ffffff"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
                     </FrameLayout>
 
                     <LinearLayout
-                        android:orientation="vertical"
+                        android:id="@+id/lila_notary_fil"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:padding="10dp"
-                        android:background="@drawable/but_new"
-                        android:id="@+id/lila_notary_fil"
+                        android:layout_marginBottom="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp">
+                        android:background="@drawable/but_new"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <CheckBox
+                            android:id="@+id/cb_fil_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Заверение сайтов"
-                            android:id="@+id/cb_fil_1"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"/>
 
                         <CheckBox
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Фиксация документов"
                             android:id="@+id/cb_fil_2"
-                            android:layout_marginTop="5dp"
-                            android:textSize="18dp" />
-
-                        <CheckBox
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Депозитарий"
+                            android:layout_marginTop="5dp"
+                            android:text="Фиксация документов"
+                            android:textSize="18dp"/>
+
+                        <CheckBox
                             android:id="@+id/cb_fil_3"
-                            android:layout_marginTop="5dp"
-                            android:textSize="18dp" />
-
-                        <CheckBox
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Запросы/дубликаты"
+                            android:layout_marginTop="5dp"
+                            android:text="Депозитарий"
+                            android:textSize="18dp"/>
+
+                        <CheckBox
                             android:id="@+id/cb_fil_4"
-                            android:layout_marginTop="5dp"
-                            android:textSize="18dp" />
-
-                        <CheckBox
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Сделки"
-                            android:id="@+id/cb_fil_5"
                             android:layout_marginTop="5dp"
-                            android:textSize="18dp" />
+                            android:text="Запросы/дубликаты"
+                            android:textSize="18dp"/>
+
+                        <CheckBox
+                            android:id="@+id/cb_fil_5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Сделки"
+                            android:textSize="18dp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -408,7 +423,6 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_gravity="bottom"
-        android:background="@color/color_menubar_l"
         android:orientation="horizontal">
 
         <Button
@@ -416,10 +430,11 @@
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/but_grey_rect"
+            android:background="@color/color_button_orange"
             android:onClick="onClick"
             android:text="Показать всех в регионе"
-            android:textSize="12dp" />
+            android:textColor="@color/apperror_color"
+            android:textSize="12dp"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -430,18 +445,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:background="@drawable/but_grey_rect"
+                android:background="@color/color_button_gray"
                 android:onClick="onClick"
                 android:text="Применить фильтр"
-                android:textColor="#55ffffff" />
+                android:textColor="@color/apperror_color"/>
 
-            <TextView
-                android:id="@+id/notary_filter_tv_dbt_filter"
+            <Button
+                android:id="@+id/buttonNotaryFilterYesNo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:onClick="onClick"
-                android:textSize="12dp" />
+                android:layout_margin="5dp"
+                android:background="@color/common_google_signin_btn_text_light_default"/>
+
         </FrameLayout>
     </LinearLayout>
 

@@ -110,7 +110,7 @@ public class Notary_list extends Activity implements View.OnTouchListener,
     public IN in = new IN();
     public int code;
 
-    public boolean[] bool_sort = new boolean[]{false, false, false, false, false, false, false, false, false, false};
+    public boolean[] bool_sort;
     int view_height;
     public String SORT_CITY = "";
 
@@ -158,7 +158,7 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             }
         });
 
-        bool_sort = in.get_sort_notary();
+        bool_sort = getIntent().getBooleanArrayExtra("SEARCH_NOTARY_ARRAY_BOOL");
 
         listViewnotary = (ListView) findViewById(R.id.notary_listView);
         LinearLayout l = new LinearLayout(this);
@@ -357,22 +357,22 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
         List<Notary>notariesList = new ArrayList<Notary>();
 
-//        if(notary_city_search.length() > 0){
-//
-//            for(int i = 0; i<mcArrayNotary.length; i++){
-//                String dd1 = mcArrayNotary[i].Address2;
-//                String dd = mcArrayNotary[i].Address.City;
-//                if(mcArrayNotary[i].Address.City.equals(notary_city_search)){
-//                    notariesList.add(mcArrayNotary[i]);
-//                }
-//            }
-//
-//            notaries = new Notary[notariesList.size()];
-//            for(int i =0; i<notariesList.size(); i++){
-//                notaries[i] = notariesList.get(i);
-//            }
-//            mcArrayNotary = notaries;
-//        }
+        if(notary_city_search.length() > 0){
+
+            for(int i = 0; i<mcArrayNotary.length; i++){
+                String dd1 = mcArrayNotary[i].Address2;
+                String dd = mcArrayNotary[i].Address.City;
+                if(mcArrayNotary[i].Address.City.equals(notary_city_search)){
+                    notariesList.add(mcArrayNotary[i]);
+                }
+            }
+
+            notaries = new Notary[notariesList.size()];
+            for(int i =0; i<notariesList.size(); i++){
+                notaries[i] = notariesList.get(i);
+            }
+            mcArrayNotary = notaries;
+        }
 
         MyAdapterJsonList mam = new MyAdapterJsonList(this, mcArrayNotary);//getnotaryList(jsonObjectnotaryList));
         listViewnotary.setAdapter(mam);
