@@ -46,6 +46,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 import kondratkov.advocatesandnotariesrf.IN;
@@ -423,9 +424,21 @@ public class My_orders extends AppCompatActivity implements View.OnTouchListener
 
         @Override
         protected void onPostExecute(String result) {
+            List <Order>arrayPaySearch = new ArrayList<Order>();
             try{
                 Gson gson = new Gson();
                 msArrayOrders = gson.fromJson(result, Order[].class);
+
+                for (int i = 0; i < msArrayOrders.length; i++) {
+                    if(msArrayOrders[i].State == Order.OrderState.WaitingForPayment){
+                        arrayPaySearch.add(msArrayOrders[i]);
+                    }
+                }
+                msArrayOrders = new Order[arrayPaySearch.size()];
+                for (int i = 0; i <msArrayOrders.length ; i++) {
+                    msArrayOrders[i] = arrayPaySearch.get(i);
+                }
+
                 AddList();
             }catch (Exception e){}
 

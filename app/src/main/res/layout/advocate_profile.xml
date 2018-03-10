@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="rubiroid.jurbeside.my_info.My_profile"
     android:orientation="vertical"
@@ -76,13 +77,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="1dp"
-            android:background="#ffffff" />
     </LinearLayout>
 
     <LinearLayout
@@ -280,20 +274,20 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="9dp"
-                        android:weightSum="1"
-                        android:gravity="center_vertical"
                         android:id="@+id/phone1"
-                        android:background="#19ffffff">
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="9dp"
+                        android:background="#19ffffff"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
 
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.15">
+                            android:layout_weight="0.15"
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -301,34 +295,37 @@
                                 android:layout_marginLeft="5dp"
                                 android:text="@string/profile_advocate_p_1"
                                 android:textColor="@color/re_prof"
-                                android:textSize="16dp" />
+                                android:textSize="16dp"/>
 
                             <TextView
                                 android:id="@+id/jur_prof_tv_phone"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp"
-                                android:layout_weight="0.82"
+                                android:layout_weight="0.2"
                                 android:gravity="center"
                                 android:textColor="@color/re_prof"
                                 android:textIsSelectable="true"
-                                android:textSize="22dp" />
+                                android:textSize="22dp"/>
                         </LinearLayout>
 
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="0.85"
-                            android:gravity="right">
+                            android:gravity="right"
+                            android:orientation="horizontal">
 
-                            <Button
-                                android:layout_width="45dp"
-                                android:layout_height="45dp"
-                                android:id="@+id/jur_prof_but_phone"
-                                android:background="@drawable/ain_ic_icon_phone"
-                                android:onClick="onClickProfileJur" />
+                            <ImageButton
+                                android:id="@+id/imageButtonJuristProfilPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:onClick="onClickProfileJur"
+                                android:src="@android:drawable/stat_sys_phone_call"
+                                android:tint="@color/color_bluedark_for_text"/>
+
                         </LinearLayout>
 
                     </LinearLayout>
@@ -341,24 +338,53 @@
                         android:id="@+id/email1"
                         android:background="#19ffffff">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/profile_advocate_p_2"
-                            android:textSize="16dp"
-                            android:singleLine="true"
-                            android:layout_marginLeft="5dp"
-                            android:textColor="@color/re_prof" />
-
-                        <TextView
-                            android:id="@+id/jur_prof_tv_email"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:gravity="center"
-                            android:textColor="@color/re_prof"
-                            android:textIsSelectable="true"
-                            android:textSize="18dp" />
+                            android:layout_weight="0.15"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.1"
+                                android:singleLine="true"
+                                android:text="@string/profile_advocate_p_2"
+                                android:textColor="@color/re_prof"
+                                android:textSize="16dp"/>
+
+                            <TextView
+                                android:id="@+id/jur_prof_tv_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="0.9"
+                                android:gravity="center"
+                                android:textColor="@color/re_prof"
+                                android:textIsSelectable="true"
+                                android:textSize="18dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.85"
+                            android:gravity="right"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/imageButtonJuristProfileEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@android:color/transparent"
+                                android:onClick="onClickProfileJur"
+                                android:src="@android:drawable/sym_action_email"
+                                android:tint="@color/color_bluedark_for_text"/>
+
+                        </LinearLayout>
                     </LinearLayout>
 
                     <FrameLayout
@@ -662,25 +688,51 @@
                             android:id="@+id/site"
                             android:background="#19ffffff" >
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/profile_advocate_p_9"
-                                android:textSize="16dp"
-                                android:singleLine="true"
-                                android:layout_marginLeft="5dp"
-                                android:textColor="@color/re_prof" />
-
-                            <TextView
-                                android:id="@+id/jur_prof_tv_site"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_marginLeft="5dp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:textColor="@color/re_prof"
-                                android:textIsSelectable="true"
-                                android:textSize="18dp" />
+                                android:layout_weight="0.15"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="0.8"
+                                    android:gravity="center_vertical"
+                                    android:singleLine="true"
+                                    android:text="@string/profile_advocate_p_9"
+                                    android:textColor="@color/re_prof"
+                                    android:textSize="16dp"/>
+
+                                <TextView
+                                    android:id="@+id/jur_prof_tv_site"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="0.2"
+                                    android:gravity="center"
+                                    android:textColor="@color/re_prof"
+                                    android:textIsSelectable="true"
+                                    android:textSize="18dp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.85"
+                                android:orientation="horizontal">
+
+                                <ImageButton
+                                    android:id="@+id/imageButtonJuristProfileSite"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/transparent"
+                                    android:onClick="onClickProfileJur"
+                                    android:src="@android:drawable/stat_sys_upload_done"
+                                    android:tint="@color/color_bluedark_for_text"/>
+                            </LinearLayout>
 
                         </LinearLayout>
 

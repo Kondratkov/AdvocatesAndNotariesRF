@@ -39,17 +39,17 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
+                    android:id="@+id/mess_jur_tv_surmname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mess_jur_tv_surmname"
                     android:layout_marginTop="3dp"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/color_bluedark_for_bar"/>
 
                 <TextView
+                    android:id="@+id/mess_jur_tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mess_jur_tv_name"
-                    android:textColor="#ffffff" />
+                    android:textColor="@color/color_bluedark_for_bar"/>
 
             </LinearLayout>
 

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -83,6 +84,8 @@ public class Advocate_profile extends Activity {
     public RatingBar ratingBar;
     //public
 
+    private ImageButton imageButtonJuristProfileEmail;
+
     public JSONObject jsonObjectJurProf = null;
     public IN in = null;
 
@@ -136,6 +139,8 @@ public class Advocate_profile extends Activity {
         tv_3      = (TextView)findViewById(R.id.jur_prof_tv_3);
 
         ratingBar = (RatingBar)findViewById(R.id.jur_prof_ratingbar);
+
+        imageButtonJuristProfileEmail = (ImageButton)findViewById(R.id.imageButtonJuristProfileEmail);
 
         image_profile_jur_icon= (ImageView)findViewById(R.id.jur_prof_image_icon );
 
@@ -296,6 +301,40 @@ public class Advocate_profile extends Activity {
                 dialog_jaloba();
                 break;
 
+            case R.id.imageButtonJuristProfileEmail:
+                try{
+                    Intent intentEmail = new Intent(Intent.ACTION_SENDTO);
+                    intentEmail.setData(Uri.parse("mailto:"+tv_email.getText()));
+                    intentEmail.putExtra(Intent.EXTRA_SUBJECT, in.get_nik_user());
+                    if (intentEmail.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intentEmail);
+                    }
+                }catch (Exception e){}
+                break;
+
+            case R.id.imageButtonJuristProfilPhone:
+                try{
+                    Intent intent12 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+tv_phone.getText()));
+                    startActivity(intent12);
+                }catch (Exception e){}
+                break;
+
+            case R.id.imageButtonJuristProfileSite:
+                try{
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(tv_site.getText())));
+                    startActivity(browserIntent);
+                }catch (Exception e){
+                    try{
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://"+String.valueOf(tv_site.getText())));
+                        startActivity(browserIntent);
+                    }catch (Exception e1){
+                        try{
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www."+String.valueOf(tv_site.getText())));
+                            startActivity(browserIntent);
+                        }catch (Exception e2){}
+                    }
+                }
+                break;
             case R.id.jur_prof_but_reply:
                 //intent = new Intent(Profile_Jur.this, list_qt_jur.class);
                 //intent.putExtra("qw", "Ответы на вопросы в чате");
@@ -331,12 +370,6 @@ public class Advocate_profile extends Activity {
                     openDialog_no_reg();
                 }
                 break;
-
-            case R.id.jur_prof_but_phone:
-                Intent intent12 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+tv_phone.getText()));
-                startActivity(intent12);
-                break;
-
             case R.id.jur_prof_but_close:
                 Advocate_profile.this.finish();
                 break;

@@ -100,7 +100,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
     public boolean Search_CanFastComing;
 
     public boolean sort_bool_fuck[] ;
-    public boolean sortir = true;
+    public boolean b_answer_next = false;
 
     //--S----L--O--C----------------------------------------------------
     private LocationManager mLocationManager;
@@ -163,6 +163,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
 
         //setDataMap(json_maps);
         Gson gson = new Gson();
+        b_answer_next = getIntent().getBooleanExtra("ANSWERNEXT", false);
         mcArrayJuristAccoun = gson.fromJson((String)getIntent().getSerializableExtra("ARRAY"), JuristAccounClass[].class);
         start_activity();
         map1.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -275,146 +276,6 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
         return px;
     }
 
-    //--S----L--O--C----------------------------------------------------
-    /*@Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("qwerty", "onResume()");
-        if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            // Просим пользователя включить GPS
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Настройка");
-            builder.setMessage("Сейчас GPS отлючён.\n" + "Включить?");
-            builder.setPositiveButton("Да",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(
-                                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(intent);
-                        }
-                    });
-            builder.setNegativeButton("Нет",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Не обязательно
-                            finish();
-                        }
-                    });
-            builder.create().show();
-        }
-
-        // Регистрируемся для обновлений
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                MINIMUM_TIME_BETWEEN_UPDATES, MINIMUM_DISTANCE_FOR_UPDATES,
-                mLocationListener);
-        // Получаем текущие координаты при запуске
-        showCurrentLocation();
-    }
-    protected void showCurrentLocation() {
-        Log.d("qwerty", "showCurrentLocation()");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Location location = mLocationManager
-                .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        if (location != null) {
-            JSONObject json_st = new JSONObject();
-            try {
-                json_st.put("idu", in.get_id_user());//String.valueOf(in.get_id()));
-                json_st.put("password", in.get_password_user());
-                json_st.put("tip_who", "0");//String.valueOf(adin.get_mess_id()));
-                json_st.put("latitude", String.valueOf(location.getLatitude()));//String.valueOf(adin.get_mess_id()));
-                json_st.put("longitude", String.valueOf(location.getLongitude()));//String.valueOf(adin.get_mess_id()));
-                json_st.put("dist", et_dist.getText());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            in.set_latitude(location.getLatitude());
-            in.set_longitude(location.getLongitude());
-
-            mark_jur = new LatLng(in.get_latitude(), in.get_longitude());
-            map1.moveCamera(CameraUpdateFactory.newLatLngZoom(mark_jur, 17));
-
-            json_s = String.valueOf(json_st);//String.valueOf(json_st);
-            //json_s = String.valueOf(location.getLatitude())+" + "+String.valueOf(location.getLongitude());
-            new AsyncTaskMaps().execute();
-        }
-        else{
-            in.set_latitude(55.75222);
-            in.set_longitude(37.61556);
-            JSONObject json_st = new JSONObject();
-            try {
-                json_st.put("idu", in.get_id_user());//String.valueOf(in.get_id()));
-                json_st.put("password", in.get_password_user());
-                json_st.put("tip_who", "0");//String.valueOf(adin.get_mess_id()));
-                json_st.put("latitude", in.get_latitude() );//String.valueOf(adin.get_mess_id()));
-                json_st.put("longitude", in.get_longitude());//String.valueOf(adin.get_mess_id()));
-                json_st.put("dist", et_dist.getText());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            mark_jur = new LatLng(in.get_latitude(), in.get_longitude());
-            map1.moveCamera(CameraUpdateFactory.newLatLngZoom(mark_jur, 17));
-
-            json_s = String.valueOf(json_st);//String.valueOf(json_st);
-            //json_s = String.valueOf(location.getLatitude())+" + "+String.valueOf(location.getLongitude());
-            new AsyncTaskMaps().execute();
-            Log.d("qwerty","chto ne tack" );
-        }
-    }
-    private class MyLocationListener implements LocationListener {
-
-        public void onLocationChanged(Location location) {
-            Log.d("qwerty", " MyLoc 1");
-            String message = "Новое местоположение \n Долгота: " +
-                    location.getLongitude() + "\n Широта: " + location.getLatitude();
-            Toast.makeText(Map_jur_and_notary.this, message, Toast.LENGTH_LONG)
-                    .show();
-            showCurrentLocation();
-        }
-
-        public void onStatusChanged(String s, int i, Bundle b) {
-            Log.d("qwerty", " MyLoc 2");
-            Toast.makeText(Map_jur_and_notary.this, "Статус провайдера изменился",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        public void onProviderDisabled(String s) {
-            Log.d("qwerty", " MyLoc 3");
-            Toast.makeText(Map_jur_and_notary.this,
-                    "Провайдер заблокирован пользователем. GPS выключен",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        public void onProviderEnabled(String s) {
-            Log.d("qwerty", " MyLoc 4");
-            Toast.makeText(Map_jur_and_notary.this,
-                    "Провайдер включен пользователем. GPS включён",
-                    Toast.LENGTH_LONG).show();
-        }
-    }*/
-    //--F----L--O--C----------------------------------------------------
-
     public List<JSONObject> getMark(JSONObject jsonObjectMess) {
 
         List markList = new ArrayList<>();
@@ -447,9 +308,17 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
 
         for(int i = 0 ; i<mcArrayJuristAccoun.length; i++){
             try {
-                Double dX = mcArrayJuristAccoun[i].Latitude;//list.get(i).getDouble("X");//Double.parseDouble(list.get(i).getString("X").replaceAll(",", "")) / 10000;
-                Double dY = mcArrayJuristAccoun[i].Longitude;//list.get(i).getDouble("Y");//Double.parseDouble(list.get(i).getString("Y").replaceAll(",", "")) / 10000;
-                Log.d("qwerty", "LL "+i+" "+dX+" "+dY );
+
+                Double dX = 0.0;
+                Double dY = 0.0;
+
+                if(b_answer_next){
+                    dX =  mcArrayJuristAccoun[i].CurrentLatitude;
+                    dY =  mcArrayJuristAccoun[i].CurrentLongitude;
+                }else {
+                    dX =  mcArrayJuristAccoun[i].Latitude;
+                    dY =  mcArrayJuristAccoun[i].Longitude;
+                }
 
                 mark_jur = new LatLng(dX, dY);
                 //map1.setInfoWindowAdapter(new MyInfoWindowAdapter());
@@ -472,17 +341,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
                     }
                 });
 
-                //marker = map1.addMarker(new MarkerOptions().title(list.get(i).getString("name")).icon(bitmapDescriptor).snippet(list.get(i).getString("adres"))
-                //     .snippet(list.get(i).getString("adres")));//+ " сайт: "+list.get(i).getString("site")).position(mark_jur));
-
-                //marker = map1.addMarker(new MarkerOptions().title("dfdfdf"));
                 dropPinEffect(marker);
-
-                //map1.setOnMapLongClickListener(Map_jur_and_notary.this);
-
-
-                //map1.moveCamera(CameraUpdateFactory.newLatLngZoom(mark_jur, 17));
-                //map1.addMarker(new MarkerOptions().position(mark_jur).title("адрес").snippet(list.get(i).getString("adres")));
 
             } catch (Exception e) {
 
@@ -581,84 +440,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
     public void onMapClick(LatLng latLng) {
 
     }
-/*
-    class AsyncTaskMaps extends AsyncTask<Void, Integer, String> {
-        // фоновая работа
-        String url_s = "";
-        @Override
-        protected String doInBackground(Void... params) {
-            JSONObject json_st = new JSONObject();
-            try {
-                json_st.put("idu", in.get_id_user());//String.valueOf(in.get_id()));
-                json_st.put("password", in.get_password());
-                json_st.put("tip_who", "0");//String.valueOf(adin.get_mess_id()));
-                json_st.put("latitude", String.valueOf(in.get_latitude()));//String.valueOf(adin.get_mess_id()));
-                json_st.put("longitude", String.valueOf(in.get_longitude()));//String.valueOf(adin.get_mess_id()));
-                json_st.put("dist", in.get_text());
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            json_s = String.valueOf(json_st);
-            Log.d("qwerty", "START json_s "+ json_s);
-            url_s ="http://"+in.get_url()+"/123.geolocjur";
-            return ServerSendData.sendRegData(url_s, json_s);
-        }
 
-        // выполняется после doInBackground, имеет доступ к UI
-        protected void onPostExecute(String result) {
-            if(result != null){
-                start_activity();
-                Log.d("qwerty", "START "+ result);
-            }
-            else{
-                Log.d("qwerty", "START  "+ "NULL");
-            }
-
-        }
-    }
-    public static class ServerSendData {
-
-        public static IN iny = new IN();
-        public static String sendRegData(String stringUrl, String json_str) {
-
-            String result =  null;
-            try {
-
-                URL url = new URL(stringUrl);
-                URLConnection connection = url.openConnection();
-
-                HttpURLConnection httpConnection = (HttpURLConnection) connection;
-                httpConnection.setDoOutput(true);
-
-                httpConnection.setChunkedStreamingMode(0);
-                OutputStream out = new BufferedOutputStream(httpConnection.getOutputStream());
-
-                out.write(json_str.getBytes());
-
-                out.flush();
-                out.close();
-
-                InputStream in = new BufferedInputStream(httpConnection.getInputStream());
-
-                int responseCode = 0;
-                responseCode = httpConnection.getResponseCode();
-
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    InputStream is = httpConnection.getInputStream();
-                    BufferedReader r = new BufferedReader(new InputStreamReader(in));
-
-                    result = r.readLine();
-
-                } else {
-                }
-            } catch (MalformedURLException e) { Log.d(DEBUG_TAG, "z8");
-            } catch (IOException e1) { Log.d(DEBUG_TAG, "z9");
-            }
-
-            return result;
-        }
-    }
-*/
     protected  void createLocationRequest() {
         LocationRequest mLocationRequest =  new  LocationRequest ();
         mLocationRequest . setInterval ( 10000 );

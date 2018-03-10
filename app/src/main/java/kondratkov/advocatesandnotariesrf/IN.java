@@ -381,6 +381,29 @@ public class IN {
         return sDateDisplay;
     }
 
+    public double dDistance(double Latitude, double Longitude, LocationManager locationManager, Context context){
+        LocationListenerGPServices l = new LocationListenerGPServices();
+        l.start_my(locationManager, context);
+
+        return Math.sqrt(Math.pow((latitude_my - Latitude), 2) + Math.pow((longitude_my - Longitude), 2))*100000;
+    }
+
+    public String d_to_sDistance(double d){
+        String distance="";
+
+        int dist_int = (int) d;
+        if(dist_int<1000){
+            distance = String.valueOf(dist_int)+" м";
+        }else if(dist_int>10000000){
+            distance = "нет коор.";
+        }
+        else{
+            distance = String.valueOf(dist_int/1000)+" км";
+        }
+
+        return distance;
+    }
+
     public String sDistance(double Latitude2, double Longitude2, LocationManager locationManager, Context context){
         String distance="";
         LocationListenerGPServices l = new LocationListenerGPServices();

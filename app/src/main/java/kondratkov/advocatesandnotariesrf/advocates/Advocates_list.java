@@ -58,6 +58,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -418,6 +419,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                 Intent intent_sidebar = new Intent(Advocates_list.this, Map_jur_and_notary.class);
                 Gson gson = new Gson();
                 intent_sidebar.putExtra("ARRAY", gson.toJson(mcArrayJuristAccoun));
+                intent_sidebar.putExtra("ANSWERNEXT", bool_newtTo_me);
                 startActivity(intent_sidebar);
                 break;
         }
@@ -442,10 +444,12 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
 
         final CheckBox ch1 = (CheckBox)dialog.getWindow().findViewById(R.id.adv_sort_checkBox);
         final CheckBox ch2 = (CheckBox)dialog.getWindow().findViewById(R.id.adv_sort_checkBox2);
+        final CheckBox ch3 = (CheckBox)dialog.getWindow().findViewById(R.id.adv_sort_checkBox3);
 
         switch (int_sort){
             case 1:ch1.setChecked(true);break;
             case 2:ch2.setChecked(true);break;
+            case 3:ch3.setChecked(true);break;
         }
 
         ch1.setOnClickListener(new View.OnClickListener() {
@@ -453,6 +457,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             public void onClick(View v) {
                 if(ch1.isChecked()){
                     ch2.setChecked(false);
+                    ch3.setChecked(false);
                 }
             }
         });
@@ -461,9 +466,20 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             public void onClick(View v) {
                 if(ch2.isChecked()){
                     ch1.setChecked(false);
+                    ch3.setChecked(false);
                 }
             }
         });
+        ch3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ch3.isChecked()){
+                    ch1.setChecked(false);
+                    ch2.setChecked(false);
+                }
+            }
+        });
+
 
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -476,6 +492,10 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                     Search_sortingType1 = FindJuristFilter.sortingType.Rating;
                     Search_sortingType2 = FindByCoordinatesFilter.sortingType.Rating;
                     int_sort=2;
+                }else if(ch3.isChecked()){
+                    Search_sortingType1 = FindJuristFilter.sortingType.Rating;
+                    Search_sortingType2 = FindByCoordinatesFilter.sortingType.Rating;
+                    int_sort=3;
                 }else{
                     int_sort=0;
                 }
@@ -510,21 +530,66 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             }
         }
 
+        ArrayList <JuristAccounClass> mJuristAccounClasses = new ArrayList<JuristAccounClass>();
         String city = (String)getIntent().getSerializableExtra("CITY");
-        if(city.length() != 0){
-            List <JuristAccounClass> mJuristAccounClasses = new ArrayList<JuristAccounClass>();
-            for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
 
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if(city.length() != 0){
+
+            for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
                 if(juristAccounClass.Address.City.equals(city)){
                     mJuristAccounClasses.add(juristAccounClass);
                 }
-
             }
 
             mcArrayJuristAccoun = new JuristAccounClass[mJuristAccounClasses.size()];
             for(int i = 0; i<mJuristAccounClasses.size(); i++){
+
+//                double mx = Math.abs(in.get_latitude()- mJuristAccounClasses.get(i).Latitude);//51.714342);
+//                double my = Math.abs(in.get_longitude() - mJuristAccounClasses.get(i).Longitude);//39.275005);
+//                mJuristAccounClasses.get(i).dist = Math.sqrt(Math.pow(mx, 2) + Math.pow(my,2));
+
+                mJuristAccounClasses.get(i).dist = in.dDistance(mJuristAccounClasses.get(i).Latitude, mJuristAccounClasses.get(i).Longitude, locationManager, this);
+
                 mcArrayJuristAccoun[i] = mJuristAccounClasses.get(i);
             }
+        }else {
+            for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
+                mJuristAccounClasses.add(juristAccounClass);
+            }
+
+            mcArrayJuristAccoun = new JuristAccounClass[mJuristAccounClasses.size()];
+            for(int i = 0; i<mJuristAccounClasses.size(); i++){
+                //double mx = Math.abs(in.get_latitude()- mJuristAccounClasses.get(i).Latitude);//51.714342);
+                //double my = Math.abs(in.get_longitude() - mJuristAccounClasses.get(i).Longitude);//39.275005);
+                if(bool_newtTo_me){
+                    mJuristAccounClasses.get(i).dist = in.dDistance(mJuristAccounClasses.get(i).CurrentLatitude, mJuristAccounClasses.get(i).CurrentLongitude, locationManager, this);
+                }else {
+                    mJuristAccounClasses.get(i).dist = in.dDistance(mJuristAccounClasses.get(i).Latitude, mJuristAccounClasses.get(i).Longitude, locationManager, this);
+                }
+
+                mcArrayJuristAccoun[i] = mJuristAccounClasses.get(i);
+            }
+        }
+
+        switch (int_sort){
+            case 2:
+                mJuristAccounClasses = Advocate_list_sort.sortListBy(mJuristAccounClasses, Advocate_list_sort.By.RETING);
+                mcArrayJuristAccoun = new JuristAccounClass[mJuristAccounClasses.size()];
+                for(int i = 0; i<mJuristAccounClasses.size(); i++){
+
+                    mcArrayJuristAccoun[i] = mJuristAccounClasses.get(i);
+                }
+                break;
+            case 3:
+                mJuristAccounClasses = Advocate_list_sort.sortListBy(mJuristAccounClasses, Advocate_list_sort.By.PRICE);
+                mcArrayJuristAccoun = new JuristAccounClass[mJuristAccounClasses.size()];
+                for(int i = 0; i<mJuristAccounClasses.size(); i++){
+
+                    mcArrayJuristAccoun[i] = mJuristAccounClasses.get(i);
+                }
+                break;
         }
 
         try {
@@ -613,7 +678,9 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             mcArrayJuristAccounSearch = m;
             try {
                 MyAdapterJsonList mam = new MyAdapterJsonList(this, mcArrayJuristAccoun);//getjurList(jsonObjectjurList));
+                //Collections.sort();
                 listViewJur.setAdapter(mam);
+
 
                 listViewJur.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -726,13 +793,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             tvRatingJur.setText(String.valueOf(juristAccounClasses[position].Rating));
 
             try{
-                LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if(bool_newtTo_me){
-                    tvDist.setText(in.sDistance(juristAccounClasses[position].CurrentLatitude, juristAccounClasses[position].CurrentLongitude, lm, Advocates_list.this));
-                }else {
-                    tvDist.setText(in.sDistance(juristAccounClasses[position].Latitude, juristAccounClasses[position].Longitude, lm, Advocates_list.this));
-                }
-
+                tvDist.setText(in.d_to_sDistance(juristAccounClasses[position].dist));//in.sDistance(juristAccounClasses[position].CurrentLatitude, juristAccounClasses[position].CurrentLongitude, lm, Advocates_list.this));
             }catch (Exception e){
                 tvDist.setText("");
             }
@@ -812,39 +873,39 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
         }
     }*/
 
-    public void query_reg11(){
-        Gson gson = new Gson();
-        if(in.get_filter_tip()==0){
-            FindJuristFilter findJuristFilter = new FindJuristFilter();
-            findJuristFilter.CityId = Search_id_city;
-            findJuristFilter.Bups = Search_bup;
-            findJuristFilter.JudicialAreaId = Search_id_JuristAreas;//.WorkInOffDays = bool_sort[2];
-            findJuristFilter.Specialization = Search_specialization;//notary.Equipage = bool_sort[3];
-            findJuristFilter.CanFastComing = sort_bool_fuck[0];
-            findJuristFilter.WorkInOffDays = sort_bool_fuck[1];
-            findJuristFilter.IsOnline = sort_bool_fuck[2];
-            findJuristFilter.SortingType = Search_sortingType1;
-            findJuristFilter.Radius = 50;
-            String JSON = gson.toJson(findJuristFilter);
-            new UrlConnectionTask().execute(JSON);
-        } else{
-            FindByCoordinatesFilter findByCoordinatesFilter = new FindByCoordinatesFilter();
-            findByCoordinatesFilter.Latitude = (double)getIntent().getSerializableExtra("LANT"); //in.get_latitude();//.WorkInOffDays = bool_sort[2];
-            findByCoordinatesFilter.Longitude = (double)getIntent().getSerializableExtra("LONG");
-            findByCoordinatesFilter.Radius = 50;
-            findByCoordinatesFilter.Bups = Search_bup;
-            findByCoordinatesFilter.JudicialAreaId = Search_id_JuristAreas;//.WorkInOffDays = bool_sort[2];
-            findByCoordinatesFilter.Specialization = Search_specialization;//notary.Equipage = bool_sort[3];
-            findByCoordinatesFilter.CanFastComing = sort_bool_fuck[0];
-            findByCoordinatesFilter.WorkInOffDays = sort_bool_fuck[1];
-            findByCoordinatesFilter.IsOnline = sort_bool_fuck[2];
-            findByCoordinatesFilter.SortingType = Search_sortingType2;
-            String JSON = gson.toJson(findByCoordinatesFilter);
-            new UrlConnectionTask().execute(JSON);//new AsyncTaskNotary().execute();
-        }
-
-        //new AsyncTaskJurList().execute();
-    }
+//    public void query_reg11(){
+//        Gson gson = new Gson();
+//        if(in.get_filter_tip()==0){
+//            FindJuristFilter findJuristFilter = new FindJuristFilter();
+//            findJuristFilter.CityId = Search_id_city;
+//            findJuristFilter.Bups = Search_bup;
+//            findJuristFilter.JudicialAreaId = Search_id_JuristAreas;//.WorkInOffDays = bool_sort[2];
+//            findJuristFilter.Specialization = Search_specialization;//notary.Equipage = bool_sort[3];
+//            findJuristFilter.CanFastComing = sort_bool_fuck[0];
+//            findJuristFilter.WorkInOffDays = sort_bool_fuck[1];
+//            findJuristFilter.IsOnline = sort_bool_fuck[2];
+//            findJuristFilter.SortingType = Search_sortingType1;
+//            findJuristFilter.Radius = 50;
+//            String JSON = gson.toJson(findJuristFilter);
+//            new UrlConnectionTask().execute(JSON);
+//        } else{
+//            FindByCoordinatesFilter findByCoordinatesFilter = new FindByCoordinatesFilter();
+//            findByCoordinatesFilter.Latitude = (double)getIntent().getSerializableExtra("LANT"); //in.get_latitude();//.WorkInOffDays = bool_sort[2];
+//            findByCoordinatesFilter.Longitude = (double)getIntent().getSerializableExtra("LONG");
+//            findByCoordinatesFilter.Radius = 50;
+//            findByCoordinatesFilter.Bups = Search_bup;
+//            findByCoordinatesFilter.JudicialAreaId = Search_id_JuristAreas;//.WorkInOffDays = bool_sort[2];
+//            findByCoordinatesFilter.Specialization = Search_specialization;//notary.Equipage = bool_sort[3];
+//            findByCoordinatesFilter.CanFastComing = sort_bool_fuck[0];
+//            findByCoordinatesFilter.WorkInOffDays = sort_bool_fuck[1];
+//            findByCoordinatesFilter.IsOnline = sort_bool_fuck[2];
+//            findByCoordinatesFilter.SortingType = Search_sortingType2;
+//            String JSON = gson.toJson(findByCoordinatesFilter);
+//            new UrlConnectionTask().execute(JSON);//new AsyncTaskNotary().execute();
+//        }
+//
+//        //new AsyncTaskJurList().execute();
+//    }
 
 
     class UrlConnectionTask extends AsyncTask<String, Void, String> {

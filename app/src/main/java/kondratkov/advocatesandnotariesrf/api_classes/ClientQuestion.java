@@ -51,11 +51,19 @@ public class ClientQuestion {
 
     public AccountTypes AccountType;
 
+    public QuestionStatusRead  StatusRead;
+
     public enum AccountTypes
     {
         Client,
         Jurist,
         DutyJurist
+    }
+
+    public enum QuestionStatusRead{
+        ClientSent,
+        Read,
+        JuristSent
     }
 
 }

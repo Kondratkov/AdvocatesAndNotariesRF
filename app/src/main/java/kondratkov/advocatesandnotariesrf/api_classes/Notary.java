@@ -77,8 +77,9 @@ public class Notary {
     public boolean  LockDocuments;//{ get; set; }
     ///предоставление консультаций
     public boolean consultation;//{ get; set; }
-    public String Phone;
-    public String Site;
-    public String Email;
+    public String Phone="";
+    public String Site="";
+    public String Email="";
+    public boolean Consultation;
 
 }

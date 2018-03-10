@@ -259,7 +259,7 @@ public class My_frag_orders_cons extends Fragment {
                         tv_read.setTextColor(getResources().getColor(R.color.read2));
                     }else if(postConsultation[position].State == PostConsultation.ServiceState.Completed) {
                         tv_read.setText("выполнен");
-                        tv_read.setTextColor(getResources().getColor(R.color.read0));
+                        tv_read.setTextColor(getResources().getColor(R.color.read3));
                     }else if(postConsultation[position].State == PostConsultation.ServiceState.WaitingForPayment) {
                         tv_read.setText(String.valueOf(postConsultation[position].Order.PaymentAmount)+" \u20BD");
                         tv_read.setTextColor(getResources().getColor(R.color.read1));

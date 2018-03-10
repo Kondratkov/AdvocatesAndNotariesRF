@@ -121,6 +121,7 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
     public Notary[] mcArrayNotary;
     public Notary[] mcSearchNotary;
+    public Notary[] mcArrayOil;
     /**
      * для поиска по ФИО
      */
@@ -147,6 +148,12 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 b1_sort = isChecked;
+                if(isChecked){
+                    mcArrayOil = mcArrayNotary;
+                }else {
+                    mcArrayNotary =mcArrayOil;
+                }
+                start_s_server();
                 // new UrlConnectionTask().execute();//new AsyncTaskNotary().execute();
             }
         });
@@ -154,6 +161,12 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 b2_sort = isChecked;
+                if(isChecked){
+                    mcArrayOil = mcArrayNotary;
+                }else {
+                    mcArrayNotary =mcArrayOil;
+                }
+                start_s_server();
                 //new UrlConnectionTask().execute();//new AsyncTaskNotary().execute();
             }
         });
@@ -346,22 +359,14 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
 
     public void start_s_server() {
-        Log.d(LOG_TAG, "start_s_server");
-        JSONObject jsonObject = null;
-        JSONArray jsonArray = new JSONArray();
 
         Notary [] notaries;
 
         String notary_city_search = (String)getIntent().getSerializableExtra("CITY_SEARCH");
-
-
         List<Notary>notariesList = new ArrayList<Notary>();
-
         if(notary_city_search.length() > 0){
 
             for(int i = 0; i<mcArrayNotary.length; i++){
-                String dd1 = mcArrayNotary[i].Address2;
-                String dd = mcArrayNotary[i].Address.City;
                 if(mcArrayNotary[i].Address.City.equals(notary_city_search)){
                     notariesList.add(mcArrayNotary[i]);
                 }
@@ -373,6 +378,42 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             }
             mcArrayNotary = notaries;
         }
+
+        if(b1_sort){
+            notariesList = new ArrayList<Notary>();
+            for(int i = 0; i<mcArrayNotary.length; i++){
+                String s = mcArrayNotary[i].Site;
+                if(mcArrayNotary[i].Site.equals("нет") == false){
+                    notariesList.add(mcArrayNotary[i]);
+                }
+            }
+
+            notaries = new Notary[notariesList.size()];
+            for(int i =0; i<notariesList.size(); i++){
+                notaries[i] = notariesList.get(i);
+            }
+            mcArrayNotary = notaries;
+        }
+
+        if(b2_sort){
+            notariesList = new ArrayList<Notary>();
+            for(int i = 0; i<mcArrayNotary.length; i++){
+                String s = mcArrayNotary[i].Site;
+                if(mcArrayNotary[i].Consultation){
+                    notariesList.add(mcArrayNotary[i]);
+                }
+            }
+
+            notaries = new Notary[notariesList.size()];
+            for(int i =0; i<notariesList.size(); i++){
+                notaries[i] = notariesList.get(i);
+            }
+            mcArrayNotary = notaries;
+        }
+
+//        if(b2_sort == false || b1_sort ==false && SEARCH_NOT.length()==0){
+//            mcArrayNotary = mcSearchNotary;
+//        }
 
         MyAdapterJsonList mam = new MyAdapterJsonList(this, mcArrayNotary);//getnotaryList(jsonObjectnotaryList));
         listViewnotary.setAdapter(mam);
@@ -722,46 +763,6 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
     }
 
-    class UrlConnectionTask1 extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String result = "";
-
-            OkHttpClient client = new OkHttpClient();
-
-            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
-
-            //RequestBody formBody = RequestBody.create(JSON, json_signup);
-
-            Request request = new Request.Builder()
-                    .header("Authorization", in.get_token_type() + " " + in.get_token())
-                    .url("http://" + in.get_url() + "/Notaries/GetNotaries")
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-                result = response.body().string();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            Gson gson = new Gson();
-            mcArrayNotary = gson.fromJson(result, Notary[].class);
-            start_s_server();
-            super.onPostExecute(result);
-        }
-    }
-
     class UrlConnectionTaskFilter extends AsyncTask<String, Void, String> {
 
         @Override
@@ -779,47 +780,6 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             String s4 = "sdf";
             String s5 = "sdf";
 
-
-            /*
-             {"Appointments":false,
-             "AppointmentsEmail":false,
-             "Consultation":false,
-             "DepositsReception":false,
-             "Equipage":true,
-             "IsPleadtingHereditaryCases":false,
-             "IsSitesCertification":false,
-             "Latitude":-1.0,
-             "LockDocuments":false,
-             "Longitude":-1.0,
-             "Radius":0,
-             "RequestsAndDuplicate":false,
-             "SortingType":"Name",
-             "Transactions":false,
-             "WorkInOffDays":false,
-             "WorkWithJur":false}
-
-             {"Longitude":0.0,
-             "Latitude":0.0,
-             "Radius":0,
-             "SortingType":0,
-             "City":null,
-             "Appointments":false,
-             "WorkWithJur":false,
-             "Transactions":false,
-             "RequestsAndDuplicate":false,
-             "LockDocuments":false,
-             "Consultation":false,
-             "WorkInOffDays":false,
-             "Equipage":true,
-             "AppointmentsEmail":false,
-             "IsPleadtingHereditaryCases":false,
-             "IsSitesCertification":false,
-             "DepositsReception":false}
-            */
-
-
-
-            //RequestBody formBody = RequestBody.create(JSON, json_signup);
             Request request = null;
             if (in.get_filter_tip() == 0) {
                 request = new Request.Builder()
@@ -860,119 +820,6 @@ public class Notary_list extends Activity implements View.OnTouchListener,
                 start_s_server();
             }
             super.onPostExecute(result);
-        }
-    }
-
-
-    class AsyncTaskNotary1 extends AsyncTask<Void, Integer, String> {
-        // фоновая работа
-        @Override
-        protected String doInBackground(Void... params) {
-            String str_url = "http://" + in.get_url() + "/123.notget";
-            String json = "";
-            JSONObject jsonObject = new JSONObject();
-
-            FindNotaryByCoordinatesFilter notary = new FindNotaryByCoordinatesFilter();
-            notary.WorkInOffDays = bool_sort[2];
-            notary.Equipage = bool_sort[3];
-            notary.Appointments = bool_sort[4];
-            notary.AppointmentsEmail = bool_sort[5];
-            notary.WorkWithJur = bool_sort[6];
-            notary.IsPleadtingHereditaryCases = bool_sort[7];
-            notary.IsSitesCertification = bool_sort[8];
-            notary.LockDocuments = bool_sort[9];
-            notary.DepositsReception = bool_sort[10];
-            notary.RequestsAndDuplicate = bool_sort[11];
-            notary.Transactions = bool_sort[12];
-
-            notary.Latitude = in.get_latitude();
-            notary.Longitude = in.get_longitude();
-            notary.SortingType = FindNotaryByCoordinatesFilter.sortingType.Name;
-
-            try {
-                jsonObject.put("idu", in.get_id_user());//String.valueOf(in.get_id()));
-                jsonObject.put("idj", in.get_id_jur()); //in.get_id_jur() );
-                jsonObject.put("password", in.get_password());//adin.get_password_jur());
-                if (bool_sort[2]) {
-                    jsonObject.put("holiday", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("holiday", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[3]) {
-                    jsonObject.put("vyezd", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("vyezd", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[4]) {
-                    jsonObject.put("predvzapis", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("predvzapis", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[5]) {
-                    jsonObject.put("zakazpoemail", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("zakazpoemail", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[6]) {
-                    jsonObject.put("urlica", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("urlica", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[7]) {
-                    jsonObject.put("nasledstvo", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("nasledstvo", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[8]) {
-                    jsonObject.put("zaversite", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("zaversite", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[9]) {
-                    jsonObject.put("fixdokaz", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("fixdokaz", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[10]) {
-                    jsonObject.put("deposit", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("deposit", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[11]) {
-                    jsonObject.put("duplicat", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("duplicat", 0);//adin.get_password_jur());
-                }
-                if (bool_sort[12]) {
-                    jsonObject.put("sdelki", 1);//adin.get_password_jur());
-                } else {
-                    jsonObject.put("sdelki", 0);//adin.get_password_jur());
-                }
-                jsonObject.put("x", in.get_latitude());//adin.get_password_jur());
-                jsonObject.put("y", in.get_longitude());//adin.get_password_jur());
-                jsonObject.put("city", in.get_id_city());//adin.get_password_jur());
-                jsonObject.put("fio", SEARCH_NOT);//adin.get_password_jur());
-                jsonObject.put("po_of_site", "'" + String.valueOf(b1_sort) + "'");//adin.get_password_jur());
-                jsonObject.put("po_consult", "'" + String.valueOf(b2_sort) + "'");//adin.get_password_jur());
-                jsonObject.put("sort", sort_po);//adin.get_password_jur());
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            json = String.valueOf(jsonObject);
-
-            Log.d(LOG_TAG, "сор " + json);
-            return ServerSendData.sendRegData(str_url, json);
-        }
-
-        // выполняется после doInBackground, имеет доступ к UI
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                Log.d(LOG_TAG, "сортировка или нет " + result);
-                start_s_server();
-            } else {
-                Log.d(LOG_TAG, "снет " + result);
-            }
         }
     }
 
@@ -1053,299 +900,3 @@ public class Notary_list extends Activity implements View.OnTouchListener,
         xNew = xX - _x;
     }
 }
-
-/*
-//--------------------------------------------------------------filter
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-
-        int[] location = new int[2];
-        Button button = (Button) findViewById(R.id.notary_but_filter);
-
-        // Get the x, y location and store it in the location[] array
-        // location[0] = x, location[1] = y.
-        button.getLocationOnScreen(location);
-        view_height = button.getHeight();
-
-        // Initialize the Point with x, and y positions
-        point = new Point();
-        point.x = location[0];
-        point.y = location[1];
-    }
-
-    private void openDialogFilter(final Activity context, Point p){
-        Log.d(LOG_TAG, "start filter_1");
-        /*LayoutInflater layoutInflater = (LayoutInflater) getBaseContext()
-                .getSystemService(LAYOUT_INFLATER_SERVICE);
-
-        View popupView = layoutInflater.inflate(R.layout.advocate_dialog_filter, null);
-
-        final PopupWindow popupWindow = new PopupWindow(popupView,
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        popupWindow.showAsDropDown(lila_sort_panel, 50, -30);/
-Button button = (Button)findViewById(R.id.notary_but_filter);
-    int popupWidth = button.getWidth();
-//int popupHeight = 270;
-Log.d(LOG_TAG, "start filter_2");
-        LayoutInflater layoutInflater = (LayoutInflater) context
-        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        View layout = layoutInflater.inflate(R.layout.notary_dialog_filter, null);
-
-        Log.d(LOG_TAG, "start filter_3");
-// Creating the PopupWindow
-final PopupWindow popup = new PopupWindow(layout,
-        ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        popup.setContentView(layout);
-        popup.setWidth(popupWidth);
-        Log.d(LOG_TAG, "start filter_4");
-        //popup.setHeight(popupHeight);
-        popup.setFocusable(true);
-        popup.showAsDropDown(button);
-        Log.d(LOG_TAG, "start filter_5");
-        // Some offset to align the popup a bit to the right, and a bit down,
-        // relative to button's position.
-        int OFFSET_X = 0;
-        int OFFSET_Y = view_height - 5;
-
-final LinearLayout lila_spec = (LinearLayout)layout.findViewById(R.id.filter_lila_spec);
-        Log.d(LOG_TAG, "start filter_5");
-        CheckBox filter_check_spc1 = (CheckBox)layout.findViewById(R.id.filter_not_check_1);
-        CheckBox filter_check_spc2 = (CheckBox)layout.findViewById(R.id.filter_not_check_2);
-        CheckBox filter_check_spc3 = (CheckBox)layout.findViewById(R.id.filter_not_check_3);
-        CheckBox filter_check_spc4 = (CheckBox)layout.findViewById(R.id.filter_not_check_4);
-        CheckBox filter_check_spc5 = (CheckBox)layout.findViewById(R.id.filter_not_check_5);
-        CheckBox filter_check_spc6 = (CheckBox)layout.findViewById(R.id.filter_not_check_6);
-        CheckBox filter_check_spc7 = (CheckBox)layout.findViewById(R.id.filter_not_check_7);
-        CheckBox filter_check_spc8 = (CheckBox)layout.findViewById(R.id.filter_not_check_8);
-        CheckBox filter_check_spc9 = (CheckBox)layout.findViewById(R.id.filter_not_check_9);
-        CheckBox filter_check_spc10 = (CheckBox)layout.findViewById(R.id.filter_not_check_10);
-        Log.d(LOG_TAG, "start filter_6");
-final CheckBox [] check_spc = new CheckBox[]{filter_check_spc1 , filter_check_spc2, filter_check_spc3,filter_check_spc4,
-        filter_check_spc5,filter_check_spc6,filter_check_spc7,filter_check_spc8,filter_check_spc9,filter_check_spc10};
-
-        for(int i = 0; i<check_spc.length; i++){
-        check_spc[i].setChecked(bool_sort[i]);
-        }
-        Log.d(LOG_TAG, "start filter_7");
-        /*for(int i = 0; i<check_spc.length; i++){
-            check_spc[i].setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    for(int j = 0; j<check_spc.length; j++) {
-
-                        check_spc[j].setChecked(false);
-
-                        buttonView.setChecked(isChecked);
-                    }
-                }
-            });
-        }/
-        // Clear the default translucent background
-
-        // Displaying the popup at the specified location, + offsets.
-        popup.showAtLocation(button, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
-        //popupWindow.showAsDropDown(butOpenPopup, 200, -15);
-
-        // Getting a reference to Close button, and close the popup when
-        // clicked.
-
-        /*Button str_spec = (Button) layout.findViewById(R.id.filter_but_not_spec);
-        str_spec.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if(ff == true){
-                    lila_spec.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                    ff=false;
-                }else{
-                    lila_spec.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2));
-                    ff=true;
-                }
-            }
-        });/
-
-        Button close = (Button) layout.findViewById(R.id.filter_but_not_close);
-        close.setOnClickListener(new View.OnClickListener() {
-
-@Override
-public void onClick(View v) {
-        ff = true;
-        popup.dismiss();
-        }
-        });
-
-        Button add_filter = (Button) layout.findViewById(R.id.filter_but_not_start_sort);
-        add_filter.setOnClickListener(new View.OnClickListener() {
-
-@Override
-public void onClick(View v) {
-        for(int i = 0; i<bool_sort.length; i++){
-        bool_sort[i]= check_spc[i].isChecked();
-        }
-        ff = true;
-        new AsyncTaskNotary().execute();
-        popup.dismiss();
-        }
-        });
-
-        }
-//______________________________________________________________filter
-
-//--------------------------------------------------------------region
-public int City_num = 0;
-public String Region_string ="";
-public String City_string = "";
-public String [] str_region = null;
-public int[] int_region = null;
-public String [] str_city = null;
-public String[] int_str_city = null;
-public Spinner spinner = null;
-private void openDialogRegion(){
-
-final Dialog dialog = new Dialog(Notary_list.this);
-        dialog.setTitle("region");
-        dialog.setContentView(R.layout.advocate_dialog_sort_city);
-
-final Spinner spinner_region = (Spinner)dialog.findViewById(R.id.dialog_sort_spinner_region);
-final Spinner spinner_city = (Spinner)dialog.findViewById(R.id.dialog_sort_spinner_city);
-
-        Button btnDismiss = (Button) dialog.getWindow().findViewById(
-        R.id.dialog_sort_button_close);
-        Button btnmiss = (Button) dialog.getWindow().findViewById(
-        R.id.dialog_sort_button_yes);
-
-
-        btnDismiss.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View v) {
-        dialog.dismiss();
-        }
-        });
-
-        btnmiss.setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View v) {
-        new AsyncTaskNotary().execute();
-        dialog.dismiss();
-        }
-        });
-
-
-        try {
-        JSONObject jsonObject = new JSONObject(Region_string);
-        JSONArray jsonArray = jsonObject.getJSONArray("array");
-        str_region = new String[jsonArray.length()];
-        int_region = new int[jsonArray.length()];
-        for(int i = 0; i< jsonArray.length(); i++ ){
-        str_region[i] = jsonArray.getJSONObject(i).getString("name");
-        int_region[i] = jsonArray.getJSONObject(i).getInt("id");
-        }
-        } catch (JSONException e) {
-        e.printStackTrace();
-        }
-
-        Log.d("qwerty", "массив РЕГИОНОВ длина "+ str_region.length+" а что там на "+ str_region[1]);
-
-final ArrayAdapter<String> adapter_region = new ArrayAdapter<String>(this,
-        R.layout.my_quest_item_spinner, str_region);
-        //ArrayAdapter.createFromResource(this, R.layout.my_quest_item_spinner, new String(){""});
-        spinner_region.setAdapter(adapter_region);
-        spinner_region.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-@Override
-public void onNothingSelected(AdapterView<?> parent) {
-        }
-
-@Override
-public void onItemSelected(AdapterView<?> parent, View view,
-        int pos, long id) {
-        Log.d("qwerty", "Я чтото выбрал " + City_num);
-        City_num = int_region[Integer.parseInt(String.valueOf(id))];
-        spinner = spinner_city;
-        new AsyncTaskDialog().execute();
-
-        }
-        });
-        spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-@Override
-public void onNothingSelected(AdapterView<?> parent) {
-        }
-
-@Override
-public void onItemSelected(AdapterView<?> parent, View view,
-        int pos, long id) {
-        SORT_CITY = int_str_city[pos];
-        notary_tv_sort_city.setText(str_city[pos]);
-        }
-        });
-
-        dialog.show();
-        }
-class AsyncTaskDialog extends AsyncTask<Void, Integer, String> {
-
-    @Override
-    protected String doInBackground(Void... params) {
-        String url_s = "";
-        String json_s = "";
-        if(City_num == 0){
-            url_s = "http://"+in.get_url()+"/123.getreg";
-        }else{
-            url_s = "http://"+in.get_url()+"/123.getcity";
-            JSONObject json = new JSONObject();
-            try {
-                if(City_num<10){
-                    json.put("code", "0"+City_num);
-                }else{
-                    json.put("code", City_num);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            json_s = String.valueOf(json);
-        }
-
-        return ServerSendData.sendRegData(url_s, json_s);
-    }
-
-    protected void onPostExecute(String result) {
-        Log.d("qwerty", "Ответ на запрос региона "+ result+ " citi_num = "+City_num);
-        if(result != null){
-            if(City_num==0){
-                Region_string = result;
-                City_num = 1;
-                openDialogRegion();
-            }
-            else {
-                City_string = result;
-                if(City_string.length()!=0){
-                    try {
-                        JSONObject jsonObject = new JSONObject(City_string);
-                        JSONArray jsonArray = jsonObject.getJSONArray("array");
-                        str_city = new String[jsonArray.length()];
-                        int_str_city = new String[jsonArray.length()];
-                        for(int i = 0; i< jsonArray.length(); i++ ){
-                            str_city[i] = jsonArray.getJSONObject(i).getString("name");
-                            int_str_city[i]=jsonArray.getJSONObject(i).getString("id");
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    Log.d("qwerty", "массив ГОРОДОВ длина "+ City_num);
-
-                    ArrayAdapter<String> adapter_city = new ArrayAdapter<String>(Notary_list.this,
-                            R.layout.my_quest_item_spinner, str_city);
-                    //ArrayAdapter.createFromResource(this, R.layout.my_quest_item_spinner, new String(){""});
-                    spinner.setAdapter(adapter_city);
-                }
-            }
-
-        }
-        //progressBarRegionSign.setVisibility(ProgressBar.INVISIBLE);
-        //progressBarCitySign.setVisibility(ProgressBar.INVISIBLE);
-    }
-}
-//___|||__|____|___|_______|____|_____|_______|____|__region
-*/

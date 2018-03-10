@@ -73,6 +73,8 @@ public class JuristAccounClass {
     public boolean IsVip;
     public String MyLoveJurists ="";
 
+    public double dist = 0;
+
     public enum accountType
     {
         Client,
