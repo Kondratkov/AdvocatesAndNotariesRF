@@ -75,8 +75,8 @@
                         android:inputType="textCapSentences"
                         android:password="false"
                         android:text="1"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -104,8 +104,8 @@
                         android:hint="@string/sign_up_p_2"
                         android:inputType="phone"
                         android:phoneNumber="false"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -131,8 +131,8 @@
                         android:background="@drawable/regestr_et_edit_text_holo_light"
                         android:hint="@string/sign_up_p_3"
                         android:inputType="textEmailAddress"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -158,8 +158,8 @@
                         android:background="@drawable/regestr_et_edit_text_holo_light"
                         android:hint="@string/sign_up_p_4"
                         android:inputType="textPassword"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -185,8 +185,8 @@
                         android:background="@drawable/regestr_et_edit_text_holo_light"
                         android:hint="@string/sign_up_p_5"
                         android:inputType="textPassword"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <TextView
@@ -228,8 +228,8 @@
                         android:ems="10"
                         android:hint="@string/sign_up_p_6"
                         android:inputType="textCapSentences"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -256,8 +256,8 @@
                         android:ems="10"
                         android:hint="@string/sign_up_p_7"
                         android:inputType="textCapSentences"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -284,8 +284,8 @@
                         android:ems="10"
                         android:hint="@string/sign_up_p_8"
                         android:inputType="textCapSentences"
-                        android:textColor="#ffffff"
-                        android:textColorHint="@color/hint_text" />
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/hint_text"/>
                 </LinearLayout>
 
                 <LinearLayout

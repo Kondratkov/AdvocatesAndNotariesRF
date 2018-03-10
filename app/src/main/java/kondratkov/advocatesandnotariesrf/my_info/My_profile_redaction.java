@@ -874,16 +874,16 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
 
     private void Dialog_loc() {
 
-        showDialog(D_13);
+        //showDialog(D_13);
 
-        /*dialog1 = new Dialog(My_profile_redaction.this);
+        dialog1 = new Dialog(My_profile_redaction.this);
         dialog1.setTitle("передача...");
         dialog1.setContentView(R.layout.input_dialog_window);
         dialog1.setCancelable(true);
 
 
         new UrlConnectionTask().execute(JSON_REGISTER);
-        dialog1.show();*/
+        dialog1.show();
     }
 
     @Override
@@ -964,36 +964,7 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
     }
 //___|||__|____|___|_______|____|_____|_______|____|__region
 
-    class AsyncTaskExample extends AsyncTask<Void, Integer, String> {
-        // фоновая работа
-        String url = "";
-        @Override
-        protected String doInBackground(Void... params) {
 
-            url = "http://"+in.get_url()+"/123.updjur";
-            return ServerSendData.sendRegData(url, json_signup);
-        }
-
-        protected void onPostExecute(String result) {
-            JSONObject object = null;
-            if(result!=null) {
-                try {
-                    object = new JSONObject(result);
-                    String status = object.getString("status");
-                    if (object.getString("status").equals("OK")) {
-                        showDialog(D_11);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                Toast.makeText(My_profile_redaction.this,
-                        "Нет связи с сервером!",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 
     class UrlConnectionTask extends AsyncTask<String, Void, String> {
 
@@ -1025,16 +996,16 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
             MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
 
             //RequestBody formBody = RequestBody.create(JSON, json_signup);
-
+            String dd = params[0];
+            String ddf = "http://"+in.get_url()+"/QuestionAnswers/PutClientAccount/"+String.valueOf(id_delete);
+            code = 0;
 
             Request request = new Request.Builder()
-                    .url("http://"+in.get_url()+"/QuestionAnswers/PutQuestionAnswer/"+String.valueOf(id_delete))
-                    .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
+                    .url("http://"+in.get_url()+"/QuestionAnswers/PutClientAccount/"+String.valueOf(id_delete))
+                    .put(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
                     .build();
 
-            String dd = params[0];
-            String ddf = "http://"+in.get_url()+"/QuestionAnswers/PutQuestionAnswer/"+String.valueOf(id_delete);
-            code = 0;
+
 
             try {
                 Response response = client.newCall(request).execute();
