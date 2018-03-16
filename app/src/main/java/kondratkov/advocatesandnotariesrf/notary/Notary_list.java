@@ -423,8 +423,11 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             public void onItemClick(AdapterView<?> parent, View v, int position,
                                     long id) {
 
-                Intent int3 = new Intent(Notary_list.this, Notary_profile.class);
-                startActivity(int3);
+                if(position != 0){
+                    Intent int3 = new Intent(Notary_list.this, Notary_profile.class);
+                    startActivity(int3);
+                }
+
             }
         });
 

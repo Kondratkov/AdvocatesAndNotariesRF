@@ -311,14 +311,14 @@ try {
                 if (sPref.getBoolean("pref_setting_push_2", true) == false) {
                 } else {
                     sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение о ",
-                            "Пакет документов отправлен на почту", 3, 1);
+                            "Новое сообщение.(пакет документов)", 3, 1);
                 }
                 //sendBigPictureStyleNotification("Вам задали вопрос!", "","", 1, 0);
             } else if (newPushMessages5.size() > 1) {
                 if (sPref.getBoolean("pref_setting_push_2", true) == false) {
                 } else {
                     sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение о ",
-                            "Пакет документов отправлен на почту", 3,
+                            "Новое сообщение.(пакет документов)", 3,
                             1);
                 }
                 //sendBigPictureStyleNotification("Вам задали вопрос!", "","", 1, 0);
