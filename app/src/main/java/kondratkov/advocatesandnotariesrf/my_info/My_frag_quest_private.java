@@ -265,8 +265,11 @@ public class My_frag_quest_private extends Fragment {
             try {
                 tv_nik.setText(clientQuestion1[position].Answers[0].Account.Fio);
             }catch (Exception e){
-
+                //tv_nik.setText(clientQuestion1[position].Header);
+                //tv_them.setText("общение после ответа на вопрос из чата");
             }
+
+
             //String("text"));
                 /*CharSequence dateJSON = DateFormat.format("dd.MM.yyyy", Long.parseLong(list.get(position).getString("date")));
                 tv_date.setText(String.valueOf(dateJSON));*/

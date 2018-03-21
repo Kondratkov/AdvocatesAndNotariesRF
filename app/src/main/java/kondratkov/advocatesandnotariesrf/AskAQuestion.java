@@ -322,8 +322,9 @@ public class AskAQuestion extends Activity {
                 Gson gson = new Gson();
                 ClientQuestion clientQuestion = new ClientQuestion();
 
-                clientQuestion.Header = comment.From;
+                clientQuestion.Header = "общение после ответа на вопрос из чата";//comment.From;
                 clientQuestion.Body = String.valueOf(editText1.getText());
+
                 clientQuestion.AccountType = ClientQuestion.AccountTypes.Jurist;
                 clientQuestion.JuristId = IDD;
 

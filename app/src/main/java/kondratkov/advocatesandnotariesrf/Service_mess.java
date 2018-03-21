@@ -46,11 +46,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import kondratkov.advocatesandnotariesrf.api_classes.NewPushMessage;
+import kondratkov.advocatesandnotariesrf.api_classes.Order;
 import kondratkov.advocatesandnotariesrf.input.SignUP;
 import kondratkov.advocatesandnotariesrf.my_info.My_orders;
 import kondratkov.advocatesandnotariesrf.my_info.My_perep_orders_mess;
@@ -117,6 +119,7 @@ public class Service_mess extends Service {
                     json_start = String.valueOf(json_st);
                     //XY_set();
                     new UrlConnectionTask().execute(json_start);
+                    new UrlConnectionTaskOrders().execute();
                 }
             });
         }
@@ -269,7 +272,7 @@ try {
                 }
             }
 
-            if (newPushMessages1.size() == 1) {
+            if (newPushMessages1.size() > 0) {
                 if (sPref.getBoolean("pref_setting_push_1", true) == false) {
                 } else {
                     if(newPushMessages1.get(0).OwnerId != in.get_id_user()){
@@ -282,10 +285,10 @@ try {
                             newPushMessage[0].ServiceId);}
                 }
 
-            } else if (newPushMessages1.size() > 1) {
-                sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение от ",
-                        "У вас есть новые сообщения", 1,
-                        1);//sendBigPictureStyleNotification("Вам задали вопрос!", "","", 1, 0);
+//            } else if (newPushMessages1.size() > 1) {
+//                sendBigPictureStyleNotification("У вас новое сообщение!", "Сообщение от ",
+//                        "У вас есть новые сообщения", 1,
+//                        1);//sendBigPictureStyleNotification("Вам задали вопрос!", "","", 1, 0);
             } else if (newPushMessages2.size() == 1) {
                 if (sPref.getBoolean("pref_setting_push_3", true) == false) {
                 } else {
@@ -451,6 +454,82 @@ try {
                     url_starting1(result);
                 }
             }
+            super.onPostExecute(result);
+        }
+    }
+
+    class UrlConnectionTaskOrders extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String result = "";
+
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
+
+            //RequestBody formBody = RequestBody.create(JSON, json_signup);
+
+            String s  = in.get_token_type()+" "+in.get_token();
+            String s1 = "http://"+in.get_url()+"/Orders/GetClientOrders";
+
+            Request request = new Request.Builder()
+                    .header("Authorization", in.get_token_type()+" "+in.get_token())
+                    .url("http://"+in.get_url()+"/Orders/GetClientOrders")
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                result = response.body().string();
+                String ddd ="";
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            List<Order> arrayPaySearch = new ArrayList<Order>();
+            try{
+                Gson gson = new Gson();
+                in.msArrayOrders = gson.fromJson(result, Order[].class);
+
+                for (int i = 0; i < in.msArrayOrders.length; i++) {
+                    if(in.msArrayOrders[i].State == Order.OrderState.WaitingForPayment){
+                        arrayPaySearch.add(in.msArrayOrders[i]);
+                    }
+                }
+                in.msArrayOrders = new Order[arrayPaySearch.size()];
+                for (int i = 0; i <in.msArrayOrders.length ; i++) {
+                    in.msArrayOrders[i] = arrayPaySearch.get(i);
+                }
+
+                if(in.msArrayOrders.length == 0 ){
+                    in.msArrayOrders = null;
+                }
+
+//                for (int i = 0; i < msArrayOrders.length; i++) {
+//                    if(msArrayOrders[i].State == Order.OrderState.WaitingForPayment){
+//                        arrayPaySearch.add(msArrayOrders[i]);
+//                    }
+//                }
+//                msArrayOrders = new Order[arrayPaySearch.size()];
+//                for (int i = 0; i <msArrayOrders.length ; i++) {
+//                    msArrayOrders[i] = arrayPaySearch.get(i);
+//                }
+//
+//                AddList();
+            }catch (Exception e){
+                in.msArrayOrders = null;
+            }
+
+            //start_activity();
             super.onPostExecute(result);
         }
     }

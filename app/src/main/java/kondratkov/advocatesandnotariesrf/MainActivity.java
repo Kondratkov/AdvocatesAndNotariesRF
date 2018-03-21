@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements View.OnTouchListener{
     public SharedPreferences sPref;
     ScrollView main_scrollView;
     IN in;
-    TextView textViewNewMess;
+    TextView textViewNewMess, textView_main_pay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class MainActivity extends Activity implements View.OnTouchListener{
         main_scrollView.setOnTouchListener(this);
 
         textViewNewMess =(TextView)findViewById(R.id.textViewNewMess);
+        textView_main_pay = (TextView)findViewById(R.id.textView_main_pay);
 
         sPref = PreferenceManager.getDefaultSharedPreferences(this);// getPreferences(MODE_PRIVATE);
         //Log.d("qwerty", "Что же там "+ String.valueOf(sPref.getBoolean("one_start", true)));
@@ -80,6 +81,12 @@ public class MainActivity extends Activity implements View.OnTouchListener{
         }else {
             textViewNewMess.setText("");
             textViewNewMess.setBackgroundResource(R.drawable.ic_oval_info_no);
+        }
+
+        if(in.msArrayOrders == null ){
+            textView_main_pay.setVisibility(View.GONE);
+        }else{
+            textView_main_pay.setVisibility(View.VISIBLE);
         }
 
         //OneStart();

@@ -432,7 +432,7 @@
             android:layout_margin="5dp"
             android:background="@color/color_button_orange"
             android:onClick="onClick"
-            android:text="Показать всех в регионе"
+            android:text="Показать всех "
             android:textColor="@color/apperror_color"
             android:textSize="12dp"/>
 

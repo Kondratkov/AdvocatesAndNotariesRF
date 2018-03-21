@@ -23,6 +23,7 @@ import kondratkov.advocatesandnotariesrf.api_classes.ClientQuestion;
 import kondratkov.advocatesandnotariesrf.api_classes.Comment;
 import kondratkov.advocatesandnotariesrf.api_classes.DocumentPacketOrder;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
+import kondratkov.advocatesandnotariesrf.api_classes.Order;
 import kondratkov.advocatesandnotariesrf.api_classes.TopQuestion;
 import kondratkov.advocatesandnotariesrf.data_theme.AllQuestions;
 import kondratkov.advocatesandnotariesrf.data_theme.AllQuestions_forum;
@@ -300,6 +301,8 @@ public class IN {
     public static String doc_num = "";
     public String get_doc_num(){return (doc_num);}
     public void set_doc_num (String doc_num){this.doc_num = doc_num;}
+
+    public static Order[] msArrayOrders = null;
 
     //для времени в сообщениях
     public String dateDisplayConsPhone(String sDate){
