@@ -82,4 +82,6 @@ public class Notary {
     public String Email="";
     public boolean Consultation;
 
+    public double Distance;
+
 }

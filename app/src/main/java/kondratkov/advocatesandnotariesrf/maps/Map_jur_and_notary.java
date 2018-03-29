@@ -62,6 +62,7 @@ import kondratkov.advocatesandnotariesrf.account.Bup;
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindByCoordinatesFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindJuristFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
+import kondratkov.advocatesandnotariesrf.api_classes.Notary;
 
 public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener,SeekBar.OnSeekBarChangeListener {
     private static final String DEBUG_TAG = "qwerty";
@@ -86,6 +87,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
     public Marker marker;
 
     public JuristAccounClass[] mcArrayJuristAccoun;
+    public Notary[] mcArrayNotary;
 
     public int Search_id_city;
     public int Search_id_JuristAreas;
@@ -158,14 +160,21 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         l.start_my(lm, Map_jur_and_notary.this);
 
-        mark_jur = new LatLng(in.get_latitude(), in.get_longitude());
+        mark_jur = new LatLng(IN.latitude_my, IN.longitude_my);
         map1.moveCamera(CameraUpdateFactory.newLatLngZoom(mark_jur, 17));
 
         //setDataMap(json_maps);
         Gson gson = new Gson();
-        b_answer_next = getIntent().getBooleanExtra("ANSWERNEXT", false);
-        mcArrayJuristAccoun = gson.fromJson((String)getIntent().getSerializableExtra("ARRAY"), JuristAccounClass[].class);
+
+        if(getIntent().getIntExtra("TYPE", 0)==0){
+            b_answer_next = getIntent().getBooleanExtra("ANSWERNEXT", false);
+            mcArrayJuristAccoun = gson.fromJson((String)getIntent().getSerializableExtra("ARRAY"), JuristAccounClass[].class);
+        }else{
+            mcArrayNotary = IN.ARRAY_NOTARY_TO_MAP;
+        }
+
         start_activity();
+
         map1.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
@@ -187,7 +196,6 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
             @Override
             public void onCameraChange(CameraPosition camera) {
                 Log.d(DEBUG_TAG, "onCameraChange: " + camera.target.latitude + "," + camera.target.longitude);
-
 
 
                 double l_x = in.get_latitude()-camera.target.latitude;
@@ -306,47 +314,88 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
                 .strokeWidth(5);
        // map1.addCircle(circleOptions);//рисует круг
 
-        for(int i = 0 ; i<mcArrayJuristAccoun.length; i++){
-            try {
+        if(getIntent().getIntExtra("TYPE", 0)==0){
+            /**
+             * если адвокаты
+             */
+            for(int i = 0 ; i<mcArrayJuristAccoun.length; i++){
+                try {
 
-                Double dX = 0.0;
-                Double dY = 0.0;
+                    Double dX = 0.0;
+                    Double dY = 0.0;
 
-                if(b_answer_next){
-                    dX =  mcArrayJuristAccoun[i].CurrentLatitude;
-                    dY =  mcArrayJuristAccoun[i].CurrentLongitude;
-                }else {
-                    dX =  mcArrayJuristAccoun[i].Latitude;
-                    dY =  mcArrayJuristAccoun[i].Longitude;
-                }
-
-                mark_jur = new LatLng(dX, dY);
-                //map1.setInfoWindowAdapter(new MyInfoWindowAdapter());
-
-                BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.x_marker_jur);
-                String online;
-                if(mcArrayJuristAccoun[i].IsOnline){
-                    online = "онлайн";
-                }else{
-                    online = "не доступен";
-                }
-                marker = map1.addMarker(new MarkerOptions().title(mcArrayJuristAccoun[i].Fio).snippet(online).position(mark_jur).icon(bitmapDescriptor));
-
-                map1.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        boolFilter = true;
-                       // dopInfo(mcArrayJuristAccoun[i].Fio);
-                        return false;
+                    if(b_answer_next){
+                        dX =  mcArrayJuristAccoun[i].CurrentLatitude;
+                        dY =  mcArrayJuristAccoun[i].CurrentLongitude;
+                    }else {
+                        dX =  mcArrayJuristAccoun[i].Latitude;
+                        dY =  mcArrayJuristAccoun[i].Longitude;
                     }
-                });
 
-                dropPinEffect(marker);
+                    mark_jur = new LatLng(dX, dY);
+                    //map1.setInfoWindowAdapter(new MyInfoWindowAdapter());
 
-            } catch (Exception e) {
+                    BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.x_marker_jur);
+                    String online;
+                    if(mcArrayJuristAccoun[i].IsOnline){
+                        online = "онлайн";
+                    }else{
+                        online = "не доступен";
+                    }
+                    marker = map1.addMarker(new MarkerOptions().title(mcArrayJuristAccoun[i].Fio).snippet(online).position(mark_jur).icon(bitmapDescriptor));
 
+                    map1.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            boolFilter = true;
+                            // dopInfo(mcArrayJuristAccoun[i].Fio);
+                            return false;
+                        }
+                    });
+
+                    dropPinEffect(marker);
+
+                } catch (Exception e) {
+
+                }
+            }
+        }else {
+            for(int i = 0 ; i<mcArrayNotary.length; i++){
+                /**
+                 * если нотариусы
+                 */
+                try {
+
+                    Double dX = 0.0;
+                    Double dY = 0.0;
+
+                    dX =  mcArrayNotary[i].Latitude;
+                    dY =  mcArrayNotary[i].Longitude;
+
+                    mark_jur = new LatLng(dX, dY);
+                    //map1.setInfoWindowAdapter(new MyInfoWindowAdapter());
+
+                    BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.drawable.x_marker_not);
+
+                    marker = map1.addMarker(new MarkerOptions().title(mcArrayNotary[i].Fio).position(mark_jur).icon(bitmapDescriptor));
+
+                    map1.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            boolFilter = true;
+                            return false;
+                        }
+                    });
+
+                    dropPinEffect(marker);
+
+                } catch (Exception e) {
+
+                }
             }
         }
+
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions

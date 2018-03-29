@@ -59,8 +59,8 @@ public class LocationListenerGPServices implements LocationListener {
 
         android.location.Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         try {
-            Log.d(TAG, "Широта=" + location.getLatitude());
-            Log.d(TAG, "Долгота=" + location.getLongitude());
+            //Log.d(TAG, "Широта=" + location.getLatitude());
+            //Log.d(TAG, "Долгота=" + location.getLongitude());
 
             in.set_latitude(location.getLatitude());
             in.set_longitude(location.getLongitude());
@@ -68,8 +68,8 @@ public class LocationListenerGPServices implements LocationListener {
         } catch (NullPointerException e) {
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             try {
-                Log.d(TAG, "Широта=" + location.getLatitude());
-                Log.d(TAG, "Долгота=" + location.getLongitude());
+                //Log.d(TAG, "Широта=" + location.getLatitude());
+                //Log.d(TAG, "Долгота=" + location.getLongitude());
 
                 in.set_latitude(location.getLatitude());
                 in.set_longitude(location.getLongitude());
@@ -77,8 +77,8 @@ public class LocationListenerGPServices implements LocationListener {
             } catch (NullPointerException e1) {
                 location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
                 try {
-                    Log.d(TAG, "Широта=" + location.getLatitude());
-                    Log.d(TAG, "Долгота=" + location.getLongitude());
+                    //Log.d(TAG, "Широта=" + location.getLatitude());
+                    //Log.d(TAG, "Долгота=" + location.getLongitude());
 
                     in.set_latitude(location.getLatitude());
                     in.set_longitude(location.getLongitude());
@@ -114,8 +114,8 @@ public class LocationListenerGPServices implements LocationListener {
 
         android.location.Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         try {
-            Log.d(TAG, "Широта=" + location.getLatitude());
-            Log.d(TAG, "Долгота=" + location.getLongitude());
+            //Log.d(TAG, "Широта=" + location.getLatitude());
+            //Log.d(TAG, "Долгота=" + location.getLongitude());
 
             in.set_latitude_my(location.getLatitude());
             in.set_longitude_my(location.getLongitude());
@@ -123,8 +123,8 @@ public class LocationListenerGPServices implements LocationListener {
         } catch (NullPointerException e) {
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
             try {
-                Log.d(TAG, "Широта=" + location.getLatitude());
-                Log.d(TAG, "Долгота=" + location.getLongitude());
+                //Log.d(TAG, "Широта=" + location.getLatitude());
+                //Log.d(TAG, "Долгота=" + location.getLongitude());
 
                 in.set_latitude_my(location.getLatitude());
                 in.set_longitude_my(location.getLongitude());
@@ -132,8 +132,8 @@ public class LocationListenerGPServices implements LocationListener {
             } catch (NullPointerException e1) {
                 location = lm.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
                 try {
-                    Log.d(TAG, "Широта=" + location.getLatitude());
-                    Log.d(TAG, "Долгота=" + location.getLongitude());
+                    //Log.d(TAG, "Широта=" + location.getLatitude());
+                    //Log.d(TAG, "Долгота=" + location.getLongitude());
 
                     in.set_latitude_my(location.getLatitude());
                     in.set_longitude_my(location.getLongitude());
@@ -149,11 +149,11 @@ public class LocationListenerGPServices implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if (location != null) {
-            Log.d(TAG, "Широта=" + location.getLatitude());
+            //Log.d(TAG, "Широта=" + location.getLatitude());
             in.set_latitude(location.getLatitude());
             in.set_latitude_my(location.getLatitude());
 
-            Log.d(TAG, "Долгота=" + location.getLongitude());
+            //Log.d(TAG, "Долгота=" + location.getLongitude());
             in.set_longitude(location.getLongitude());
             in.set_longitude_my(location.getLongitude());
         }

@@ -4,9 +4,25 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/but_notarys_list_to_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/color_button_orange"
+            android:onClick="onClick"
+            android:text="на карте"
+            android:textColor="@color/color_white"/>
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="45dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:orientation="vertical">
@@ -19,7 +35,7 @@
         <ListView
             android:id="@+id/notary_listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
@@ -72,37 +88,6 @@
                     android:weightSum="1">
 
                     <LinearLayout
-                        android:layout_width="1dp"
-                        android:layout_height="1dp"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <Button
-                            android:id="@+id/but_sort_not_list1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_weight="0.5"
-                            android:background="@drawable/but_new"
-                            android:onClick="onClick"
-                            android:text="по удаленности"
-                            android:textColor="#50ffffff"
-                            android:textSize="11dp" />
-
-                        <Button
-                            android:id="@+id/but_sort_not_list2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="0.5"
-                            android:background="@drawable/but_new"
-                            android:onClick="onClick"
-                            android:text="по рейтингу"
-                            android:textColor="#50ffffff"
-                            android:textSize="11dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -118,7 +103,9 @@
                             android:layout_marginTop="2dp"
                             android:layout_weight="0.5"
                             android:gravity="center"
-                            android:text="Официальный сайт нотариуса" />
+                            android:text="Официальный сайт нотариуса"
+                            android:textColor="@color/color_button_gray"
+                            android:textSize="12sp"/>
 
                         <CheckBox
                             android:id="@+id/checkBox_list_not2"
@@ -128,19 +115,54 @@
                             android:layout_marginTop="2dp"
                             android:layout_weight="0.5"
                             android:gravity="center"
-                            android:text="Предоставление консультаций" />
+                            android:text="Предоставление консультаций"
+                            android:textColor="@color/color_button_gray"
+                            android:textSize="12sp"/>
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_menubar_l"
+                    android:paddingBottom="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="55dp"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <Button
+                            android:id="@+id/but_sort_not_list1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginRight="3dp"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/but_new"
+                            android:onClick="onClick"
+                            android:text="по удаленности"
+                            android:textColor="#50ffffff"
+                            android:textSize="11dp"/>
+
+                        <Button
+                            android:id="@+id/but_sort_not_list2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/but_new"
+                            android:onClick="onClick"
+                            android:text="по рейтингу"
+                            android:textColor="#50ffffff"
+                            android:textSize="11dp"/>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="140dp"
                         android:gravity="right"
                         android:orientation="horizontal">
 
@@ -244,14 +266,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginTop="1dp"
-            android:background="#aaffffff" />
     </LinearLayout>
 
     <FrameLayout

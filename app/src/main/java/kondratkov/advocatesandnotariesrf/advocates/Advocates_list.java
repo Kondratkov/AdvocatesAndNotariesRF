@@ -418,6 +418,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             case R.id.jurList_but_map:
                 Intent intent_sidebar = new Intent(Advocates_list.this, Map_jur_and_notary.class);
                 Gson gson = new Gson();
+                intent_sidebar.putExtra("TYPE", 0);
                 intent_sidebar.putExtra("ARRAY", gson.toJson(mcArrayJuristAccoun));
                 intent_sidebar.putExtra("ANSWERNEXT", bool_newtTo_me);
                 startActivity(intent_sidebar);

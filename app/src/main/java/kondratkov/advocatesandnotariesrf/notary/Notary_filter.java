@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Criteria;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.DisplayMetrics;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +27,14 @@ import android.widget.Toast;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
+import com.google.gson.Gson;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -35,6 +44,9 @@ import kondratkov.advocatesandnotariesrf.New_sidebar;
 import kondratkov.advocatesandnotariesrf.R;
 import kondratkov.advocatesandnotariesrf.account.City;
 import kondratkov.advocatesandnotariesrf.account.Region;
+import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindNotaryByFilter;
+import kondratkov.advocatesandnotariesrf.api_classes.Filter.GetNotaryByAddressCoordinates;
+import kondratkov.advocatesandnotariesrf.api_classes.Notary;
 import kondratkov.advocatesandnotariesrf.dop_dialog.Dialog_region;
 import kondratkov.advocatesandnotariesrf.maps.LocationListenerGPServices;
 import kondratkov.advocatesandnotariesrf.start_help.Start_activity_no_login;
@@ -45,25 +57,16 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
     TextView tvf1, tvf2, tvf3, tvf4, tvf5, tvf6, tvf7, tvf8;
     public CheckBox ch1, ch2, ch3, ch4, ch5;
     Button bt_filter, buttonNotaryFilterYesNo;
+    public FrameLayout frameLayout_not_filter_Visio;
     public TextView[] tv_mas = null;
     public Button[] mButtonsFilter = null;
-    public String[] s_mas = new String[]{"", "", "", "", "", "", "", ""};
-    public String[] s_mas_text = new String[]{"", "", "", "", "", "", "", ""};
     public boolean but_yes = false;
     public boolean dop_fil = false;
     IN in;
-    Point point;
-    int view_height;
-    int v_bup = 0;
-    int v_office = 0;
     public boolean[] bool_sort;
+    public int code;
 
-    private LocationManager mLocationManager;
-    private LocationListener mLocationListener;
-    private TextView mLatitudeTextView, mLongitudeTextView;
-
-    private static final long MINIMUM_DISTANCE_FOR_UPDATES = 1; // в метрах
-    private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // в мс
+    private LocationManager locationManager;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -108,6 +111,8 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
         Button b8 = (Button)findViewById(R.id.notary_filter_but_8);
 
         mButtonsFilter = new Button[]{b3, b4, b5, b6, b7, b8};
+
+        frameLayout_not_filter_Visio = (FrameLayout)findViewById(R.id.frameLayout_not_filter_Visio);
 
         buttonNotaryFilterYesNo = (Button)findViewById(R.id.buttonNotaryFilterYesNo);
 
@@ -168,6 +173,12 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
             startActivity(intent);
             Notary_filter.this.finish();
         }
+
+        frameLayout_not_filter_Visio.setVisibility(View.GONE);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListenerGPServices l = new LocationListenerGPServices();
+        l.start_my(locationManager, getApplicationContext());
     }
 
     public void XY_set() {
@@ -225,11 +236,12 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
                 }else{
                     bool_sort[0]=true;
                     bool_sort[1]=false;
-                    XY_set();
                     tv_mas[1].setText("Другой регион/населенный пункт");
                     in.set_id_city("");
                     in.set_filter_tip(1);
                 }
+                in.set_latitude(IN.latitude_my);
+                in.set_longitude(IN.longitude_my);
                 on_position();
                 break;
             case R.id.notary_filter_but_2://*-*-*-*-*-*-
@@ -295,27 +307,59 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
                             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0));
                 }
                 break;
+            /**
+             * поиск всех нотариусов
+             */
             case R.id.notary_filter_but_vse:
                 in.set_filter_tip(0);
-                intent = new Intent(Notary_filter.this, Notary_list.class);
-                intent.putExtra("FILES_sort", 1);
-                intent.putExtra("CITY_SEARCH", "");
-                intent.putExtra("SEARCH_NOTARY_ARRAY_BOOL", bool_sort);
-                startActivity(intent);
+                Gson gson = new Gson();
+
+                FindNotaryByFilter notary= new FindNotaryByFilter();
+                notary.WorkInOffDays = bool_sort[2];
+                notary.Equipage = bool_sort[3];
+                notary.Appointments = bool_sort[4];
+                notary.AppointmentsEmail = bool_sort[5];
+                notary.WorkWithJur = bool_sort[6];
+                notary.IsPleadtingHereditaryCases = bool_sort[7];
+                notary.IsSitesCertification = bool_sort[8];
+                notary.LockDocuments = bool_sort[9];
+                notary.DepositsReception = bool_sort[10];
+                notary.RequestsAndDuplicate = bool_sort[11];
+                notary.Transactions = bool_sort[12];
+                notary.Consultation = false;
+
+                notary.SortingType = FindNotaryByFilter.sortingType.Name;
+                String JSON = gson.toJson(notary);
+                frameLayout_not_filter_Visio.setVisibility(View.VISIBLE);
+                new UrlConnectionTaskFilter().execute(JSON);
+
                 break;
             case R.id.notary_filter_but_filter:
-                intent = new Intent(Notary_filter.this, Notary_list.class);
-                intent.putExtra("FILES_sort", 2);
 
-                intent.putExtra("SEARCH_NOTARY_ARRAY_BOOL", bool_sort);
+                Gson gson2 = new Gson();
 
-                if(tv_mas[1].equals("Другой регион/населенный пункт")){
-                    intent.putExtra("CITY_SEARCH", "");
-                }else {
-                    intent.putExtra("CITY_SEARCH", tv_mas[1].getText());
-                }
+                GetNotaryByAddressCoordinates notaryByAddressCoordinates = new GetNotaryByAddressCoordinates();
+                notaryByAddressCoordinates.WorkInOffDays = bool_sort[2];
+                notaryByAddressCoordinates.Equipage = bool_sort[3];
+                notaryByAddressCoordinates.Appointments = bool_sort[4];
+                notaryByAddressCoordinates.AppointmentsEmail = bool_sort[5];
+                notaryByAddressCoordinates.WorkWithJur = bool_sort[6];
+                notaryByAddressCoordinates.IsPleadtingHereditaryCases = bool_sort[7];
+                notaryByAddressCoordinates.IsSitesCertification = bool_sort[8];
+                notaryByAddressCoordinates.LockDocuments = bool_sort[9];
+                notaryByAddressCoordinates.DepositsReception = bool_sort[10];
+                notaryByAddressCoordinates.RequestsAndDuplicate = bool_sort[11];
+                notaryByAddressCoordinates.Transactions = bool_sort[12];
+                notaryByAddressCoordinates.Consultation = false;
+                notaryByAddressCoordinates.Latitude = in.get_latitude();
+                notaryByAddressCoordinates.Longitude = in.get_longitude();
 
-                startActivity(intent);
+                notaryByAddressCoordinates.Radius = 55;
+                notaryByAddressCoordinates.SortingType = GetNotaryByAddressCoordinates.sortingType.Name;
+                String JSONByAddressCoordinates = gson2.toJson(notaryByAddressCoordinates);
+                frameLayout_not_filter_Visio.setVisibility(View.VISIBLE);
+                new UrlConnectionTaskFilter().execute(JSONByAddressCoordinates);
+
                 break;
             case R.id.notary_filter_but_close:
                 Notary_filter.this.finish();
@@ -396,5 +440,113 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
             in.set_filter_tip(1);
         }
         on_position();
+    }
+
+    public void startListActivity(String result){
+        Intent intent = new Intent(getApplicationContext(), Notary_list.class);
+        Gson gson = new Gson();
+        if (in.get_filter_tip() == 0) {
+
+            IN.RESULT_LIST_NOTARY = gson.fromJson(result, Notary[].class);
+            for (Notary notary:IN.RESULT_LIST_NOTARY ) {
+                try {
+                    notary.Distance = in.dDistance(
+                            notary.Latitude,
+                            notary.Longitude,
+                            locationManager,
+                            getApplicationContext()
+                    );
+                }catch (Exception e){
+                    notary.Distance = 12312312312.2;
+                }
+            }
+            intent.putExtra("SEARCH_NOTARY_ARRAY_BOOL", bool_sort);
+            intent.putExtra("FILES_sort", 1);
+            intent.putExtra("CITY_SEARCH", "");
+            startActivity(intent);
+        }else{
+
+            IN.RESULT_LIST_NOTARY = gson.fromJson(result, Notary[].class);
+            for (Notary notary:IN.RESULT_LIST_NOTARY ) {
+                try {
+                    notary.Distance = in.dDistance(
+                            notary.Latitude,
+                            notary.Longitude,
+                            locationManager,
+                            getApplicationContext()
+                    );
+                }catch (Exception e){
+                    notary.Distance = 12312312312.2;
+                }
+            }
+            intent.putExtra("FILES_sort", 2);
+            intent.putExtra("SEARCH_NOTARY_ARRAY_BOOL", bool_sort);
+
+            if(tv_mas[1].equals("Другой регион/населенный пункт")|| bool_sort[0]){
+                intent.putExtra("CITY_SEARCH", "");
+            }else {
+                intent.putExtra("CITY_SEARCH", tv_mas[1].getText());
+            }
+            if( IN.RESULT_LIST_NOTARY.length==0){
+                Toast.makeText(this, "Нет данных, по вашему запросу!", Toast.LENGTH_SHORT).show();
+            }else{
+                startActivity(intent);
+            }
+
+        }
+        frameLayout_not_filter_Visio.setVisibility(View.GONE);
+    }
+
+    class UrlConnectionTaskFilter extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String result = "";
+
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
+
+            Request request = null;
+            if (in.get_filter_tip() == 0) {
+                request = new Request.Builder()
+                        .header("Authorization", in.get_token_type() + " " + in.get_token())
+                        .url("http://" + in.get_url() + "/Notaries/GetNotaryByFilter")
+                        .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
+                        .build();
+            }else {
+                request = new Request.Builder()
+                        .header("Authorization", in.get_token_type() + " " + in.get_token())
+                        .url("http://" + in.get_url() + "/Notaries/GetNotaryByAddressCoordinates")
+                        .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
+                        .build();
+            }
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                result = response.body().string();
+                code = response.code();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                frameLayout_not_filter_Visio.setVisibility(View.GONE);
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if (result != null && code >= 200 && code < 300) {
+                startListActivity(result);
+            }else{
+                frameLayout_not_filter_Visio.setVisibility(View.GONE);
+            }
+            super.onPostExecute(result);
+        }
     }
 }

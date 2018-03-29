@@ -64,6 +64,7 @@ public class Advocate_profile extends Activity {
     public String FIO="";
     public String JALOBA_FROM ="";
     public String JALOBA = "";
+    public String j_1 ="";
 
     public View lm[] = new View[6];//-ff
 
@@ -393,8 +394,12 @@ public class Advocate_profile extends Activity {
         final Button btnYes = (Button) dialog.getWindow().findViewById(
                 R.id.jaloba_but_yes);
 
+        final Button btnYes2 = (Button) dialog.getWindow().findViewById(
+                R.id.jaloba_but_yes2);
+
         final EditText et_adv = (EditText)dialog.getWindow().findViewById(R.id.jaloba_et_ad);
         et_adv.setText(FIO);
+        j_1 =FIO;
 
         final CheckBox ch1 = (CheckBox)dialog.getWindow().findViewById(R.id.jaloba_but_checkBox1);
         final CheckBox ch2 = (CheckBox)dialog.getWindow().findViewById(R.id.jaloba_but_checkBox2);
@@ -475,7 +480,50 @@ public class Advocate_profile extends Activity {
 
                 Gson gsonJ = new Gson();
                 JALOBA = gsonJ.toJson(complaint);
+
                 new UrlConnectionTaskJaloba().execute(JALOBA);
+
+                dialog.dismiss();
+            }
+        });
+        btnYes2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ch1.isChecked()){
+                    JALOBA_FROM = "Неправильный ответ";
+                }else if(ch2.isChecked()){
+                    JALOBA_FROM="Хамство";
+                }else if(ch3.isChecked()){
+                    JALOBA_FROM="Игнорирование вопроса";
+                }else if(ch4.isChecked()){
+                    JALOBA_FROM="Другое";
+                }else{
+                    JALOBA_FROM="Другое";
+                }
+
+                Calendar dateAndTime=Calendar.getInstance();
+                String dateInString = "";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+
+                dateInString = sdf.format(dateAndTime.getTime());
+                Complaint complaint = new Complaint();
+
+                complaint.AccountType = Complaint.AccountTypes.Jurist;
+                complaint.JuristId = in.get_id_jur();
+                complaint.AccountId = in.get_id_user();
+                complaint.From = JALOBA_FROM;
+                complaint.Message = JALOBA_FROM+": \n"+String.valueOf(jaloba_et_text.getText());
+                complaint.Date = dateInString;
+
+                try{
+                    Intent intentEmail = new Intent(Intent.ACTION_SENDTO);
+                    intentEmail.setData(Uri.parse("mailto:"+"2211107@mmka.info"));
+                    intentEmail.putExtra(Intent.EXTRA_SUBJECT, "Жалоба на адвоката "+ j_1);
+                    intentEmail.putExtra(Intent.EXTRA_TEXT, JALOBA_FROM+": \n"+String.valueOf(jaloba_et_text.getText()));
+                    if (intentEmail.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intentEmail);
+                    }
+                }catch (Exception e){}
 
                 dialog.dismiss();
             }

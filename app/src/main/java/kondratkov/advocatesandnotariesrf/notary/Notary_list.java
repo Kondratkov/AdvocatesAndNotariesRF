@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -74,58 +75,42 @@ import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindNotaryByCoordina
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindNotaryByFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.GetNotaryByAddressCoordinates;
 import kondratkov.advocatesandnotariesrf.api_classes.Notary;
+import kondratkov.advocatesandnotariesrf.maps.LocationListenerGPServices;
 import kondratkov.advocatesandnotariesrf.maps.Map_coor;
+import kondratkov.advocatesandnotariesrf.maps.Map_jur_and_notary;
 
 public class Notary_list extends Activity implements View.OnTouchListener,
         SearchView.OnQueryTextListener {
 
-    boolean bool_notaryl_list = false;
     String LOG_TAG = "qwerty_not";
 
-    String json_notary = "";
-    Point point;
+
     public String SEARCH_NOT = "";
     public SearchView searchView_notar;
 
     public ListView listViewnotary;
-    public JSONArray jsonArraynotaryList = null;
-    public JSONObject jsonObjectnotaryList = null;
-    public List<JSONObject> listnotaryJSON = null;
-    public List<Boolean> iz_po_list = null;
-    public boolean add_or_set = true;
-    public TextView notary_tv_sort_city;
 
-    //dlya sortirovki
     public LinearLayout lila_sort_panel, jurList_lila_sity, lila_sort_panel_down_tw;
     boolean b1 = true, b2 = true;
-    public View lm[] = new View[3];//-ff
-    public Spinner spinner_notary_sort = null;
-    public String sort_notary = "";
-    public String[] m_sort_notary = null;
-    public String sort_notarys = "������� ������";
-    public String[] m_sort_notarys = null;
 
-    public Button but_notaryList_sort;
 
     public IN in = new IN();
     public int code;
 
     public boolean[] bool_sort;
-    int view_height;
-    public String SORT_CITY = "";
 
     public Button but_sort_not_list1, but_sort_not_list2;
     public CheckBox checkBox_list_not1, checkBox_list_not2;
-    public boolean b1_sort = false, b2_sort = false, b3_sort = false, b4_sort = false;
-    public int sort_po = 0;
+    public boolean b1_sort = false, b2_sort = false, b3_sort = false, b4_sort = false, b5_update=false;
 
-    public Notary[] mcArrayNotary;
-    public Notary[] mcSearchNotary;
-    public Notary[] mcArrayOil;
+
+    public Notary[] mcArrayNotary= null;
+    public Notary[] mcSearchNotary = null;
+    public Notary[] mcArrayOil = null;
+    public LocationManager locationManager;
     /**
      * для поиска по ФИО
      */
-    public String[] fio_notaty = null;
 
     private GoogleApiClient client;
 
@@ -150,11 +135,12 @@ public class Notary_list extends Activity implements View.OnTouchListener,
                 b1_sort = isChecked;
                 if(isChecked){
                     mcArrayOil = mcArrayNotary;
+                    checkBox_list_not1.setTextColor(getResources().getColor(R.color.color_button_orange));
                 }else {
                     mcArrayNotary =mcArrayOil;
+                    checkBox_list_not1.setTextColor(getResources().getColor(R.color.color_button_gray));
                 }
                 start_s_server();
-                // new UrlConnectionTask().execute();//new AsyncTaskNotary().execute();
             }
         });
         checkBox_list_not2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -163,11 +149,12 @@ public class Notary_list extends Activity implements View.OnTouchListener,
                 b2_sort = isChecked;
                 if(isChecked){
                     mcArrayOil = mcArrayNotary;
+                    checkBox_list_not2.setTextColor(getResources().getColor(R.color.color_button_orange));
                 }else {
                     mcArrayNotary =mcArrayOil;
+                    checkBox_list_not2.setTextColor(getResources().getColor(R.color.color_button_gray));
                 }
                 start_s_server();
-                //new UrlConnectionTask().execute();//new AsyncTaskNotary().execute();
             }
         });
 
@@ -188,21 +175,11 @@ public class Notary_list extends Activity implements View.OnTouchListener,
         l.setBackgroundResource(R.drawable.transpar);
         listViewnotary.addHeaderView(l);
 
-//dlya sortirovki
         lila_sort_panel = (LinearLayout) findViewById(R.id.notary_lila_sort_panel);
         jurList_lila_sity = (LinearLayout) findViewById(R.id.notary_lila_city);
 
-        try {
-            //json_notary = getString(R.string.mess_json);
-            jsonObjectnotaryList = new JSONObject(json_notary);
-
-        } catch (JSONException e) {
-            // TODO Auto-generatedcatchblock
-            e.printStackTrace();
-        }
         setupSearchView();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
@@ -215,9 +192,12 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
     @Override
     protected void onStart() {
-        super.onStart();// ATTENTION: This was auto-generated to implement the App Indexing API.
-// See https://g.co/AppIndexing/AndroidStudio for more information.
+        super.onStart();
         client.connect();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListenerGPServices l = new LocationListenerGPServices();
+        l.start_my(locationManager, getApplicationContext());
 
         if (in.getOnemay()) {
         } else {
@@ -226,51 +206,11 @@ public class Notary_list extends Activity implements View.OnTouchListener,
         in.setChoice_of_menus(8);
         listViewnotary.setOnTouchListener(this);
 
-        Gson gson = new Gson();
-        if (in.get_filter_tip() == 0) {
-            FindNotaryByFilter notary= new FindNotaryByFilter();
-            notary.WorkInOffDays = bool_sort[2];
-            notary.Equipage = bool_sort[3];
-            notary.Appointments = bool_sort[4];
-            notary.AppointmentsEmail = bool_sort[5];
-            notary.WorkWithJur = bool_sort[6];
-            notary.IsPleadtingHereditaryCases = bool_sort[7];
-            notary.IsSitesCertification = bool_sort[8];
-            notary.LockDocuments = bool_sort[9];
-            notary.DepositsReception = bool_sort[10];
-            notary.RequestsAndDuplicate = bool_sort[11];
-            notary.Transactions = bool_sort[12];
-            notary.Consultation = false;
 
-            notary.SortingType = FindNotaryByFilter.sortingType.Name;
-            String JSON = gson.toJson(notary);
-            new UrlConnectionTaskFilter().execute(JSON);//new AsyncTaskNotary().execute();
+        mcSearchNotary =IN.RESULT_LIST_NOTARY;
+        mcArrayNotary = mcSearchNotary;
+        start_s_server();
 
-        } else{
-            GetNotaryByAddressCoordinates notary= new GetNotaryByAddressCoordinates();
-            notary.WorkInOffDays = bool_sort[2];
-            notary.Equipage = bool_sort[3];
-            notary.Appointments = bool_sort[4];
-            notary.AppointmentsEmail = bool_sort[5];
-            notary.WorkWithJur = bool_sort[6];
-            notary.IsPleadtingHereditaryCases = bool_sort[7];
-            notary.IsSitesCertification = bool_sort[8];
-            notary.LockDocuments = bool_sort[9];
-            notary.DepositsReception = bool_sort[10];
-            notary.RequestsAndDuplicate = bool_sort[11];
-            notary.Transactions = bool_sort[12];
-            notary.Consultation = false;
-
-            notary.Latitude = in.get_latitude();
-            notary.Longitude = in.get_longitude();
-            notary.Radius = 50;
-            notary.SortingType = GetNotaryByAddressCoordinates.sortingType.Name;
-            String JSON = gson.toJson(notary);
-            new UrlConnectionTaskFilter().execute(JSON);//new AsyncTaskNotary().execute();
-        }
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.start(client, getIndexApiAction());
     }
 
@@ -292,6 +232,7 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             case R.id.but_sort_not_list1:
                 if (b3_sort) {
                     b3_sort = false;
+                    b5_update = true;
                 } else {
                     b3_sort = true;
                     b4_sort = false;
@@ -301,17 +242,21 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             case R.id.but_sort_not_list2:
                 if (b4_sort) {
                     b4_sort = false;
+                    b5_update = true;
                 } else {
                     b4_sort = true;
                     b3_sort = false;
                 }
                 sort_po_void();
                 break;
-            /*case R.id.notary_but_sort_city:
-                City_num = 0;
-
-                new AsyncTaskDialog().execute();
-                break;*/
+            case R.id.but_notarys_list_to_map:
+                IN.ARRAY_NOTARY_TO_MAP = mcArrayNotary;
+                Intent intent_sidebar = new Intent(Notary_list.this, Map_jur_and_notary.class);
+                intent_sidebar.putExtra("TYPE", 1);
+                intent_sidebar.putExtra("ARRAY", "");
+                intent_sidebar.putExtra("ANSWERNEXT", false);
+                startActivity(intent_sidebar);
+                break;
         }
     }
 
@@ -319,42 +264,16 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
     public void sort_po_void() {
         if (b3_sort) {
-            sort_po = 1;
             but_sort_not_list1.setTextColor(Color.argb(255, 255, 255, 255));
             but_sort_not_list2.setTextColor(Color.argb(80, 255, 255, 255));
         } else if (b4_sort) {
-            sort_po = 2;
             but_sort_not_list1.setTextColor(Color.argb(80, 255, 255, 255));
             but_sort_not_list2.setTextColor(Color.argb(255, 255, 255, 255));
         } else {
-            sort_po = 0;
             but_sort_not_list1.setTextColor(Color.argb(80, 255, 255, 255));
             but_sort_not_list2.setTextColor(Color.argb(80, 255, 255, 255));
         }
-        //new UrlConnectionTask().execute();
-        Gson gson = new Gson();
-
-            GetNotaryByAddressCoordinates notary= new GetNotaryByAddressCoordinates();
-            notary.WorkInOffDays = bool_sort[2];
-            notary.Equipage = bool_sort[3];
-            notary.Appointments = bool_sort[4];
-            notary.AppointmentsEmail = bool_sort[5];
-            notary.WorkWithJur = bool_sort[6];
-            notary.IsPleadtingHereditaryCases = bool_sort[7];
-            notary.IsSitesCertification = bool_sort[8];
-            notary.LockDocuments = bool_sort[9];
-            notary.DepositsReception = bool_sort[10];
-            notary.RequestsAndDuplicate = bool_sort[11];
-            notary.Transactions = bool_sort[12];
-            notary.Consultation = false;
-
-            notary.Latitude = in.get_latitude();
-            notary.Longitude = in.get_longitude();
-            notary.Radius = 50;
-            notary.SortingType = GetNotaryByAddressCoordinates.sortingType.Name;
-            String JSON = gson.toJson(notary);
-            new UrlConnectionTaskFilter().execute(JSON);//new AsyncTaskNotary().execute();
-
+        start_s_server();
     }
 
 
@@ -363,6 +282,11 @@ public class Notary_list extends Activity implements View.OnTouchListener,
         Notary [] notaries;
 
         String notary_city_search = (String)getIntent().getSerializableExtra("CITY_SEARCH");
+        if(b5_update){
+            b5_update = false;
+            mcArrayNotary = IN.RESULT_LIST_NOTARY;
+        }
+
         List<Notary>notariesList = new ArrayList<Notary>();
         if(notary_city_search.length() > 0){
 
@@ -383,8 +307,11 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             notariesList = new ArrayList<Notary>();
             for(int i = 0; i<mcArrayNotary.length; i++){
                 String s = mcArrayNotary[i].Site;
-                if(mcArrayNotary[i].Site.equals("нет") == false){
-                    notariesList.add(mcArrayNotary[i]);
+                try{
+                    if(mcArrayNotary[i].Site.equals("нет") == false){
+                        notariesList.add(mcArrayNotary[i]);
+                    }
+                }catch (Exception e){
                 }
             }
 
@@ -411,104 +338,103 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             mcArrayNotary = notaries;
         }
 
-//        if(b2_sort == false || b1_sort ==false && SEARCH_NOT.length()==0){
-//            mcArrayNotary = mcSearchNotary;
-//        }
-
-        MyAdapterJsonList mam = new MyAdapterJsonList(this, mcArrayNotary);//getnotaryList(jsonObjectnotaryList));
-        listViewnotary.setAdapter(mam);
-
-        listViewnotary.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position,
-                                    long id) {
-
-                if(position != 0){
-                    Intent int3 = new Intent(Notary_list.this, Notary_profile.class);
-                    startActivity(int3);
-                }
-
-            }
-        });
-
-
-        listViewnotary.setOnScrollListener(new AbsListView.OnScrollListener() {
-            private int position;
-
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+        if(b3_sort){
+            ArrayList<Notary> notariesListSort = new ArrayList<Notary>();
+            for(int i = 0; i<mcArrayNotary.length; i++){
+                notariesListSort.add(mcArrayNotary[i]);
             }
 
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if (position < firstVisibleItem && b1 == true) {
-                    Log.d(LOG_TAG, "vnizvverh");
+            notariesListSort = Notary_list_sort.sortListBy(notariesListSort, Notary_list_sort.By.PRICE);
+            mcArrayNotary= new Notary[notariesListSort.size()];
+            for(int i = 0; i<notariesListSort.size(); i++){
 
-                    lila_sort_panel.setLayoutParams(
-                            new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, (float) 0.07));
-
-                    Animation anim = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_down_sort);
-                    Animation anim2 = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_up_sort2);
-
-                    lila_sort_panel.setPadding(0, dpToPx(14), 0, 0);//lila_sort_panel.setPadding(0, dpToPx(64),0,0);
-                    lila_sort_panel.startAnimation(anim);
-
-                    jurList_lila_sity.setPadding(0, 10000000, 0, dpToPx(80));
-                    jurList_lila_sity.startAnimation(anim2);
-                    //FrameLayout jurList_frla = (FrameLayout)findViewById(R.id.jurList_frla);
-                    //jurList_frla.startAnimation(anim2);
-                    //jurList_lila_sity.startAnimation(anim2);
-                    //jurList_lila_sity.setPadding(0, 0, 0, dpToPx(60));
-
-                    b1 = false;
-                    b2 = true;
-                }
-                if (position > firstVisibleItem && b2 == true) {
-
-                    Animation anim = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_up_sort);
-                    Animation anim2 = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_down_sort2);
-
-                    lila_sort_panel.setPadding(0, dpToPx(52), 0, 0);
-                    lila_sort_panel.startAnimation(anim);
-
-
-                    jurList_lila_sity.startAnimation(anim2);
-                    jurList_lila_sity.setPadding(0, 0, 0, 0);
-                    //jurList_lila_sity.setPadding(0, 0, 0, 0);
-                    //jurList_lila_sity.startAnimation(anim2);
-
-                    b2 = false;
-                    b1 = true;
-                }
-                position = firstVisibleItem;
+                mcArrayNotary[i] = notariesListSort.get(i);
             }
-        });
-
-    }
-
-    /*public List<JSONObject> getnotaryList(JSONObject jsonObjectnotaryList) {
-
-        List notaryListRT = new ArrayList<>();
-        try {
-            Log.d(LOG_TAG, "заполнение листа "+jsonObjectnotaryList);
-            //json_notary = getString(R.string.mess_json);
-            //JSONObject results = jsonObjectnotaryList.getJSONObject("notaryList");
-
-            jsonArraynotaryList = jsonObjectnotaryList.getJSONArray("array");
-
-            for (int i = 0; i <jsonArraynotaryList.length(); i++) {
-                JSONObject arrayElement = jsonArraynotaryList.getJSONObject(i);
-                notaryListRT.add(arrayElement);
+        }else if(b4_sort){
+            ArrayList<Notary> notariesListSort = new ArrayList<Notary>();
+            for(int i = 0; i<mcArrayNotary.length; i++){
+                notariesListSort.add(mcArrayNotary[i]);
             }
 
-        } catch (JSONException e) {
-            // TODO Auto-generatedcatchblock
-            e.printStackTrace();
+            notariesListSort = Notary_list_sort.sortListBy(notariesListSort, Notary_list_sort.By.RETING);
+            mcArrayNotary= new Notary[notariesListSort.size()];
+            for(int i = 0; i<notariesListSort.size(); i++){
+
+                mcArrayNotary[i] = notariesListSort.get(i);
+            }
         }
-        Log.d(LOG_TAG, "List OK");
-        return notaryListRT;
-    }*/
+
+        try{
+            if(mcArrayNotary != null){
+                MyAdapterJsonList mam = new MyAdapterJsonList(this, mcArrayNotary);
+                listViewnotary.setAdapter(mam);
+
+                listViewnotary.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View v, int position,
+                                            long id) {
+
+                        if(position != 0){
+                            Intent int3 = new Intent(Notary_list.this, Notary_profile.class);
+                            startActivity(int3);
+                        }
+
+                    }
+                });
+
+
+                listViewnotary.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    private int position;
+
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                    }
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                        if (position < firstVisibleItem && b1 == true) {
+                            Log.d(LOG_TAG, "vnizvverh");
+
+                            lila_sort_panel.setLayoutParams(
+                                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, (float) 0.07));
+
+                            Animation anim = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_down_sort);
+                            Animation anim2 = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_up_sort2);
+
+                            lila_sort_panel.setPadding(0, dpToPx(14), 0, 0);//lila_sort_panel.setPadding(0, dpToPx(64),0,0);
+                            lila_sort_panel.startAnimation(anim);
+
+                            jurList_lila_sity.setPadding(0, 10000000, 0, dpToPx(80));
+                            jurList_lila_sity.startAnimation(anim2);
+
+                            b1 = false;
+                            b2 = true;
+                        }
+                        if (position > firstVisibleItem && b2 == true) {
+
+                            Animation anim = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_up_sort);
+                            Animation anim2 = AnimationUtils.loadAnimation(Notary_list.this, R.anim.trans_down_sort2);
+
+                            lila_sort_panel.setPadding(0, dpToPx(52), 0, 0);
+                            lila_sort_panel.startAnimation(anim);
+
+
+                            jurList_lila_sity.startAnimation(anim2);
+                            jurList_lila_sity.setPadding(0, 0, 0, 0);
+                            //jurList_lila_sity.setPadding(0, 0, 0, 0);
+                            //jurList_lila_sity.startAnimation(anim2);
+
+                            b2 = false;
+                            b1 = true;
+                        }
+                        position = firstVisibleItem;
+                    }
+                });
+            }
+        }catch (Exception e) {
+        }
+    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
@@ -571,6 +497,27 @@ public class Notary_list extends Activity implements View.OnTouchListener,
         client.disconnect();
     }
 
+    // Класс для сохранения во внешний класс и для ограничения доступа
+    // из потомков класса
+    static class ViewHolder {
+        TextView tv_item_notary_fio;
+        TextView tv_item_notary_adres_text;
+        TextView tv_item_notary_phone_text;
+        TextView tv_item_notary_holiday;
+        TextView tv_item_notary_distance;
+        ImageView iv_item_notary_vyezd;
+        ImageView iv_item_notary_zapic;
+
+        Button but_item_notary;
+        ImageButton not_but_phone;
+        Button but_item_notary_adres;
+        ImageButton not_but_maps;
+
+        LinearLayout lila_item_notary_adres;
+    }
+
+
+
     class MyAdapterJsonList extends ArrayAdapter {
 
         private Notary[] arrayNotary = null;
@@ -582,7 +529,7 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             this.context = context;
             this.arrayNotary = arrayNotary;
 
-            Log.d(LOG_TAG, "Adapter START");
+            //Log.d(LOG_TAG, "Adapter START");
         }
 
         public int dpToPx(int dp) {
@@ -591,7 +538,6 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             return px;
         }
 
-        public LinearLayout lila_item_notary_adres;
         public Boolean bool = true;
 
         public void start_map() {
@@ -608,25 +554,50 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
         @Override
         public View getView(final int position, View convertView, final ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            final View rowView = inflater.inflate(R.layout.notary_item_list, parent, false);//null;
+
+            // ViewHolder буферизирует оценку различных полей шаблона элемента
+
+            final ViewHolder holder;
+
+            // Очищает сущетсвующий шаблон, если параметр задан
+            // Работает только если базовый шаблон для всех классов один и тот же
+            View rowView = convertView;
+
+            if (rowView == null) {
+                LayoutInflater inflater = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowView = inflater.inflate(R.layout.notary_item_list, parent, false);//null;
+                holder = new ViewHolder();
+
+                //holder.textView = (TextView) rowView.findViewById(R.id.label);
+                //holder.imageView = (ImageView) rowView.findViewById(R.id.icon);
+                holder.tv_item_notary_fio = (TextView) rowView.findViewById(R.id.tv_item_notary_fio);
+                holder.tv_item_notary_adres_text = (TextView) rowView.findViewById(R.id.tv_item_notary_adres_text);
+                holder.tv_item_notary_phone_text = (TextView) rowView.findViewById(R.id.tv_item_notary_phone_text);
+                holder.tv_item_notary_holiday = (TextView) rowView.findViewById(R.id.tv_item_notary_holiday);
+                holder.iv_item_notary_vyezd = (ImageView) rowView.findViewById(R.id.iv_item_notary_vyezd);
+                holder.iv_item_notary_zapic = (ImageView) rowView.findViewById(R.id.iv_item_notary_zapic);
+                holder.tv_item_notary_distance = (TextView) rowView.findViewById(R.id.tv_item_notary_distance);
 
 
-            TextView tv_item_notary_fio = (TextView) rowView.findViewById(R.id.tv_item_notary_fio);
-            TextView tv_item_notary_adres_text = (TextView) rowView.findViewById(R.id.tv_item_notary_adres_text);
-            TextView tv_item_notary_phone_text = (TextView) rowView.findViewById(R.id.tv_item_notary_phone_text);
-            TextView tv_item_notary_holiday = (TextView) rowView.findViewById(R.id.tv_item_notary_holiday);
-            ImageView iv_item_notary_vyezd = (ImageView) rowView.findViewById(R.id.iv_item_notary_vyezd);
-            ImageView iv_item_notary_zapic = (ImageView) rowView.findViewById(R.id.iv_item_notary_zapic);
+                holder.but_item_notary = (Button) rowView.findViewById(R.id.item_but_notary);
+                holder.but_item_notary_adres = (Button) rowView.findViewById(R.id.but_item_notary_adres);
+                holder.not_but_maps = (ImageButton) rowView.findViewById(R.id.not_but_maps);
+                holder.not_but_phone = (ImageButton)rowView.findViewById(R.id.not_but_phone);
+                holder.lila_item_notary_adres = (LinearLayout) rowView.findViewById(R.id.lila_item_notary_adres);
 
-            tv_item_notary_fio.setText(arrayNotary[position].Fio);
-            try{
-                tv_item_notary_phone_text.setText(arrayNotary[position].Phone);
-            }catch (Exception e){
+                rowView.setTag(holder);
+            } else {
+                holder = (ViewHolder) rowView.getTag();
             }
 
-            tv_item_notary_adres_text.setText(arrayNotary[position].Address2);
+            holder.tv_item_notary_fio.setText(arrayNotary[position].Fio);
+            try {
+                holder.tv_item_notary_phone_text.setText(arrayNotary[position].Phone);
+            } catch (Exception e) {
+            }
+
+            holder.tv_item_notary_adres_text.setText(arrayNotary[position].Address2);
 
             try {
                 //tv_item_notary_phone_text.setText(arrayNotary[position].Contacts.Phone);
@@ -635,33 +606,30 @@ public class Notary_list extends Activity implements View.OnTouchListener,
             }
 
             if (arrayNotary[position].WorkInOffDays) {
-                tv_item_notary_holiday.setText("пн-сб");
+                holder.tv_item_notary_holiday.setText("пн-сб");
             } else {
-                tv_item_notary_holiday.setText("пн-пт");
+                holder.tv_item_notary_holiday.setText("пн-пт");
             }
             if (arrayNotary[position].Equipage) {
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_exit_not_no);
-                iv_item_notary_vyezd.setImageBitmap(bitmap);
+                holder.iv_item_notary_vyezd.setImageBitmap(bitmap);
             } else {
-                iv_item_notary_vyezd.setBackgroundResource(R.drawable.exit_not_no);
+                holder.iv_item_notary_vyezd.setBackgroundResource(R.drawable.exit_not_no);
             }
             if (arrayNotary[position].Appointments) {
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ain_ic_docrequest);
-                iv_item_notary_zapic.setImageBitmap(bitmap);
+                holder.iv_item_notary_zapic.setImageBitmap(bitmap);
             }
 
+            try{
+                holder.tv_item_notary_distance.setText(
+                        in.d_to_sDistance(arrayNotary[position].Distance)
+                );
+            }catch (Exception e){
+                holder.tv_item_notary_distance.setText("");
+            }
 
-
-            //LinearLayout lila_item_notaryAdres = (LinearLayout)rowView.findViewById(R.id.lila_item_notary_adres);
-            //lila_item_notaryAdres.setLayoutParams(
-            // new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(300), (float) 0));
-
-            TextView tv = (TextView) rowView.findViewById(R.id.tv_item_notary_fio);
-
-            //tv.setText("qweqwrqwr");
-
-            Button but_item_notary = (Button) rowView.findViewById(R.id.item_but_notary);
-            but_item_notary.setOnClickListener(new View.OnClickListener() {
+            holder.but_item_notary.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -686,185 +654,60 @@ public class Notary_list extends Activity implements View.OnTouchListener,
                             String.valueOf(arrayNotary[position].Latitude),//"-1",//arrayNotary[position].list.get(position).getString("X"),
                             String.valueOf(arrayNotary[position].Longitude)//"-1",//arrayNotary[position].list.get(position).getString("Y")
                     };
-                    try{
+                    try {
                         sm[2] = arrayNotary[position].Phone;
                         sm[3] = arrayNotary[position].Email;
                         sm[5] = arrayNotary[position].Site;
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                     in.set_not_prof(sm);
 
                     start_profile_not(position);
-                    //lila_item_notary_adres = (LinearLayout)rowView.findViewById(R.id.lila_item_notary_adres);
-                    //lila_item_notary_adres.setBackgroundResource(R.color.black_m);
-
-                    //TextView r = (TextView)rowView.findViewById(R.id.tv_item_notary_adres_text);
-                    //r.setText("d");
-                    //r.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0));
-                    //lila_item_notary_adres.setLayoutParams(
-                    // new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(165), (float) 0));
                 }
             });
 
-            Button but_item_notary_adres = (Button) rowView.findViewById(R.id.but_item_notary_adres);
-            but_item_notary_adres.setOnClickListener(new View.OnClickListener() {
+
+            holder.but_item_notary_adres.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    lila_item_notary_adres = (LinearLayout) rowView.findViewById(R.id.lila_item_notary_adres);
+
                     if (bool) {
                         Log.d(LOG_TAG, "position " + position + " " + bool);
-                        lila_item_notary_adres.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0));
+                        holder.lila_item_notary_adres.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0));
                         bool = false;
                     } else {
                         Log.d(LOG_TAG, "position " + position + " " + bool);
-                        lila_item_notary_adres.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(2), (float) 0));
+                        holder.lila_item_notary_adres.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(2), (float) 0));
                         bool = true;
                     }
-                    //lila_item_notary_adres = (LinearLayout)rowView.findViewById(R.id.lila_item_notary_adres);
-                    //lila_item_notary_adres.setBackgroundResource(R.color.black_m);
-
-                    //TextView r = (TextView)rowView.findViewById(R.id.tv_item_notary_adres_text);
-                    //r.setText("d");
-                    //r.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0));
-                    //lila_item_notary_adres.setLayoutParams(
-                    // new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(165), (float) 0));
                 }
             });
 
-            ImageButton not_but_maps = (ImageButton) rowView.findViewById(R.id.not_but_maps);
-            not_but_maps.setOnClickListener(new View.OnClickListener() {
+            holder.not_but_phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    in.set_latitude(0);
-                    in.set_longitude(0);
-                    TextView tv_fio = (TextView) rowView.findViewById(R.id.tv_item_notary_fio);
-                    TextView tv_adres = (TextView) rowView.findViewById(R.id.tv_item_notary_adres_text);
-                    in.set_text(String.valueOf(tv_adres.getText()));
-                    in.set_fio_jur(String.valueOf(tv_fio.getText()));
+                    try{
+                        Intent intent12 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ holder.tv_item_notary_phone_text.getText()));
+                        startActivity(intent12);
+                    }catch (Exception e){}
+                }
+            });
+
+
+            holder.not_but_maps.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    in.set_text(String.valueOf(holder.tv_item_notary_adres_text.getText()));
+                    in.set_fio_jur(String.valueOf(holder.tv_item_notary_fio.getText()));
                     in.set_jut_ili_not(false);
 
                     start_map();
-                    //Intent intent = new Intent(Notary_list.this, Map_coor.class);
-                    //startActivity(intent);
-                    //lila_item_notary_adres = (LinearLayout)rowView.findViewById(R.id.lila_item_notary_adres);
-                    //lila_item_notary_adres.setBackgroundResource(R.color.black_m);
-
-                    //TextView r = (TextView)rowView.findViewById(R.id.tv_item_notary_adres_text);
-                    //r.setText("d");
-                    //r.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, (float) 0));
-                    //lila_item_notary_adres.setLayoutParams(
-                    // new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(165), (float) 0));
                 }
             });
 
-            //searchView_notar.setQuery("", false);
-           // searchView_notar.clearFocus();
-          //  searchView_notar.setIconified(true);
             return rowView;
-        }
-
-    }
-
-    class UrlConnectionTaskFilter extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String result = "";
-
-            OkHttpClient client = new OkHttpClient();
-
-            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
-
-            String s1 = in.get_token_type() + " " + in.get_token();
-            String s2 = "http://" + in.get_url() + "/Notaries/GetNotaryByFilter";
-            String s3 = params[0];
-            String s4 = "sdf";
-            String s5 = "sdf";
-
-            Request request = null;
-            if (in.get_filter_tip() == 0) {
-                request = new Request.Builder()
-                        .header("Authorization", in.get_token_type() + " " + in.get_token())
-                        .url("http://" + in.get_url() + "/Notaries/GetNotaryByFilter")
-                        .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
-                        .build();
-            }else {
-                request = new Request.Builder()
-                        .header("Authorization", in.get_token_type() + " " + in.get_token())
-                        .url("http://" + in.get_url() + "/Notaries/GetNotaryByAddressCoordinates")
-                        .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
-                        .build();
-            }
-
-            try {
-                Response response = client.newCall(request).execute();
-                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-                result = response.body().string();
-                code = response.code();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            Gson gson = new Gson();
-            if (result != null && code >= 200 && code < 300) {
-
-                //SEARCH заполнение списка с ФИО нотариусов
-                mcSearchNotary = gson.fromJson(result, Notary[].class);
-                mcArrayNotary = gson.fromJson(result, Notary[].class);
-                start_s_server();
-            }
-            super.onPostExecute(result);
-        }
-    }
-
-    public static class ServerSendData {
-
-        public static String sendRegData(String stringUrl, String json_user_str) {
-
-            String result = null;
-            try {
-                URL url = new URL(stringUrl);
-
-                URLConnection connection = url.openConnection();
-                HttpURLConnection httpConnection = (HttpURLConnection) connection;
-
-                httpConnection.setDoOutput(true);
-                httpConnection.setChunkedStreamingMode(0);
-                OutputStream out = new BufferedOutputStream(httpConnection.getOutputStream());
-
-                out.write(json_user_str.getBytes());
-
-                out.flush();
-                out.close();
-
-                InputStream in = new BufferedInputStream(httpConnection.getInputStream());
-
-                int responseCode = 0;
-                responseCode = httpConnection.getResponseCode();
-
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    InputStream is = httpConnection.getInputStream();
-                    BufferedReader r = new BufferedReader(new InputStreamReader(in));
-
-                    result = r.readLine();
-
-                } else {
-
-                }
-            } catch (MalformedURLException e) {
-            } catch (IOException e1) {
-            }
-
-            return result;
         }
     }
 
@@ -879,14 +722,14 @@ public class Notary_list extends Activity implements View.OnTouchListener,
                     Intent intent = new Intent(Notary_list.this, New_sidebar.class);
                     startActivity(intent);
                 }
-                Log.d("qwerty", "ACTION_UP");
+
                 break;
             case (MotionEvent.ACTION_DOWN):
                 xX = event.getX();
-                Log.d("qwerty", "ACTION_DOWN xX " + xX);
+
                 break;
             case (MotionEvent.ACTION_MOVE):
-                Log.d("qwerty", "ACTION_MOVE ");
+
                 int historySize = event.getHistorySize();
                 for (int i = 0; i < historySize; i++) {
                     float x = event.getHistoricalX(i);

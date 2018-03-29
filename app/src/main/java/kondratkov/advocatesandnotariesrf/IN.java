@@ -23,6 +23,7 @@ import kondratkov.advocatesandnotariesrf.api_classes.ClientQuestion;
 import kondratkov.advocatesandnotariesrf.api_classes.Comment;
 import kondratkov.advocatesandnotariesrf.api_classes.DocumentPacketOrder;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
+import kondratkov.advocatesandnotariesrf.api_classes.Notary;
 import kondratkov.advocatesandnotariesrf.api_classes.Order;
 import kondratkov.advocatesandnotariesrf.api_classes.TopQuestion;
 import kondratkov.advocatesandnotariesrf.data_theme.AllQuestions;
@@ -74,6 +75,9 @@ public class IN {
     public static String nik_user = "";
     public String get_nik_user(){return this.nik_user;}
     public void set_nik_user (String nik_user){this.nik_user = nik_user;}
+
+    public static Notary[] RESULT_LIST_NOTARY;
+    public static Notary[] ARRAY_NOTARY_TO_MAP;
 
     public static int choice_of_menus = -1;
     public int  getChoice_of_menus(){return (choice_of_menus);}

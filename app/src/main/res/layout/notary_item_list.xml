@@ -34,9 +34,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
+                    android:layout_weight="0.2"
                     android:text="Нет данных"
                     android:textColor="@color/color_bluedark_for_bar"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:id="@+id/tv_item_notary_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.8"
+                    android:textColor="@color/color_bluedark_for_bar"
+                    android:textSize="15dp"/>
 
             </LinearLayout>
 
@@ -63,8 +74,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="адрес:"
-                    android:textColor="#fec024"
-                    android:textSize="12dp" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12dp"/>
 
                 <TextView
                     android:id="@+id/tv_item_notary_adres_text"
@@ -115,8 +126,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:text="телефон:"
-                    android:textColor="#fec024"
-                    android:textSize="12dp" />
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="12dp"/>
 
                 <TextView
                     android:id="@+id/tv_item_notary_phone_text"
@@ -132,14 +143,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7">
 
-                    <Button
+                    <ImageButton
                         android:id="@+id/not_but_phone"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_gravity="center_vertical|right"
                         android:layout_marginRight="5dp"
                         android:layout_weight="0.8"
-                        android:background="@drawable/ain_ic_icon_phone" />
+                        android:background="@android:color/transparent"
+                        android:onClick="onClickProfileJur"
+                        android:src="@android:drawable/stat_sys_phone_call"
+                        android:tint="@color/colorPrimaryDark"/>
+
                 </FrameLayout>
             </LinearLayout>
 

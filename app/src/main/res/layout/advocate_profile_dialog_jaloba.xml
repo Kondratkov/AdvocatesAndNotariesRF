@@ -116,21 +116,40 @@
                     android:id="@+id/jaloba_but_yes"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.3"
+                    android:background="@color/color_button_orange"
+                    android:gravity="center"
+                    android:onClick="onClick"
+                    android:text="отправить через сервис"
+                    android:textColor="@color/black_m"
+                    android:textSize="10sp"/>
+
+                <Button
+                    android:id="@+id/jaloba_but_yes2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_weight="0.3"
                     android:background="@color/color_button_orange"
                     android:onClick="onClick"
-                    android:text="отправить"
-                    android:textColor="@color/color_white" />
+                    android:text="отправить через email"
+                    android:textColor="@color/black_m"
+                    android:textSize="10sp"/>
 
                 <Button
                     android:id="@+id/jaloba_but_cancel"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.4"
                     android:allowUndo="true"
                     android:background="@color/color_button_gray"
                     android:text="отмена"
-                    android:textColor="@color/color_white" />
+                    android:textColor="@color/black_m"
+                    android:textSize="10sp"/>
 
             </LinearLayout>
         </LinearLayout>
