@@ -81,7 +81,7 @@ public class Advocate_profile extends Activity {
     public TextView tv_online, tv_fio, tv_rating, tv_phone, tv_email,tv_reply, tv_thanks, tv_adres, tv_stag, tv_kvalif, tv_site, tv_firm, tv_srv, tv_fsar, tv_job, tv_1, tv_2, tv_3;
     public LinearLayout lila_kvalif, lila_info;
 
-    public ImageView image_profile_jur_icon;
+    public ImageView image_profile_jur_icon, jur_prof_image_fff;
     public RatingBar ratingBar;
     //public
 
@@ -144,6 +144,7 @@ public class Advocate_profile extends Activity {
         imageButtonJuristProfileEmail = (ImageButton)findViewById(R.id.imageButtonJuristProfileEmail);
 
         image_profile_jur_icon= (ImageView)findViewById(R.id.jur_prof_image_icon );
+        jur_prof_image_fff = (ImageView)findViewById(R.id.jur_prof_image_fff);
 
         data_prof_v = getResources().getStringArray(R.array.array_profile_jur);
 
@@ -355,6 +356,21 @@ public class Advocate_profile extends Activity {
                 in.set_fio_jur(String.valueOf(tv_fio.getText()));
                 in.set_jut_ili_not(true);
                 intent = new Intent(Advocate_profile.this, Map_coor.class);
+
+                double d_latitude = 0;
+                double d_longitude = 0;
+
+                try{
+                    if(juristAccounClass.Latitude == 0 || juristAccounClass.Latitude == 0){
+                    }else{
+                        d_latitude = juristAccounClass.Latitude;
+                        d_longitude = juristAccounClass.Longitude;
+                    }
+                }catch (Exception e){}
+
+                intent.putExtra("THIS_LATITUDE", d_latitude);
+                intent.putExtra("THIS_LONGITUDE", d_longitude);
+
                 startActivity(intent);
                 break;
 

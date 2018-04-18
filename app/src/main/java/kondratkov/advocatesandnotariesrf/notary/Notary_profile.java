@@ -2,6 +2,7 @@ package kondratkov.advocatesandnotariesrf.notary;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -100,13 +101,47 @@ public class Notary_profile extends Activity {
                 break;
             case R.id.not_prof_but_maps:
                 in.set_text(in.get_not_prof()[4]);
-                in.set_latitude(Double.parseDouble(in.get_not_prof()[17]));
-                in.set_longitude(Double.parseDouble(in.get_not_prof()[18]));
+                //in.set_latitude(Double.parseDouble(in.get_not_prof()[17]));
+                //in.set_longitude();
                 in.set_id_jur(Integer.parseInt(in.get_not_prof()[16]));
                 in.set_fio_jur(in.get_not_prof()[0]);
                 in.set_jut_ili_not(false);
+
+                double d_latitude = 0;
+                double d_longitude = 0;
+
+                try{
+                    if(Double.parseDouble(in.get_not_prof()[17]) == 0 || Double.parseDouble(in.get_not_prof()[18]) == 0){
+                    }else{
+                        d_latitude = Double.parseDouble(in.get_not_prof()[17]);
+                        d_longitude = Double.parseDouble(in.get_not_prof()[18]);
+                    }
+                }catch (Exception e){}
+
                 Intent intent = new Intent(Notary_profile.this, Map_coor.class);
+                intent.putExtra("THIS_LATITUDE", d_latitude);
+                intent.putExtra("THIS_LONGITUDE", d_longitude);
                 startActivity(intent);
+                break;
+            case R.id.imageButtonNotaryProfilPhone:
+                if(not_tv_prof_1.getText().length()!=0){
+                    try{
+                        Intent intent12 = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+not_tv_prof_1.getText()));
+                        startActivity(intent12);
+                    }catch (Exception e){}
+                }
+                break;
+            case R.id.imageButtonNotaryProfileEmail:
+                if(not_tv_prof_2.getText().length()!=0){
+                    try{
+                        Intent intentEmail = new Intent(Intent.ACTION_SENDTO);
+                        intentEmail.setData(Uri.parse("mailto:"+not_tv_prof_2.getText()));
+                        intentEmail.putExtra(Intent.EXTRA_SUBJECT, in.get_nik_user());
+                        if (intentEmail.resolveActivity(getPackageManager()) != null) {
+                            startActivity(intentEmail);
+                        }
+                    }catch (Exception e){}
+                }
                 break;
         }
     }

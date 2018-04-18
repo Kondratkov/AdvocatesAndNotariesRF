@@ -158,11 +158,11 @@
                                     />
 
                                 <ImageView
+                                    android:id="@+id/jur_prof_image_fff"
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
-                                    android:id="@+id/jur_prof_image_fff"
-                                    android:src="@drawable/ricfas"
-                                    android:onClick="onClickProfileJur" />
+                                    android:onClick="onClickProfileJur"
+                                    android:src="@drawable/ricfas"/>
 
                             </FrameLayout>
 

@@ -50,6 +50,9 @@ public class Map_coor extends Activity {
     public FrameLayout asked_frameProg;
     public ProgressBar asked_progressBar;
 
+    public double this_latitude;
+    public double this_longitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +78,15 @@ public class Map_coor extends Activity {
         asked_frameProg.setClickable(true);
         asked_progressBar.setVisibility(ProgressBar.VISIBLE);
 
-        if (in.get_longitude() != 0 && in.get_longitude() != 0) {
+        try{
+            this_latitude = getIntent().getDoubleExtra("THIS_LATITUDE", 0);
+            this_longitude = getIntent().getDoubleExtra("THIS_LONGITUDE", 0);
+        }catch (Exception e){
+            this_latitude = 0;
+            this_longitude = 0;
+        }
+
+        if (this_latitude != 0 && this_longitude != 0) {
             start1();
         } else if (in.get_text().equals("")) {
             start2();
@@ -91,7 +102,7 @@ public class Map_coor extends Activity {
     }
 
     public void start1() {
-        LatLng latLng = new LatLng(in.get_latitude(), in.get_longitude());
+        LatLng latLng = new LatLng(this_latitude, this_longitude);
         FragmentManager fragmentManager = getFragmentManager();
         MapFragment mapFragment1 = (MapFragment) fragmentManager
                 .findFragmentById(R.id.map_coor_fragment);
@@ -181,10 +192,10 @@ public class Map_coor extends Activity {
             Log.d("qwerty", " -jsonArray- " + String.valueOf(jsonObject.getJSONArray("results").length()));
             Log.d("qwerty", " -geometry- " + String.valueOf(jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry")));
             //Log.d("qwerty", " -bounds northeast- "+String.valueOf(jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("bounds").getJSONObject("northeast")));
-            in.set_latitude(jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
-            in.set_longitude(jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
+            this_latitude = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+            this_longitude = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
 
-            LatLng latLng = new LatLng(in.get_latitude(), in.get_longitude());
+            LatLng latLng = new LatLng(this_latitude, this_longitude);
             FragmentManager fragmentManager = getFragmentManager();
             MapFragment mapFragment1 = (MapFragment) fragmentManager
                     .findFragmentById(R.id.map_coor_fragment);
@@ -193,8 +204,8 @@ public class Map_coor extends Activity {
             mapMark.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
             mapMark.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
-            in.set_latitude(latLng.latitude);
-            in.set_longitude(latLng.longitude);
+            this_latitude = latLng.latitude;
+            this_longitude = latLng.longitude;
             new AsyncTaskNotary().execute();
             BitmapDescriptor bitmapDescriptor = null;
             Log.d("qwerty", "для натариуса на карте труе "+ in.get_jut_ili_not());
@@ -275,8 +286,8 @@ public class Map_coor extends Activity {
             JSONObject jsonObject = new JSONObject();
             try {
                 jsonObject.put("id", in.get_id_jur());//String.valueOf(in.get_id()));
-                jsonObject.put("X", in.get_latitude());//adin.get_password_jur());
-                jsonObject.put("Y", in.get_longitude());//adin.get_password_jur());
+                jsonObject.put("X", this_latitude);//adin.get_password_jur());
+                jsonObject.put("Y", this_longitude);//adin.get_password_jur());
 
             } catch (JSONException e) {
                 e.printStackTrace();

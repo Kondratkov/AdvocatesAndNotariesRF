@@ -181,40 +181,40 @@ public class Notary_filter extends Activity implements Dialog_region.i_dialog_re
         l.start_my(locationManager, getApplicationContext());
     }
 
-    public void XY_set() {
-        //LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        String bestProvider = locationManager.getBestProvider(criteria, false);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        android.location.Location location = locationManager.getLastKnownLocation(bestProvider);
-        Double lat, lon;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        try {
-            lat = location.getLatitude();
-            lon = location.getLongitude();
-            in.set_latitude(location.getLatitude());
-            in.set_longitude(location.getLongitude());
-            Toast.makeText(this, "" + lat.toString() + "-" + lon.toString(), Toast.LENGTH_SHORT).show();
-
-        } catch (NullPointerException e) {
-            Toast.makeText(this, "HELL-NO", Toast.LENGTH_SHORT).show();
-            Log.e("HELL-NO", "n", e);
-            xyi();
-            e.printStackTrace();
-        }
-    }
-    public void xyi(){
+//    public void XY_set() {
+//        //LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+//        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        Criteria criteria = new Criteria();
+//        String bestProvider = locationManager.getBestProvider(criteria, false);
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            // TODO: Consider calling
+//            //    ActivityCompat#requestPermissions
+//            // here to request the missing permissions, and then overriding
+//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//            //                                          int[] grantResults)
+//            // to handle the case where the user grants the permission. See the documentation
+//            // for ActivityCompat#requestPermissions for more details.
+//            return;
+//        }
+//        android.location.Location location = locationManager.getLastKnownLocation(bestProvider);
+//        Double lat, lon;
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//        Date date = new Date();
+//        try {
+//            lat = location.getLatitude();
+//            lon = location.getLongitude();
+//            IN.latitude_my = lat;//location.getLatitude();
+//            IN.latitude_my = lon;//location.getLongitude();
+//            Toast.makeText(this, "" + lat.toString() + "-" + lon.toString(), Toast.LENGTH_SHORT).show();
+//
+//        } catch (NullPointerException e) {
+//            Toast.makeText(this, "HELL-NO", Toast.LENGTH_SHORT).show();
+//            Log.e("HELL-NO", "n", e);
+//            xyLocationListenerGPServices();
+//            e.printStackTrace();
+//        }
+//    }
+    public void  xyLocationListenerGPServices(){
         LocationListenerGPServices l = new LocationListenerGPServices();
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         l.start(lm, this );

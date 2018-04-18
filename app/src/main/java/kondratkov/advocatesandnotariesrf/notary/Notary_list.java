@@ -540,13 +540,6 @@ public class Notary_list extends Activity implements View.OnTouchListener,
 
         public Boolean bool = true;
 
-        public void start_map() {
-            in.set_jut_ili_not(false);
-            Log.d(LOG_TAG, "для натариуса труе " + in.get_jut_ili_not());
-            Intent intent = new Intent(Notary_list.this, Map_coor.class);
-            startActivity(intent);
-        }
-
         public void start_profile_not(int i) {
             Intent intent = new Intent(Notary_list.this, Notary_profile.class);
             startActivity(intent);
@@ -703,7 +696,25 @@ public class Notary_list extends Activity implements View.OnTouchListener,
                     in.set_fio_jur(String.valueOf(holder.tv_item_notary_fio.getText()));
                     in.set_jut_ili_not(false);
 
-                    start_map();
+
+                    in.set_jut_ili_not(false);
+                    Log.d(LOG_TAG, "для натариуса труе " + in.get_jut_ili_not());
+
+                    double d_latitude = 0;
+                    double d_longitude = 0;
+
+                    try{
+                        if(arrayNotary[position].Latitude == 0 || arrayNotary[position].Latitude == 0){
+                        }else{
+                            d_latitude = arrayNotary[position].Latitude;
+                            d_longitude = arrayNotary[position].Longitude;
+                        }
+                    }catch (Exception e){}
+
+                    Intent intent = new Intent(Notary_list.this, Map_coor.class);
+                    intent.putExtra("THIS_LATITUDE", d_latitude);
+                    intent.putExtra("THIS_LONGITUDE", d_longitude);
+                    startActivity(intent);
                 }
             });
 

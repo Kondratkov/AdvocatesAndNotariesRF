@@ -1,8 +1,8 @@
-  <resources>
+<resources>
     <string name="app_name">AdvocatesAndNotariesRF</string>
     <string name="action_settings">Settings</string>
 
-    <string name="version">0.435.5.B</string>
+    <string name="version">0.455.5.B</string>
 
     <string name="main_1">Задать вопрос</string>
     <string name="main_2">Топ вопросов</string>
@@ -166,8 +166,8 @@
     <string name="profile_advocate_p_13">график работы</string>
     <string name="profile_advocate_p_14">задать вопрос</string>
     <string name="profile_advocate_p_15">рейтинг</string>
-      <string name="my_profile_m15">Судебная территория:</string>
-      <string name="my_profile_m16">Рег. номер:</string>
+    <string name="my_profile_m15">Судебная территория:</string>
+    <string name="my_profile_m16">Рег. номер:</string>
 
     <string-array name="array_profile_jur">
         <item>Рег. номер   </item>
@@ -253,18 +253,18 @@
         <item>Без темы</item>
         <item>Затрудняюсь выбрать</item>
     </string-array>
-      <string-array name="ArrayVidDoc">
-          <item> Проверка добросовестности контрагента (дью дилидженс- лайт)</item>
-          <item> Претензия</item>
-          <item> Жалоба на действия должностных лиц</item>
-          <item> Обращение в госорганы РФ</item>
-          <item> Заявление</item>
-          <item> Исковое заявление</item>
-          <item> Возражение на иск</item>
-          <item> Обжалование решения суда</item>
-          <item> Иной документ</item>
-          <item> Затрудняюсь выбрать</item>
-      </string-array>
+    <string-array name="ArrayVidDoc">
+        <item> Проверка добросовестности контрагента (дью дилидженс- лайт)</item>
+        <item> Претензия</item>
+        <item> Жалоба на действия должностных лиц</item>
+        <item> Обращение в госорганы РФ</item>
+        <item> Заявление</item>
+        <item> Исковое заявление</item>
+        <item> Возражение на иск</item>
+        <item> Обжалование решения суда</item>
+        <item> Иной документ</item>
+        <item> Затрудняюсь выбрать</item>
+    </string-array>
 
     <string-array name="ArrayVidDocPr">
         <item>Претензия</item>
@@ -461,7 +461,6 @@
     <string name="title_activity_my_frag_orders_doc">My_frag_orders_doc</string>
     <string name="title_activity_my_frag_orders_doc_pack">My_frag_orders_doc_pack</string>
     <string name="title_activity_my_perep_orders_mess">My_perep_orders_mess</string>
-
 
 
     <string name="title_activity_notary_filter">Notary_filter</string>

@@ -75,6 +75,7 @@ import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindNotaryByCoordina
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
 import kondratkov.advocatesandnotariesrf.api_classes.TopQuestion;
 import kondratkov.advocatesandnotariesrf.maps.Map_jur_and_notary;
+import kondratkov.advocatesandnotariesrf.notary.Notary_list;
 import kondratkov.advocatesandnotariesrf.start_help.Start_activity_no_login;
 
 import static android.R.id.list;
@@ -515,12 +516,14 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
         if((Boolean)getIntent().getSerializableExtra("ANSWERNEXT")){
             List <JuristAccounClass> mJuristAccounClasses = new ArrayList<JuristAccounClass>();
             for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
-                if(juristAccounClass.CurrentLatitude!=0 && juristAccounClass.CurrentLongitude !=0 && juristAccounClass.IsOnline){
-                    double mx = Math.abs(in.get_latitude()- juristAccounClass.CurrentLatitude);//51.714342);
-                    double my = Math.abs(in.get_longitude() - juristAccounClass.CurrentLongitude);//39.275005);
-                    double dist = Math.sqrt(Math.pow(mx, 2) + Math.pow(my,2));
-                    if(dist< 0.15){
-                        mJuristAccounClasses.add(juristAccounClass);
+                if(juristAccounClass.IsOnline){
+                    if(juristAccounClass.CurrentLatitude!=0 && juristAccounClass.CurrentLongitude !=0){
+                        double mx = Math.abs(in.get_latitude()- juristAccounClass.CurrentLatitude);//51.714342);
+                        double my = Math.abs(in.get_longitude() - juristAccounClass.CurrentLongitude);//39.275005);
+                        double dist = Math.sqrt(Math.pow(mx, 2) + Math.pow(my,2));
+                        if(dist< 0.15){
+                            mJuristAccounClasses.add(juristAccounClass);
+                        }
                     }
                 }
             }
@@ -750,6 +753,22 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
         return false;
     }
 
+
+    // Класс для сохранения во внешний класс и для ограничения доступа
+    // из потомков класса
+    static class ViewHolder {
+        TextView tvSurname;
+        TextView tvDist;
+        TextView tvCityJur;
+        TextView tvRatingJur;
+        TextView tvOnLine;
+        ImageView imageView;
+
+        LinearLayout lila_jur_item;
+        LinearLayout lila_jur_item_fon;
+    }
+
+
     class MyAdapterJsonList extends ArrayAdapter {
 
         private JuristAccounClass[] juristAccounClasses = null;
@@ -763,49 +782,58 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View rowView = null;
 
-            rowView = inflater.inflate(R.layout.advocates_item_list, parent, false);
-            TextView tvSurname   = (TextView) rowView.findViewById(R.id.tvSurnameJur);
-            TextView tvDist = (TextView) rowView.findViewById(R.id.textView6);
-            tvSurname.setTextSize(in.get_font_1());
+            // ViewHolder буферизирует оценку различных полей шаблона элемента
 
-            TextView tvCityJur = (TextView) rowView.findViewById(R.id.tvJLcity);
-            tvCityJur.setTextSize(in.get_font_2());
+            final ViewHolder holder;
 
-            TextView tvRatingJur = (TextView) rowView.findViewById(R.id.tvRatingJur);
-            tvRatingJur.setTextSize(in.get_font_2());
+            // Очищает сущетсвующий шаблон, если параметр задан
+            // Работает только если базовый шаблон для всех классов один и тот же
+            View rowView = convertView;
 
-            TextView tvOnLine    = (TextView) rowView.findViewById(R.id.tvOnLine);
-            ImageView imageView  = (ImageView) rowView.findViewById(R.id.imageViewJur);
-            LinearLayout lila_jur_item = (LinearLayout)rowView.findViewById(R.id.lila_jur_item);
-            LinearLayout lila_jur_item_fon = (LinearLayout)rowView.findViewById(R.id.lila_jur_item_fon);
-
-            tvSurname.setText(juristAccounClasses[position].Fio);
-
-            try{
-                tvCityJur.setText(String.valueOf(juristAccounClasses[position].Address.City));
-            }catch (Exception e){}
+            if (rowView == null) {
+                LayoutInflater inflater = (LayoutInflater) context
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                rowView = inflater.inflate(R.layout.advocates_item_list, parent, false);//null;
+                holder = new ViewHolder();
 
 
+                holder.tvSurname   = (TextView) rowView.findViewById(R.id.tvSurnameJur);
+                holder.tvDist = (TextView) rowView.findViewById(R.id.textView6);
+                holder.tvSurname.setTextSize(in.get_font_1());
 
-            tvRatingJur.setText(String.valueOf(juristAccounClasses[position].Rating));
+                holder.tvCityJur = (TextView) rowView.findViewById(R.id.tvJLcity);
+                holder.tvCityJur.setTextSize(in.get_font_2());
 
-            try{
-                tvDist.setText(in.d_to_sDistance(juristAccounClasses[position].dist));//in.sDistance(juristAccounClasses[position].CurrentLatitude, juristAccounClasses[position].CurrentLongitude, lm, Advocates_list.this));
-            }catch (Exception e){
-                tvDist.setText("");
-            }
+                holder.tvRatingJur = (TextView) rowView.findViewById(R.id.tvRatingJur);
+                holder.tvRatingJur.setTextSize(in.get_font_2());
 
-            if(juristAccounClasses[position].IsVip){
-                    lila_jur_item.setBackgroundResource(R.drawable.status_vip);
-                    lila_jur_item_fon.setBackgroundResource(R.color.colorvip);
-                    tvSurname.setTextColor(Color.argb(255,255,211,35));
-            }
+                holder.tvOnLine    = (TextView) rowView.findViewById(R.id.tvOnLine);
+                holder.imageView  = (ImageView) rowView.findViewById(R.id.imageViewJur);
+                holder.lila_jur_item = (LinearLayout)rowView.findViewById(R.id.lila_jur_item);
+                holder.lila_jur_item_fon = (LinearLayout)rowView.findViewById(R.id.lila_jur_item_fon);
 
-            CheckBox jur_item_checkBox = (CheckBox)rowView.findViewById(R.id.jur_item_checkBox);
+                holder.tvSurname.setText(juristAccounClasses[position].Fio);
+
+                try{
+                    holder.tvCityJur.setText(String.valueOf(juristAccounClasses[position].Address.City));
+                }catch (Exception e){}
+
+                holder.tvRatingJur.setText(String.valueOf(juristAccounClasses[position].Rating));
+
+                try{
+                    holder.tvDist.setText(in.d_to_sDistance(juristAccounClasses[position].dist));//in.sDistance(juristAccounClasses[position].CurrentLatitude, juristAccounClasses[position].CurrentLongitude, lm, Advocates_list.this));
+                }catch (Exception e){
+                    holder.tvDist.setText("");
+                }
+
+                if(juristAccounClasses[position].IsVip){
+                    holder.lila_jur_item.setBackgroundResource(R.drawable.status_vip);
+                    holder.lila_jur_item_fon.setBackgroundResource(R.color.colorvip);
+                    holder.tvSurname.setTextColor(Color.argb(255,255,211,35));
+                }
+
+                CheckBox jur_item_checkBox = (CheckBox)rowView.findViewById(R.id.jur_item_checkBox);
                 /*if(juristAccounClasses[position].   list.get(position).getInt("liked")==0){
                     jur_item_checkBox.setChecked(false);
                 }
@@ -837,21 +865,24 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                     }
                 });*/
 
-            if(juristAccounClasses[position].IsOnline){
-                //tvOnLine.setBackgroundResource(R.color.on_line_true);
-                tvOnLine.setText("в сети");
-                //lila_jur_item.setBackgroundColor(getResources().getColor(R.color.read_menu));
-                //tvSurname.setTextColor(getResources().getColor(R.color.read0));
-                tvOnLine.setTextColor(getResources().getColor(R.color.read0));
+                if(juristAccounClasses[position].IsOnline){
+                    //tvOnLine.setBackgroundResource(R.color.on_line_true);
+                    holder.tvOnLine.setText("в сети");
+                    //lila_jur_item.setBackgroundColor(getResources().getColor(R.color.read_menu));
+                    //tvSurname.setTextColor(getResources().getColor(R.color.read0));
+                    holder.tvOnLine.setTextColor(getResources().getColor(R.color.read0));
+                }
+                else{
+                    //tvOnLine.setBackgroundResource(R.color.on_line_false);
+
+                    holder.tvOnLine.setText("");
+                    holder.tvOnLine.setTextColor(getResources().getColor(R.color.read2));
+
+                }
+                rowView.setTag(holder);
+            } else {
+                holder = (ViewHolder) rowView.getTag();
             }
-            else{
-                //tvOnLine.setBackgroundResource(R.color.on_line_false);
-
-                tvOnLine.setText("");
-                tvOnLine.setTextColor(getResources().getColor(R.color.read2));
-
-            }
-
             //imageView.setImageResource(Integer.parseInt(list.get(position).getString("icon")));
 
             return rowView;

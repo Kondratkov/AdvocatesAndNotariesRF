@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +62,8 @@ public class My_profile extends Activity {
 
     public GetProfileClient getProfileClient;
 
+    private ImageView my_prof_image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +77,15 @@ public class My_profile extends Activity {
         tv_email = (TextView) findViewById(R.id.my_prof_tv_email);
         tv_phone = (TextView) findViewById(R.id.my_prof_tv_phone);
         tv_kol_quest = (TextView) findViewById(R.id.my_prof_tv_kol_quest);
+
+        my_prof_image = (ImageView)findViewById(R.id.my_prof_image);
+
+        my_prof_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setPhotoProfile();
+            }
+        });
 
         lila_ld = (LinearLayout) findViewById(R.id.my_prof_lila_ld);
         findViewById(R.id.my_prof_but_redactor).setOnClickListener(new View.OnClickListener() {
@@ -121,6 +134,11 @@ public class My_profile extends Activity {
         int px = Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
 
         return px;
+    }
+
+    private void setPhotoProfile(){
+        Intent intent = new Intent(My_profile.this, My_photo_redaction.class);
+        startActivity(intent);
     }
 
     public void onClick(View v){
