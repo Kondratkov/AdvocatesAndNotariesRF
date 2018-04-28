@@ -21,6 +21,7 @@ public abstract class BaseAccount {
     public Address Address;
     public double Longitude;
     public double Latitude;
+    public char ImageUIrl;
 
     public enum AccountType
     {

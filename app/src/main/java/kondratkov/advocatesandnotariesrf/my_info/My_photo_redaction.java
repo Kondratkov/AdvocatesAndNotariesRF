@@ -3,6 +3,7 @@ package kondratkov.advocatesandnotariesrf.my_info;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -12,13 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URI;
 
 import kondratkov.advocatesandnotariesrf.IN;
 import kondratkov.advocatesandnotariesrf.R;
+import kondratkov.advocatesandnotariesrf.account.GetProfileClient;
 
 public class My_photo_redaction extends AppCompatActivity {
 
@@ -74,6 +85,9 @@ public class My_photo_redaction extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if(picUri !=null){
+                    My_photo_redaction.this.finish();
+                }
             }
         });
 
@@ -81,6 +95,7 @@ public class My_photo_redaction extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                My_photo_redaction.this.finish();
             }
         });
     }
@@ -115,7 +130,12 @@ public class My_photo_redaction extends AppCompatActivity {
                 try{
                     Bundle extras = data.getExtras();
                     bitmap = extras.getParcelable("data");
+
+
                     imageView_photo_user.setImageBitmap(bitmap);
+                    //
+
+
                 }catch (Exception e){}
 
                 break;
@@ -187,4 +207,50 @@ public class My_photo_redaction extends AppCompatActivity {
         }
 
     }
+
+//    class UrlConnectionTask extends AsyncTask<String, Void, String> {
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//
+//            String result = "";
+//
+//            OkHttpClient client = new OkHttpClient();
+//
+//            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
+//
+//            //RequestBody formBody = RequestBody.create(JSON, json_signup);
+//
+//            Request request = new Request.Builder()
+//                    .header("Authorization", in.get_token_type()+" "+in.get_token())
+//                    .url("http://"+in.get_url()+"/AccauntPostUserImage/")
+//                    .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
+//                    .build();
+//            try {
+//                Response response = client.newCall(request).execute();
+//                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+//
+//                result = response.body().string();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return result;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//
+////            if(result!=null && code>=200 && code<300){
+////                Gson gson = new Gson();
+////                getProfileClient = gson.fromJson(result, GetProfileClient.class);
+////                start_activity();
+////            }else{
+////                Toast.makeText(My_profile.this,
+////                        "Нет связи с сервером!",
+////                        Toast.LENGTH_LONG).show();
+////            }
+//            super.onPostExecute(result);
+//        }
+//    }
 }
