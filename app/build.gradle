@@ -8,8 +8,8 @@ android {
         applicationId "kondratkov.advocatesandnotariesrf"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 79
-        versionName "0.499.5.B"
+        versionCode 80
+        versionName "0.499.6.B"
         vectorDrawables.useSupportLibrary = true
     }
     lintOptions {
