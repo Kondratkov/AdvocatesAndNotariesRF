@@ -28,6 +28,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -174,6 +175,10 @@ public class Advocate_profile extends Activity {
 
         }catch (Exception e){}
 
+        if(juristAccounClass.ImageUrl!=null){
+            Picasso.get().load("http://app.mmka.info/"+juristAccounClass.ImageUrl).into(image_profile_jur_icon);
+            Picasso.get().load("http://app.mmka.info/"+juristAccounClass.ImageUrl).into(jur_prof_image_fff);
+        }
         String sp="";
         try{
             for(int i=0; i<juristAccounClass.Specializations.length; i++){

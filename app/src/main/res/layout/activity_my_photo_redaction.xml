@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
+            android:scaleType="centerCrop"
             android:background="@drawable/style_photo_image"
             tools:layout_editor_absoluteY="176dp"/>
 

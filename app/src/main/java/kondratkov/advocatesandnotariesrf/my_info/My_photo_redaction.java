@@ -17,14 +17,21 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Writer;
 import java.net.URI;
 
 import kondratkov.advocatesandnotariesrf.IN;
@@ -40,8 +47,10 @@ public class My_photo_redaction extends AppCompatActivity {
     private final int CAMERA_RESULT = 2;
     private final int PIC_CROP = 3;
 
+    public File fileImage = null;
     private Uri picUri;
     private IN in;
+    private Bitmap bitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +95,53 @@ public class My_photo_redaction extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(picUri !=null){
-                    My_photo_redaction.this.finish();
+
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(picUri);
+                        byte[] buffer = new byte[inputStream.available()];
+                        inputStream.read(buffer);
+
+
+                        File root = Environment.getExternalStorageDirectory();
+                        fileImage = new File(root.getAbsolutePath() + File.separator + "My Bundle");
+
+
+                        OutputStream out=new FileOutputStream(fileImage);
+                        byte buf[]=new byte[1024];
+                        int len;
+                        while((len=inputStream.read(buf))>0)
+                            out.write(buf,0,len);
+                        out.close();
+                        inputStream.close();
+
+//                        FileUtils.copyInputStreamToFile(initialStream, targetFile);
+//                        MediaStore.Files.write(buffer, targetFile);
+//                        File targetFile = new File("src/main/resources/targetFile.tmp");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+//                    try {
+//                        File file_i = new File(picUri.getPath());
+//                        Log.d("qwerty_q", "file -" + file_i.getPath());
+//                        FileOutputStream fos = new FileOutputStream(bitmap + String.valueOf(in.get_id_user())+"_photo");
+//                        bitmap.compress(Bitmap.CompressFormat.JPEG, 75, fos);
+//                        fos.flush();
+//                        fos.close();
+//                    } catch (Exception e) {
+//                        Log.e("MyLog", e.toString());
+//                    }
+//
+//
+//
+//
+//
+//                    fileImage = new File(picUri.getPath());
+
+                    new UrlConnectionImage().execute();
+
                 }
             }
         });
@@ -119,11 +174,37 @@ public class My_photo_redaction extends AppCompatActivity {
         startActivityForResult(cropIntent, PIC_CROP);
     }
 
+//    public void write(String fileName, Bundle bundle)
+//    {
+//        File root = Environment.getExternalStorageDirectory();
+//        File outDir = new File(root.getAbsolutePath() + File.separator + "My Bundle");
+//        if (!outDir.isDirectory())
+//        {
+//            outDir.mkdir();
+//        }
+//        try
+//        {
+//            if (!outDir.isDirectory())
+//            {
+//                throw new IOException("Не удалось создать каталог My bundle. Может быть, SD-карта смонтирована?");
+//            }
+//            File outputFile = new File(outDir, fileName);
+//            Writer writer = new BufferedWriter(new FileWriter(outputFile));
+//            String value = bundle.getString("key");
+//            writer.write(value);
+//            Toast.makeText(getApplicationContext(), "Отчет успешно сохранен: " + outputFile.getAbsolutePath(), Toast.LENGTH_LONG).show();
+//           //writer.close();
+//        } catch (Exception e)
+//        {
+//            Log.w("error", e.getMessage(), e);
+//            Toast.makeText(getApplicationContext(), e.getMessage() + " Не удается записать на внешнее хранилище.", Toast.LENGTH_LONG).show();
+//        }
+//    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         ViewGroup.LayoutParams imageViewLayoutParams;
-        Bitmap bitmap = null;
 
         switch (requestCode) {
             case PIC_CROP:
@@ -131,11 +212,7 @@ public class My_photo_redaction extends AppCompatActivity {
                     Bundle extras = data.getExtras();
                     bitmap = extras.getParcelable("data");
 
-
                     imageView_photo_user.setImageBitmap(bitmap);
-                    //
-
-
                 }catch (Exception e){}
 
                 break;
@@ -143,18 +220,22 @@ public class My_photo_redaction extends AppCompatActivity {
                 //File photo = new File(Environment.getExternalStorageDirectory(), String.valueOf(in.get_id_user())+"_photo");
                 try {
                     Bundle extras = data.getExtras();
+                    picUri = data.getData();
+                    File file_i = new File(picUri.getPath());
+                    Log.d("qwerty_q", "file -" + file_i.getPath());
                     bitmap = extras.getParcelable("data");
                     FileOutputStream fos = new FileOutputStream(bitmap + String.valueOf(in.get_id_user())+"_photo");
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 75, fos);
-
                     fos.flush();
                     fos.close();
                 } catch (Exception e) {
                     Log.e("MyLog", e.toString());
                 }
 
-                picUri  =Uri.parse(bitmap + String.valueOf(in.get_id_user())+"_photo");
+                //picUri  =Uri.parse(bitmap + String.valueOf(in.get_id_user())+"_photo");
                 performCrop();
+
+
                 //imageView_photo_user.setImageBitmap(bitmap);//setImageURI(picUri);
 
               //  photo = new File(data.pa)
@@ -207,6 +288,80 @@ public class My_photo_redaction extends AppCompatActivity {
         }
 
     }
+
+    int code;
+    class UrlConnectionImage extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String result = "";
+            OkHttpClient client = new OkHttpClient();
+
+//            //fileImage = new File()
+//
+            //MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("multipart/form-data; charset=utf-8");
+            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("multipart/form-data; charset=utf-8");
+            String s= in.get_token_type()+" "+in.get_token();
+//            String s3= "http://"+in.get_url()+"/DocumentOrders/SendClientFiles/"+in.get_idt();
+//            String s4=String.valueOf(in.getFile());
+//            String d5 =in.getDoc_fail();
+
+            Log.d("qwerty_q", "f - "+fileImage.getPath());
+
+            RequestBody requestBody;
+            Request request;
+
+            requestBody = new MultipartBuilder()
+                    //.type((MultipartBuilder.FORM))
+                    .addFormDataPart("file1", fileImage.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, fileImage))
+                    //.addFormDataPart("file1", fileImage))
+                    //.addFormDataPart("some-field", "some-value")
+                    .build();
+
+            request = new Request.Builder()
+                    .header("Authorization", in.get_token_type()+" "+in.get_token())
+                    .header("content-type", "multipart/form-data")
+                    .url("http://app.mmka.info/api/Account/PostUserImage")//"http://"+in.get_url()+"/Account/PostUserImage")
+                    .post(requestBody)
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                result = response.body().string();
+                code = response.code();
+                Log.d("qwerty_q", result +" - "+String.valueOf(code));
+            } catch (IOException e) {
+                Log.e("qwerty_q", result);
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("qwerty_q", result);
+            My_photo_redaction.this.finish();
+//            if (result!=null) {
+//                if(intClose==intSetI+1){
+//                    Toast.makeText(create_document.this,
+//                            "Заказ на составление документа принят!",
+//                            Toast.LENGTH_LONG).show();
+//                    in.FilesRestart();
+//                    in.setDoc_fail_name("");
+//                    create_document.this.finish();
+//                }
+//            }else{
+//                Toast.makeText(create_document.this,
+//                        "Нет связи с сервером!",
+//                        Toast.LENGTH_LONG).show();
+//            }
+            super.onPostExecute(result);
+        }
+    }
+
 
 //    class UrlConnectionTask extends AsyncTask<String, Void, String> {
 //

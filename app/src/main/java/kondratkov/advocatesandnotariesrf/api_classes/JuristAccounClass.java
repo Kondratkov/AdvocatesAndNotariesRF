@@ -72,6 +72,7 @@ public class JuristAccounClass {
     public double CurrentLatitude;
     public boolean IsVip;
     public String MyLoveJurists ="";
+    public String ImageUrl;
 
     public double dist = 0;
 

@@ -83,7 +83,6 @@ public class IN {
     public int  getChoice_of_menus(){return (choice_of_menus);}
     public void setChoice_of_menus(int choice_of_menus){this.choice_of_menus=choice_of_menus;}
 
-
     public static String ur232l = "93.170.186.54";
     //public static String url = "192.168.0.100/api";
     //public static String url = "vsundupey.vds.serverdale.com/api";

@@ -33,11 +33,13 @@ import kondratkov.advocatesandnotariesrf.doc_create.create_document;
 import kondratkov.advocatesandnotariesrf.input.LogIN;
 import kondratkov.advocatesandnotariesrf.maps.Map_jur_and_notary;
 import kondratkov.advocatesandnotariesrf.my_info.My_orders;
+import kondratkov.advocatesandnotariesrf.my_info.My_photo_redaction;
 import kondratkov.advocatesandnotariesrf.my_info.My_profile;
 import kondratkov.advocatesandnotariesrf.my_info.My_questions;
 import kondratkov.advocatesandnotariesrf.notary.Notary_list;
 import kondratkov.advocatesandnotariesrf.paid_services.Paid_services;
 import kondratkov.advocatesandnotariesrf.start_help.About_us;
+import kondratkov.advocatesandnotariesrf.start_help.Start_activity_no_login;
 
 public class Settings_no_login extends Activity implements View.OnTouchListener {
 
@@ -92,6 +94,7 @@ public class Settings_no_login extends Activity implements View.OnTouchListener 
                 on_close();
                 break;
             case R.id.start_no_but_menu_login:
+
                 Intent intent = new Intent(Settings_no_login.this, LogIN.class);
                 startActivity(intent);
                 Settings_no_login.this.finish();

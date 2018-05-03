@@ -12,6 +12,7 @@ public class GetProfileClient {
     public String Patronymic;
     public String Surename;
     public String Fio;
+    public String ImageUrl;
     public String Email;
     public String Phone;
     public String LastActivityTime;

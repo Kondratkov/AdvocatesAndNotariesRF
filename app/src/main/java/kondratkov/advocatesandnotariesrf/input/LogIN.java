@@ -42,6 +42,7 @@ import kondratkov.advocatesandnotariesrf.IN;
 import kondratkov.advocatesandnotariesrf.R;
 import kondratkov.advocatesandnotariesrf.account.ClientAccount;
 import kondratkov.advocatesandnotariesrf.account.JuristSpecialization;
+import kondratkov.advocatesandnotariesrf.my_info.My_photo_redaction;
 
 public class LogIN extends Activity {
 
@@ -250,7 +251,9 @@ public class LogIN extends Activity {
                 break;
 
             case R.id.forget_password:
-                    dialog_password_help();
+                //Intent intent = new Intent(LogIN.this, My_photo_redaction.class);
+                //startActivity(intent);
+                dialog_password_help();
                 break;
 
             case R.id.butReg:

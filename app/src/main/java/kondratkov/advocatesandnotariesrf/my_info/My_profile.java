@@ -2,6 +2,7 @@ package kondratkov.advocatesandnotariesrf.my_info;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,6 +52,8 @@ public class My_profile extends Activity {
 
     public boolean ld = true;
     public TextView tv_nik,  tv_surname ,tv_name, tv_patron, tv_email, tv_phone, tv_kol_quest;
+
+
     public LinearLayout lila_ld;
     public int code;
 
@@ -127,6 +131,10 @@ public class My_profile extends Activity {
         try {
             tv_kol_quest.setText(getProfileClient.Address.City);//jsonObjectMyProf.getString("city"));
         }catch (Exception e){}
+
+        if(getProfileClient.ImageUrl!=null){
+            Picasso.get().load("http://app.mmka.info/"+getProfileClient.ImageUrl).into(my_prof_image);
+        }
     }
 
     public int dpToPx(int dp) {
@@ -252,6 +260,7 @@ public class My_profile extends Activity {
             if(result!=null && code>=200 && code<300){
                 Gson gson = new Gson();
                 getProfileClient = gson.fromJson(result, GetProfileClient.class);
+                Log.d("qwerty_q", "ImageUrl - "+getProfileClient.ImageUrl);
                 start_activity();
             }else{
                 Toast.makeText(My_profile.this,

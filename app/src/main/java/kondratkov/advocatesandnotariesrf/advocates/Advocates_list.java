@@ -41,6 +41,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -826,6 +827,15 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                 }catch (Exception e){
                     holder.tvDist.setText("");
                 }
+
+                try{
+                    if(juristAccounClasses[position].ImageUrl!=null){
+                        Picasso.get().load("http://app.mmka.info/"+juristAccounClasses[position].ImageUrl).into(holder.imageView);
+                    }
+                }catch (Exception e){
+
+                }
+
 
                 if(juristAccounClasses[position].IsVip){
                     holder.lila_jur_item.setBackgroundResource(R.drawable.status_vip);

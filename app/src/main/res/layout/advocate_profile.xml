@@ -134,27 +134,27 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="7dp">
+                        android:layout_marginTop="7dp"
+                        android:orientation="vertical">
 
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
                             <FrameLayout
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
+                                android:layout_marginBottom="5dp"
                                 android:layout_marginLeft="15dp"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginBottom="5dp">
+                                android:layout_marginRight="5dp">
 
                                 <ImageView
+                                    android:id="@+id/jur_prof_image_icon"
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
-                                    android:id="@+id/jur_prof_image_icon"
                                     />
 
                                 <ImageView
@@ -167,9 +167,9 @@
                             </FrameLayout>
 
                             <LinearLayout
-                                android:orientation="vertical"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/jur_prof_tv_fio"
@@ -179,14 +179,14 @@
                                     android:gravity="center"
                                     android:textColor="@color/re_prof"
                                     android:textIsSelectable="false"
-                                    android:textSize="23dp" />
+                                    android:textSize="23dp"/>
 
                                 <LinearLayout
-                                    android:orientation="vertical"
                                     android:layout_width="match_parent"
                                     android:layout_height="103dp"
+                                    android:layout_marginTop="5dp"
                                     android:gravity="center"
-                                    android:layout_marginTop="5dp">
+                                    android:orientation="vertical">
 
                                 </LinearLayout>
 
