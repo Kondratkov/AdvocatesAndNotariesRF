@@ -133,7 +133,7 @@ public class My_profile extends Activity {
         }catch (Exception e){}
 
         if(getProfileClient.ImageUrl!=null){
-            Picasso.get().load("http://app.mmka.info/"+getProfileClient.ImageUrl).into(my_prof_image);
+            Picasso.with(this.getApplicationContext()).load("http://app.mmka.info/"+getProfileClient.ImageUrl).into(my_prof_image);
         }
     }
 

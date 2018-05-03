@@ -51,7 +51,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // https://mvnrepository.com/artifact/com.squareup.picasso/picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
 
     //compile 'org.apache.httpcomponents:httpclient:4.5'

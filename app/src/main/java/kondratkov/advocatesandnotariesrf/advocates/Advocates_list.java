@@ -830,7 +830,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
 
                 try{
                     if(juristAccounClasses[position].ImageUrl!=null){
-                        Picasso.get().load("http://app.mmka.info/"+juristAccounClasses[position].ImageUrl).into(holder.imageView);
+                        Picasso.with(holder.imageView.getContext()).load("http://app.mmka.info/"+juristAccounClasses[position].ImageUrl).into(holder.imageView);
                     }
                 }catch (Exception e){
 

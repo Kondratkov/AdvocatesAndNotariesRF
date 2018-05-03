@@ -176,8 +176,8 @@ public class Advocate_profile extends Activity {
         }catch (Exception e){}
 
         if(juristAccounClass.ImageUrl!=null){
-            Picasso.get().load("http://app.mmka.info/"+juristAccounClass.ImageUrl).into(image_profile_jur_icon);
-            Picasso.get().load("http://app.mmka.info/"+juristAccounClass.ImageUrl).into(jur_prof_image_fff);
+            Picasso.with(this.getApplicationContext()).load("http://app.mmka.info/"+juristAccounClass.ImageUrl).into(image_profile_jur_icon);
+            Picasso.with(this.getApplicationContext()).load("http://app.mmka.info/"+juristAccounClass.ImageUrl).into(jur_prof_image_fff);
         }
         String sp="";
         try{
