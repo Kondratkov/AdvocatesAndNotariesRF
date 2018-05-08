@@ -170,7 +170,8 @@ public class My_photo_redaction extends AppCompatActivity {
 
                 fileImage = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "savedBitmap"+in.get_id_user()+".png");
 
-                bitmap.setPixel(150, 150, 0);
+                Bitmap.createScaledBitmap(bitmap, 250, 250, true);
+                //bitmap.setPixel(150, 150, 0);
                 try {
                     FileOutputStream fos = null;
                     try {
@@ -186,10 +187,15 @@ public class My_photo_redaction extends AppCompatActivity {
 
                 break;
             case GALLERY_REQUEST:
-                // Получим Uri снимка
-                picUri = data.getData();
-                // кадрируем его
-                performCrop();
+                try{
+                    if(data.getData() != null){
+                        picUri = data.getData();
+                        // кадрируем его
+                        performCrop();
+                    }
+                }catch (Exception e){
+
+                }
 
                 break;
         }
