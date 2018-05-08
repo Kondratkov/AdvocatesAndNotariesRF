@@ -432,6 +432,7 @@ public class AskAQuestion extends Activity {
                     LinearLayout lilamess_jur_tv = (LinearLayout)rowView.findViewById(R.id.lilamess_jur_tv);
 
                     TextView tv_mess = (TextView) rowView.findViewById(R.id.mess_user_tv);
+                    ImageView imageView = (ImageView)rowView.findViewById(R.id.mess_user_icon);
                     tv_mess.setTextSize(in.get_font_1());
                     TextView tv_mess_date = (TextView) rowView.findViewById(R.id.mess_user_tv_date);
                     tv_mess_date.setTextSize(in.get_font_2());
@@ -443,7 +444,11 @@ public class AskAQuestion extends Activity {
                     tv_mess_date.setText(in.dateDisplay(comments1.get(position).Date));
                     in.set_data_servise(comments1.get(position).Date);
 
-                    tv_nik_user_mess.setText("Вы");//list.get(position).get_name());
+                    tv_nik_user_mess.setText("Вы");//list.get(position).get_name())
+
+                    //imageView
+
+
                     //icon_user_mess.setBackgroundResource(Integer.parseInt(list.get(position).getString("iconuser")));
                 }catch (Exception e){}
 
