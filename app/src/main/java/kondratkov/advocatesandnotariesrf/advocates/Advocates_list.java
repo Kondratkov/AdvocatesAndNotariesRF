@@ -814,36 +814,43 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                 holder.lila_jur_item = (LinearLayout)rowView.findViewById(R.id.lila_jur_item);
                 holder.lila_jur_item_fon = (LinearLayout)rowView.findViewById(R.id.lila_jur_item_fon);
 
-                holder.tvSurname.setText(juristAccounClasses[position].Fio);
 
-                try{
-                    holder.tvCityJur.setText(String.valueOf(juristAccounClasses[position].Address.City));
-                }catch (Exception e){}
+                rowView.setTag(holder);
+            } else {
+                holder = (ViewHolder) rowView.getTag();
+            }
 
-                holder.tvRatingJur.setText(String.valueOf(juristAccounClasses[position].Rating));
+            holder.tvSurname.setText(juristAccounClasses[position].Fio);
 
-                try{
-                    holder.tvDist.setText(in.d_to_sDistance(juristAccounClasses[position].dist));//in.sDistance(juristAccounClasses[position].CurrentLatitude, juristAccounClasses[position].CurrentLongitude, lm, Advocates_list.this));
-                }catch (Exception e){
-                    holder.tvDist.setText("");
+            try{
+                holder.tvCityJur.setText(String.valueOf(juristAccounClasses[position].Address.City));
+            }catch (Exception e){}
+
+            holder.tvRatingJur.setText(String.valueOf(juristAccounClasses[position].Rating));
+
+            try{
+                holder.tvDist.setText(in.d_to_sDistance(juristAccounClasses[position].dist));//in.sDistance(juristAccounClasses[position].CurrentLatitude, juristAccounClasses[position].CurrentLongitude, lm, Advocates_list.this));
+            }catch (Exception e){
+                holder.tvDist.setText("");
+            }
+            try{
+                if(juristAccounClasses[position].ImageUrl!=null){
+                    Picasso.with(holder.imageView.getContext()).load("http://app.mmka.info/"+juristAccounClasses[position].ImageUrl).into(holder.imageView);
+                }else{
+                    holder.imageView.setImageResource(R.drawable.ricfas);
                 }
+            }catch (Exception e){
 
-                try{
-                    if(juristAccounClasses[position].ImageUrl!=null){
-                        Picasso.with(holder.imageView.getContext()).load("http://app.mmka.info/"+juristAccounClasses[position].ImageUrl).into(holder.imageView);
-                    }
-                }catch (Exception e){
-
-                }
+            }
 
 
-                if(juristAccounClasses[position].IsVip){
-                    holder.lila_jur_item.setBackgroundResource(R.drawable.status_vip);
-                    holder.lila_jur_item_fon.setBackgroundResource(R.color.colorvip);
-                    holder.tvSurname.setTextColor(Color.argb(255,255,211,35));
-                }
+            if(juristAccounClasses[position].IsVip){
+                holder.lila_jur_item.setBackgroundResource(R.drawable.status_vip);
+                holder.lila_jur_item_fon.setBackgroundResource(R.color.colorvip);
+                holder.tvSurname.setTextColor(Color.argb(255,255,211,35));
+            }
 
-                CheckBox jur_item_checkBox = (CheckBox)rowView.findViewById(R.id.jur_item_checkBox);
+           //CheckBox jur_item_checkBox = (CheckBox)rowView.findViewById(R.id.jur_item_checkBox);
                 /*if(juristAccounClasses[position].   list.get(position).getInt("liked")==0){
                     jur_item_checkBox.setChecked(false);
                 }
@@ -875,23 +882,19 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                     }
                 });*/
 
-                if(juristAccounClasses[position].IsOnline){
-                    //tvOnLine.setBackgroundResource(R.color.on_line_true);
-                    holder.tvOnLine.setText("в сети");
-                    //lila_jur_item.setBackgroundColor(getResources().getColor(R.color.read_menu));
-                    //tvSurname.setTextColor(getResources().getColor(R.color.read0));
-                    holder.tvOnLine.setTextColor(getResources().getColor(R.color.read0));
-                }
-                else{
-                    //tvOnLine.setBackgroundResource(R.color.on_line_false);
+            if(juristAccounClasses[position].IsOnline){
+                //tvOnLine.setBackgroundResource(R.color.on_line_true);
+                holder.tvOnLine.setText("в сети");
+                //lila_jur_item.setBackgroundColor(getResources().getColor(R.color.read_menu));
+                //tvSurname.setTextColor(getResources().getColor(R.color.read0));
+                holder.tvOnLine.setTextColor(getResources().getColor(R.color.read0));
+            }
+            else{
+                //tvOnLine.setBackgroundResource(R.color.on_line_false);
 
-                    holder.tvOnLine.setText("");
-                    holder.tvOnLine.setTextColor(getResources().getColor(R.color.read2));
+                holder.tvOnLine.setText("");
+                holder.tvOnLine.setTextColor(getResources().getColor(R.color.read2));
 
-                }
-                rowView.setTag(holder);
-            } else {
-                holder = (ViewHolder) rowView.getTag();
             }
             //imageView.setImageResource(Integer.parseInt(list.get(position).getString("icon")));
 
