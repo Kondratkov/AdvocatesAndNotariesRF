@@ -325,13 +325,13 @@
                             android:paddingTop="15dp" />
 
                         <Button
+                            android:id="@+id/but_city_sign"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            android:id="@+id/but_city_sign"
-                            android:background="@drawable/regestr_textfield_activated_holo_light"
-                            android:onClick="onClick"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginRight="15dp" />
+                            android:layout_marginRight="15dp"
+                            android:background="@drawable/regestr_textfield_activated_holo_light"
+                            android:onClick="onClick"/>
                     </FrameLayout>
 
                 </LinearLayout>

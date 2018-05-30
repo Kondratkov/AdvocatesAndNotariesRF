@@ -7,7 +7,9 @@ package kondratkov.advocatesandnotariesrf.account;
 public class GetProfileClient {
     public int Id;
     public AccountTypes AccounteType;
-    public AccountState State;
+    public State State;
+
+    public String Login;
     public String Name;
     public String Patronymic;
     public String Surename;
@@ -16,14 +18,18 @@ public class GetProfileClient {
     public String Email;
     public String Phone;
     public String LastActivityTime;
+    public String LastPushUpdateTime;
     public Address Address;
     public double Longitude;
     public double Latitude;
     public double CurrentLatitude;
     public double CurrentLongitude;
+    public String Password = "";
+    public String ConfirmPassword = "";
     public boolean IsOnline;
 
-    public enum AccountState{
+
+    public enum State{
         RegisterNotConfirmed,
         Confirmed,
         Blacklist

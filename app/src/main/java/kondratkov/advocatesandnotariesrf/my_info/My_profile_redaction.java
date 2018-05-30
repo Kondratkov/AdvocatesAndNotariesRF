@@ -61,8 +61,8 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
 
     public String json_signup = "";
 
-    public EditText etNikSign, etPhoneSign, etEmailSign, etNameSign, etPatronymicSign, etSurnameSign, etPasswordSign, etPassword2Sign;
-    public TextView tvNikSign, tvPhoneSign, tvEmailSign, tvNameSign, tvPatronymicSign, tvSurnameSign, tvPasswordSign, tvPassword2Sign, etCitySign;
+    public EditText etNikSign, etPhoneSign, etEmailSign, etNameSign, etPatronymicSign, etSurnameSign;
+    public TextView tvNikSign, tvPhoneSign, tvEmailSign, tvNameSign, tvPatronymicSign, tvSurnameSign, etCitySign;
     public int flagView = 0;
     public String strErrors = "";
 
@@ -82,6 +82,8 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
     public int code;
     public int id_delete=-1;
 
+    public GetProfileClient getProfileClient_new;
+    public Address address = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +98,7 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
         etNameSign = (EditText) findViewById(R.id.etNameSign_red);
         etPatronymicSign = (EditText) findViewById(R.id.etPatronymicSign_red);
         etSurnameSign = (EditText) findViewById(R.id.etSurnameSign_red);
-        etPasswordSign = (EditText) findViewById(R.id.etPasswordSign_red);
-        etPassword2Sign = (EditText) findViewById(R.id.etPassword2Sign_red);
+
 
         tvNikSign = (TextView) findViewById(R.id.tvNikSign_red);
         String phone = "+7 ";
@@ -110,8 +111,6 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
         tvNameSign = (TextView) findViewById(R.id.tvNameSign_red);
         tvPatronymicSign = (TextView) findViewById(R.id.tvPatronymicSign_red);
         tvSurnameSign = (TextView) findViewById(R.id.tvSurnameSign_red);
-        tvPasswordSign = (TextView) findViewById(R.id.tvPasswordSign_red);
-        tvPassword2Sign = (TextView) findViewById(R.id.tvPassword2Sign_red);
         etCitySign = (TextView) findViewById(R.id.etCitySign_red);
         etCitySign.setText("");
 
@@ -253,28 +252,6 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
                 return false;
             }
         });
-        etPasswordSign.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    flagView = 7;
-                    onTouchL();
-                }
-                return false;
-            }
-        });
-        etPassword2Sign.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    flagView = 8;
-                    onTouchL();
-                }
-                return false;
-            }
-        });
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -291,7 +268,7 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
        //new AsyncTaskProfile().execute();
     }
 
-    public void start_activity(GetProfileClient getProfileClient_new){
+    public void start_activity(GetProfileClient _getProfileClient_new){
 
         //data_prof_v = getResources().getStringArray(R.array.array_profile);
 
@@ -384,29 +361,7 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
             tvSurnameSign.setText(R.string.sign_up_p_6);
         }
 //-----------------
-        if (etPasswordSign.getText().toString().equals("")) {
-            if (flagView == 7) {
-                tvPasswordSign.setText(R.string.sign_up_p_4);
-                etPasswordSign.setHint("");
-            } else {
-                tvPasswordSign.setText("");
-                etPasswordSign.setHint(R.string.sign_up_p_4);
-            }
-        } else {
-            tvPasswordSign.setText(R.string.sign_up_p_4);
-        }
-//-----------------
-        if (etPassword2Sign.getText().toString().equals("")) {
-            if (flagView == 8) {
-                tvPassword2Sign.setText(R.string.sign_up_p_5);
-                etPassword2Sign.setHint("");
-            } else {
-                tvPassword2Sign.setText("");
-                etPassword2Sign.setHint(R.string.sign_up_p_5);
-            }
-        } else {
-            tvPassword2Sign.setText(R.string.sign_up_p_5);
-        }
+
     }
 
     private final int D_0 = 0;
@@ -668,77 +623,55 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
                             }
                             break;
 
-                        case 6:
-                            if (etPasswordSign.getText().toString().length() == 0 ||
-                                    String.valueOf(etPasswordSign.getText().toString().charAt(0)) == " " ||
-                                    etPasswordSign.getText().toString().length() < 6||String.valueOf(etPasswordSign.getText()).equals(String.valueOf(etPassword2Sign.getText()))==false) {
-                                etPasswordSign.setHintTextColor(getResources().getColor(R.color.apperror_color));
-                                etPasswordSign.setBackgroundResource(R.drawable.apperror_edit_text_holo_light);
-                                tvPasswordSign.setTextColor(getResources().getColor(R.color.apperror_color));
-
-                                if (etPasswordSign.getText().toString().length() == 0 ||
-                                        String.valueOf(etPasswordSign.getText().toString().charAt(0)) == " ") {
-                                    strErrors = getString(R.string.sign_error_one) + " '" + getString(R.string.sign_up_p_4) + "' " + getString(R.string.sign_error_two);
-                                    showDialog(D_6);
-                                } else if (etPasswordSign.getText().toString().length() < 6) {
-                                    strErrors = getString(R.string.sign_error_password_lengh);
-                                    showDialog(D_8);
-                                } else if(String.valueOf(etPasswordSign.getText()).equals(String.valueOf(etPassword2Sign.getText()))==false){
-                                    strErrors = getString(R.string.sign_error_password_no_two) + " ";
-                                    etPassword2Sign.setHintTextColor(getResources().getColor(R.color.apperror_color));
-                                    etPassword2Sign.setBackgroundResource(R.drawable.apperror_edit_text_holo_light);
-                                    tvPassword2Sign.setTextColor(getResources().getColor(R.color.apperror_color));
-                                    showDialog(D_7);
-                                }
-                                else {
-                                    Toast.makeText(My_profile_redaction.this,
-                                            "Ошибка заполнения полей!!",
-                                            Toast.LENGTH_LONG).show();
-                                }
-                                i = 9;
-                            } else {
-                                etPasswordSign.setHintTextColor(getResources().getColor(R.color.text_one));
-                                etPasswordSign.setBackgroundResource(R.drawable.regestr_edit_text_holo_dark);
-                                tvPasswordSign.setTextColor(getResources().getColor(R.color.text_one));
-                            }
-                            break;
-
-                        case 7:
-                            if (etPassword2Sign.getText().toString().length() == 0 ||
-                                    String.valueOf(etPasswordSign.getText().toString().charAt(0)) == " "||
-                                    String.valueOf(etPasswordSign.getText()).equals(String.valueOf(etPassword2Sign.getText()))==false) {
-                                etPassword2Sign.setHintTextColor(getResources().getColor(R.color.apperror_color));
-                                etPassword2Sign.setBackgroundResource(R.drawable.apperror_edit_text_holo_light);
-                                tvPassword2Sign.setTextColor(getResources().getColor(R.color.apperror_color));
-                            } else {
-                                etPassword2Sign.setHintTextColor(getResources().getColor(R.color.text_one));
-                                etPassword2Sign.setBackgroundResource(R.drawable.regestr_et_edit_text_holo_light);
-                                tvPassword2Sign.setTextColor(getResources().getColor(R.color.text_one));
-                            }
-                            break;
                         case 8:
 
 
                             Gson gson = new Gson();
 
-                            Set_baseAccount baseAccount = new Set_baseAccount();
-                            baseAccount.Name = String.valueOf(etNameSign.getText());
-                            baseAccount.Surename = String.valueOf(etSurnameSign.getText());
-                            baseAccount.Patronymic = String.valueOf(etPatronymicSign.getText());
-                            baseAccount.Email = String.valueOf(etEmailSign.getText());
-                            baseAccount.Phone = String.valueOf(etPhoneSign.getText());
-                            Address address = new Address();
-                            address.City = String.valueOf(city_class);
-                            address.Region = String.valueOf(region_class);
-                            baseAccount.Address = address;
+                            GetProfileClient getProfileClient_nn = getProfileClient_new;
 
-                            clientAccount = new ClientAccount();
-                            clientAccount.UserName = String.valueOf(etEmailSign.getText());
-                            clientAccount.Password = String.valueOf(etPasswordSign.getText());
-                            clientAccount.ConfirmPassword = String.valueOf(etPasswordSign.getText());
-                            clientAccount.AccountType = ClientAccount.AccountTypes.Client;
-                            clientAccount.AccountProfile = baseAccount;
-                            JSON_REGISTER =  gson.toJson(clientAccount);
+                            getProfileClient_nn.Name = String.valueOf(etNameSign.getText());
+                            getProfileClient_nn.Surename = String.valueOf(etSurnameSign.getText());
+                            getProfileClient_nn.Patronymic = String.valueOf(etPatronymicSign.getText());
+                            getProfileClient_nn.Email = String.valueOf(etEmailSign.getText());
+                            getProfileClient_nn.Phone = String.valueOf(etPhoneSign.getText());
+//                            Address address = new Address();
+//                            address.City = String.valueOf(city_class);
+//                            address.Region = String.valueOf(region_class);
+//                            getProfileClient_nn.Address = address;
+                            getProfileClient_nn.Login = String.valueOf(etEmailSign.getText());
+
+//                            clientAccount = new ClientAccount();
+//                            clientAccount.UserName = String.valueOf(etEmailSign.getText());
+//                            clientAccount.Password = String.valueOf(etPasswordSign.getText());
+//                            clientAccount.ConfirmPassword = String.valueOf(etPasswordSign.getText());
+//                            clientAccount.AccountType = ClientAccount.AccountTypes.Client;
+//                            clientAccount.AccountProfile = baseAccount;
+                            JSON_REGISTER =  gson.toJson(getProfileClient_nn);
+
+
+
+
+
+//
+//                            Set_baseAccount baseAccount = new Set_baseAccount();
+//                            baseAccount.Name = String.valueOf(etNameSign.getText());
+//                            baseAccount.Surename = String.valueOf(etSurnameSign.getText());
+//                            baseAccount.Patronymic = String.valueOf(etPatronymicSign.getText());
+//                            baseAccount.Email = String.valueOf(etEmailSign.getText());
+//                            baseAccount.Phone = String.valueOf(etPhoneSign.getText());
+//                            Address address = new Address();
+//                            address.City = String.valueOf(city_class);
+//                            address.Region = String.valueOf(region_class);
+//                            baseAccount.Address = address;
+//
+//                            clientAccount = new ClientAccount();
+//                            clientAccount.UserName = String.valueOf(etEmailSign.getText());
+//                            clientAccount.Password = String.valueOf(etPasswordSign.getText());
+//                            clientAccount.ConfirmPassword = String.valueOf(etPasswordSign.getText());
+//                            clientAccount.AccountType = ClientAccount.AccountTypes.Client;
+//                            clientAccount.AccountProfile = baseAccount;
+//                            JSON_REGISTER =  gson.toJson(clientAccount);
                             //Log.d("qwerty", json_register);
 
                             Dialog_loc();
@@ -892,6 +825,9 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
 
         if(b){
             etCitySign.setText(city.Name);
+
+            getProfileClient_new.Address.City = city.Name;
+            getProfileClient_new.Address.Region = region.Name;
         }else{
             etCitySign.setText("");
         }
@@ -997,11 +933,11 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
 
             //RequestBody formBody = RequestBody.create(JSON, json_signup);
             String dd = params[0];
-            String ddf = "http://"+in.get_url()+"/QuestionAnswers/PutClientAccount/"+String.valueOf(id_delete);
+            String ddf = "http://"+in.get_url()+"/ClientAccounts/PutClientAccount/"+String.valueOf(id_delete);
             code = 0;
 
             Request request = new Request.Builder()
-                    .url("http://"+in.get_url()+"/QuestionAnswers/PutClientAccount/"+String.valueOf(id_delete))
+                    .url("http://"+in.get_url()+"/ClientAccounts/PutClientAccount/"+String.valueOf(id_delete))
                     .put(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
                     .build();
 
@@ -1073,9 +1009,9 @@ public class My_profile_redaction extends Activity implements Dialog_region.i_di
 
             if(result!=null && code>=200 && code<300){
                 Gson gson = new Gson();
-                GetProfileClient getProfileClient = gson.fromJson(result, GetProfileClient.class);
-                id_delete = getProfileClient.Id;
-                start_activity(getProfileClient);
+                getProfileClient_new = gson.fromJson(result, GetProfileClient.class);
+                id_delete = getProfileClient_new.Id;
+                start_activity(getProfileClient_new);
             }else{
                 Toast.makeText(My_profile_redaction.this,
                         "Нет связи с сервером!",

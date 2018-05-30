@@ -161,7 +161,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
         l.start_my(lm, Map_jur_and_notary.this);
 
         mark_jur = new LatLng(IN.latitude_my, IN.longitude_my);
-        map1.moveCamera(CameraUpdateFactory.newLatLngZoom(mark_jur, 17));
+        map1.moveCamera(CameraUpdateFactory.newLatLngZoom(mark_jur, 10));
 
         //setDataMap(json_maps);
         Gson gson = new Gson();
