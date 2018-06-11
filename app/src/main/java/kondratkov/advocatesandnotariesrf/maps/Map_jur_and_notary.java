@@ -53,12 +53,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kondratkov.advocatesandnotariesrf.IN;
 import kondratkov.advocatesandnotariesrf.R;
 import kondratkov.advocatesandnotariesrf.Sidebar;
 import kondratkov.advocatesandnotariesrf.account.Bup;
+import kondratkov.advocatesandnotariesrf.advocates.Advocate_profile;
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindByCoordinatesFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindJuristFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
@@ -302,6 +305,8 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
         return markList;
     }
 
+    public Map<Marker, Integer> map_jur = new HashMap<Marker, Integer>();
+
     public void add_mark_maps(){
 
         map1.clear();
@@ -344,12 +349,22 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
                     }
                     marker = map1.addMarker(new MarkerOptions().title(mcArrayJuristAccoun[i].Fio).snippet(online).position(mark_jur).icon(bitmapDescriptor));
 
+                    map_jur.put(marker, mcArrayJuristAccoun[i].Id);
+
                     map1.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
                             boolFilter = true;
-                            // dopInfo(mcArrayJuristAccoun[i].Fio);
+                            //dopInfo(mcArrayJuristAccoun[i].Fio);
                             return false;
+                        }
+                    });
+                    map1.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+                            Intent intent = new Intent(Map_jur_and_notary.this, Advocate_profile.class);
+                            in.set_id_jur(map_jur.get(marker));
+                            startActivity(intent);
                         }
                     });
 

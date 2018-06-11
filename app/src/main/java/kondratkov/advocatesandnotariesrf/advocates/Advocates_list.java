@@ -518,10 +518,12 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             List <JuristAccounClass> mJuristAccounClasses = new ArrayList<JuristAccounClass>();
             for(JuristAccounClass juristAccounClass : mcArrayJuristAccoun){
                 if(juristAccounClass.IsOnline){
+                    Log.d("qwerty_", "CurrentLatitude = "+String.valueOf(juristAccounClass.CurrentLatitude)+" "+String.valueOf(juristAccounClass.CurrentLongitude));
                     if(juristAccounClass.CurrentLatitude!=0 && juristAccounClass.CurrentLongitude !=0){
                         double mx = Math.abs(in.get_latitude()- juristAccounClass.CurrentLatitude);//51.714342);
                         double my = Math.abs(in.get_longitude() - juristAccounClass.CurrentLongitude);//39.275005);
                         double dist = Math.sqrt(Math.pow(mx, 2) + Math.pow(my,2));
+                        Log.d("qwerty_", "dist = "+String.valueOf(dist));
                         if(dist< 0.15){
                             mJuristAccounClasses.add(juristAccounClass);
                         }
