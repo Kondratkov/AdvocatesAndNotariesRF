@@ -1,5 +1,6 @@
 package kondratkov.advocatesandnotariesrf;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -37,6 +39,7 @@ public class MainActivity extends Activity implements View.OnTouchListener{
     ScrollView main_scrollView;
     IN in;
     TextView textViewNewMess, textView_main_pay;
+    public  static final int RequestPermissionCode  = 1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class MainActivity extends Activity implements View.OnTouchListener{
         in = new IN();
         main_scrollView = (ScrollView) findViewById(R.id.main_scrollView);
         main_scrollView.setOnTouchListener(this);
+
+        onPermissions();
 
         textViewNewMess =(TextView)findViewById(R.id.textViewNewMess);
         textView_main_pay = (TextView)findViewById(R.id.textView_main_pay);
@@ -91,6 +96,18 @@ public class MainActivity extends Activity implements View.OnTouchListener{
 
         //OneStart();
     }
+
+    public void onPermissions(){
+        ActivityCompat.requestPermissions(MainActivity.this,new String[]{
+                Manifest.permission.INTERNET,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
+    }
+
 
     @Override
     protected void onDestroy(){

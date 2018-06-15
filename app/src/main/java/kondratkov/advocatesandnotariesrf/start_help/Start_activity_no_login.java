@@ -22,6 +22,7 @@ import kondratkov.advocatesandnotariesrf.MainActivity;
 import kondratkov.advocatesandnotariesrf.R;
 import kondratkov.advocatesandnotariesrf.Settings_no_login;
 import kondratkov.advocatesandnotariesrf.input.LogIN;
+import kondratkov.advocatesandnotariesrf.input.WhoToContactActivity;
 //import ru.yandex.money.android.PaymentActivity;
 
 public class Start_activity_no_login extends Activity implements View.OnTouchListener{
@@ -123,7 +124,8 @@ public class Start_activity_no_login extends Activity implements View.OnTouchLis
                 startActivity(intent);
                 break;
             case R.id.start_no_but_1:
-
+                intent = new Intent(Start_activity_no_login.this, WhoToContactActivity.class);
+                startActivity(intent);
                 break;
             case R.id.start_no_but_4:
                 intent = new Intent(Start_activity_no_login.this, Top_quest.class);

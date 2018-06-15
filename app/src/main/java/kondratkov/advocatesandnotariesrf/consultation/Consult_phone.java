@@ -65,7 +65,7 @@ public class Consult_phone extends Activity {
     }
 
     void on_call_phone(){
-        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:894539077"));
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:88002501107"));
         startActivity(intent);
     }
 

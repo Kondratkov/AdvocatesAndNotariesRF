@@ -8,8 +8,8 @@ android {
         applicationId "kondratkov.advocatesandnotariesrf"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 86
-        versionName "0.586.6.B"
+        versionCode 87
+        versionName "0.596.6.B"
         vectorDrawables.useSupportLibrary = true
     }
     lintOptions {
@@ -53,10 +53,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.squareup.picasso/picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-
     //compile 'org.apache.httpcomponents:httpclient:4.5'
     //compile 'com.yandex.money.api:yandex-money-sdk-java:5.1.0'
 }
-
-
-

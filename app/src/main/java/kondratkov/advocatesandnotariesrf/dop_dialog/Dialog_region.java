@@ -123,8 +123,12 @@ public class Dialog_region {
         btnmiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                di_r.iv_onRegion(region.Cities[id_city], region, true);
-                dialog.dismiss();
+                try{
+                    di_r.iv_onRegion(region.Cities[id_city], region, true);
+                    dialog.dismiss();
+                }catch (Exception e){
+                    dialog.dismiss();
+                }
             }
         });
 
