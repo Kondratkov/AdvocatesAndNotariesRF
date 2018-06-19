@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,6 +37,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,6 +72,7 @@ import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindByCoordinatesFil
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindJuristFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
 import kondratkov.advocatesandnotariesrf.api_classes.Notary;
+import kondratkov.advocatesandnotariesrf.notary.Notary_profile;
 
 public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener,SeekBar.OnSeekBarChangeListener {
     private static final String DEBUG_TAG = "qwerty";
@@ -106,6 +113,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
 
     public boolean sort_bool_fuck[] ;
     public boolean b_answer_next = false;
+    public int id_notary;
 
     //--S----L--O--C----------------------------------------------------
     private LocationManager mLocationManager;
@@ -306,6 +314,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
     }
 
     public Map<Marker, Integer> map_jur = new HashMap<Marker, Integer>();
+    public Map<Marker, Integer> map_notary = new HashMap<Marker, Integer>();
 
     public void add_mark_maps(){
 
@@ -394,11 +403,23 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
 
                     marker = map1.addMarker(new MarkerOptions().title(mcArrayNotary[i].Fio).position(mark_jur).icon(bitmapDescriptor));
 
+                    map_notary.put(marker, mcArrayNotary[i].Id);
+
                     map1.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                         @Override
                         public boolean onMarkerClick(Marker marker) {
                             boolFilter = true;
                             return false;
+                        }
+                    });
+
+                    map1.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                        @Override
+                        public void onInfoWindowClick(Marker marker) {
+                            //Intent intent = new Intent(Map_jur_and_notary.this, Notary_profile.class);
+                            id_notary = map_notary.get(marker);
+                            new UrlConnectionTask().execute();
+                            //startActivity(intent);
                         }
                     });
 
@@ -579,5 +600,72 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
             }
         });
     }
+
+    class UrlConnectionTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String result = "";
+            OkHttpClient client = new OkHttpClient();
+            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
+            //RequestBody formBody = RequestBody.create(JSON, json_signup);
+            Request request = new Request.Builder()
+                    .header("Authorization", in.get_token_type()+" "+in.get_token())
+                    .url("http://"+in.get_url()+"/Notaries/GetNotary/"+id_notary)
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                result = response.body().string();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Gson gson = new Gson();
+            Notary notary = gson.fromJson(result, Notary.class);
+
+            String sm[] = new String[]{
+                    notary.Fio,
+                    "",//String.valueOf(notary.Address.City),
+                    notary.Phone,
+                    "",//notary.Contacts.Email,
+                    notary.Address2,
+                    "",//notary.Contacts.Site,
+                    String.valueOf(notary.Appointments),//"false",//notary.list.get(position).getString("predvzapis"),
+                    String.valueOf(notary.WorkInOffDays),
+                    String.valueOf(notary.AppointmentsEmail),//"false",//notary.list.get(position).getString("zakazpoemail"),
+                    String.valueOf(notary.Equipage),
+                    String.valueOf(notary.WorkWithJur),//"false",//notary.list.get(position).getString("urlica"),
+                    String.valueOf(notary.IsSitesCertification),
+                    String.valueOf(notary.IsPleadtingHereditaryCases),
+                    String.valueOf(notary.LockDocuments),//"false",//notary.list.get(position).getString("fixdokaz"),
+                    String.valueOf(notary.RequestsAndDuplicate),//"false",//notary.list.get(position).getString("duplicat"),
+                    String.valueOf(notary.DepositsReception),
+                    String.valueOf(notary.Id),
+                    String.valueOf(notary.Latitude),//"-1",//notary.list.get(position).getString("X"),
+                    String.valueOf(notary.Longitude)//"-1",//notary.list.get(position).getString("Y")
+            };
+            try {
+                sm[2] = notary.Phone;
+                sm[3] = notary.Email;
+                sm[5] = notary.Site;
+            } catch (Exception e) {
+
+            }
+            in.set_not_prof(sm);
+            Intent intent = new Intent(Map_jur_and_notary.this, Notary_profile.class);
+            startActivity(intent);
+            super.onPostExecute(result);
+        }
+    }
+
 }
 
