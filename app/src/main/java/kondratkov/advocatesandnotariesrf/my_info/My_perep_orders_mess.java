@@ -65,6 +65,7 @@ import kondratkov.advocatesandnotariesrf.IN;
 import kondratkov.advocatesandnotariesrf.Pay_br_yandex;
 import kondratkov.advocatesandnotariesrf.R;
 import kondratkov.advocatesandnotariesrf.Sidebar;
+import kondratkov.advocatesandnotariesrf.api_classes.ClientQuestion;
 import kondratkov.advocatesandnotariesrf.api_classes.Comment;
 import kondratkov.advocatesandnotariesrf.api_classes.DocumentOrder;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
@@ -262,7 +263,7 @@ public class My_perep_orders_mess extends Activity {
                 Comment comment = new Comment();
                 comment.Message = "123123";//clientQuestions.Body;
                 comment.CommentType = Comment.CommentType1.Question;
-                comment.AccountType = Comment.AccountTypes.Client;
+                comment.AccountType = ClientQuestion.AccountTypes.Client;
                 msArraycomments = new Comment[]{comment};
                 MyAdapterList mam = new MyAdapterList(in.get_activity(), arrayList);
                 lv_mess.setAdapter(mam);
@@ -428,7 +429,7 @@ public class My_perep_orders_mess extends Activity {
             CharSequence dateISNow = DateFormat.format("dd.MM", System.currentTimeMillis());
             CharSequence dateJSON = null;
 
-            if(comments1.get(position).AccountType == Comment.AccountTypes.Client){
+            if(comments1.get(position).AccountType == ClientQuestion.AccountTypes.Client){
                 rowView = inflater.inflate(R.layout.ask_item_user, parent, false);
 
                 TextView tv_mess = (TextView) rowView.findViewById(R.id.mess_user_tv);
@@ -478,7 +479,7 @@ public class My_perep_orders_mess extends Activity {
                             }
                         }
                         in.set_id_jur(msArraycomments[position].Serviceld);
-
+                        in.setType_jur(msArraycomments[position].AccountType);
                         //Intent intent = new Intent(AskAQuestion.this,Profile_Jur.class);
                         //startActivity(intent);
                     }

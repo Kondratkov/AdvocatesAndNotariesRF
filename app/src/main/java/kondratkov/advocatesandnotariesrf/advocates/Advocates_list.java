@@ -354,6 +354,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                             String ssd = gson.toJson(mcArrayJuristAccoun[position - 1]);
                             String sd = "sdf";
                             in.set_id_jur(mcArrayJuristAccoun[(int) id].Id);
+                            in.setType_jur(mcArrayJuristAccoun[(int) id].AccountType);
                             Intent int3 = new Intent(Advocates_list.this, Advocate_profile.class);
                             startActivity(int3);
                         }
@@ -612,6 +613,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                         String ssd = gson.toJson(mcArrayJuristAccoun[position-1]);
                         String sd ="sdf";
                         in.set_id_jur(mcArrayJuristAccoun[(int) id].Id);
+                        in.setType_jur(mcArrayJuristAccoun[(int) id].AccountType);
                         Intent int3 = new Intent(Advocates_list.this, Advocate_profile.class);
                         startActivity(int3);
                     }
@@ -698,6 +700,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
                             String ssd = gson.toJson(mcArrayJuristAccoun[position-1]);
                             String sd ="sdf";
                             in.set_id_jur(mcArrayJuristAccoun[(int) id].Id);
+                            in.setType_jur(mcArrayJuristAccoun[(int) id].AccountType);
                             Intent int3 = new Intent(Advocates_list.this, Advocate_profile.class);
                             startActivity(int3);
                         }

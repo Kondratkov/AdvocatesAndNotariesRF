@@ -270,7 +270,7 @@ public class AddQuestion extends Activity implements View.OnTouchListener{
                         case 2:
                             clientQuestion.Header = SPECIALIZATION;//String.valueOf(getResources().getStringArray(R.array.ArrayTipAddQuest)[int_tip_mess]);
                             clientQuestion.Body = String.valueOf(etAddQuest.getText());
-                            clientQuestion.AccountType = ClientQuestion.AccountTypes.Jurist;
+                            clientQuestion.AccountType = in.getType_jur();
                             clientQuestion.JuristId = in.get_id_jur();
                             break;
                     }
@@ -400,10 +400,11 @@ public class AddQuestion extends Activity implements View.OnTouchListener{
             OkHttpClient client = new OkHttpClient();
 
             MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
-            String s= in.get_token_type()+" "+in.get_token();
-            String s2 = params[0];
-            String s3= "http://"+in.get_url()+"/ClientQuestions/PostClientQuestion";
-            String s4="213";
+
+            Log.d("qwerty_addq", "1- "+in.get_token_type()+" "+in.get_token());
+            Log.d("qwerty_addq", "2- "+params[0]);
+            Log.d("qwerty_addq", "3- "+"http://"+in.get_url()+"/ClientQuestions/PostClientQuestion");
+
 
             Request request = new Request.Builder()
                     .header("Authorization", in.get_token_type()+" "+in.get_token())

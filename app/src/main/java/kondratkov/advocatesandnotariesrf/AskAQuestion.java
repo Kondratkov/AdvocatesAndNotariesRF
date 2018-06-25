@@ -243,7 +243,7 @@ public class AskAQuestion extends Activity {
                 Comment comment = new Comment();
                 comment.Message = "123123";//clientQuestions.Body;
                 comment.CommentType = Comment.CommentType1.Question;
-                comment.AccountType = Comment.AccountTypes.Client;
+                comment.AccountType = ClientQuestion.AccountTypes.Client;
                 msArraycomments = new Comment[]{comment};
                 MyAdapterList mam = new MyAdapterList(in.get_activity(), arrayList);
                 lv_mess.setAdapter(mam);
@@ -273,12 +273,13 @@ public class AskAQuestion extends Activity {
 
 
     }
-    @TargetApi(Build.VERSION_CODES.M)
-    private void openDialog(final int id, final Comment comment) {
+    //@TargetApi(Build.VERSION_CODES.M)
+    private void openDialog(final int id, ClientQuestion.AccountTypes accountTypes, final Comment comment) {
         final Dialog dialog = new Dialog(AskAQuestion.this);
         dialog.setTitle("");
         dialog.setContentView(R.layout.add_new_quest_advak);
         final int IDD= id;
+        final ClientQuestion.AccountTypes accountType = accountTypes;
 
         TextView tv_time    = (TextView) dialog.findViewById(R.id.cons_phone_tv_tipnew);
         final EditText editText1 = (EditText)dialog.findViewById(R.id.editTextnnn);
@@ -325,7 +326,7 @@ public class AskAQuestion extends Activity {
                 clientQuestion.Header = "общение после ответа на вопрос из чата";//comment.From;
                 clientQuestion.Body = String.valueOf(editText1.getText());
 
-                clientQuestion.AccountType = ClientQuestion.AccountTypes.Jurist;
+                clientQuestion.AccountType = accountType;
                 clientQuestion.JuristId = IDD;
 
                 String JSON_POST = gson.toJson(clientQuestion);
@@ -359,10 +360,9 @@ public class AskAQuestion extends Activity {
             OkHttpClient client = new OkHttpClient();
 
             MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
-            String s= in.get_token_type()+" "+in.get_token();
-            String s2 = params[0];
-            String s3= "http://"+in.get_url()+"/ClientQuestions/PostClientQuestion";
-            String s4="213";
+            Log.d("qwerty_ask", "1- "+in.get_token_type()+" "+in.get_token());
+            Log.d("qwerty_ask", "2- "+params[0]);
+            Log.d("qwerty_ask", "3- "+"http://"+in.get_url()+"/ClientQuestions/PostClientQuestion");
 
             Request request = new Request.Builder()
                     .header("Authorization", in.get_token_type()+" "+in.get_token())
@@ -425,7 +425,7 @@ public class AskAQuestion extends Activity {
             CharSequence dateISNow = DateFormat.format("dd.MM", System.currentTimeMillis());
             CharSequence dateJSON = null;
 
-            if(comments1.get(position).AccountType == Comment.AccountTypes.Client){
+            if(comments1.get(position).AccountType == ClientQuestion.AccountTypes.Client){
                 rowView = inflater.inflate(R.layout.ask_item_user, parent, false);
 
                 try{
@@ -481,9 +481,10 @@ public class AskAQuestion extends Activity {
                         public void onClick(View v) {
                             //region.Cities[id_SudTer].Region = region;
                             if(in.get_Tiptip()==false){
-                                if(comments1.get(position).GetAccountTypes()==1){
-                                    openDialog(comments1.get(position).AccountId, comments1.get(position));
-                                }
+                                openDialog(comments1.get(position).AccountId, comments1.get(position).AccountType, comments1.get(position));
+//                                if(comments1.get(position).GetAccountTypes()==1){
+//
+//                                }
                             }
                         }
                     });
@@ -492,9 +493,10 @@ public class AskAQuestion extends Activity {
                         public void onClick(View v) {
                             //region.Cities[id_SudTer].Region = region;
                             if(in.get_Tiptip()==false){
-                                if(comments1.get(position).GetAccountTypes()==1){
-                                    openDialog(comments1.get(position).AccountId, comments1.get(position));
-                                }
+                                openDialog(comments1.get(position).AccountId, comments1.get(position).AccountType, comments1.get(position));
+//                                if(comments1.get(position).GetAccountTypes()==1){
+//                                    openDialog(comments1.get(position).AccountId, comments1.get(position).AccountType, comments1.get(position));
+//                                }
                             }
                         }
                     });
@@ -511,6 +513,7 @@ public class AskAQuestion extends Activity {
                                 }
                             }
                             in.set_id_jur(comments1.get(position).AccountId);
+                            in.setType_jur(comments1.get(position).AccountType);
 
                             Intent intent = new Intent(AskAQuestion.this, Advocate_profile.class);
                             startActivity(intent);

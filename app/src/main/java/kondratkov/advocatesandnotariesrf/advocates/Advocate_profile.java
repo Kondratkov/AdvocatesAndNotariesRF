@@ -53,6 +53,7 @@ import kondratkov.advocatesandnotariesrf.R;
 import kondratkov.advocatesandnotariesrf.account.Address;
 import kondratkov.advocatesandnotariesrf.account.City;
 import kondratkov.advocatesandnotariesrf.account.Region;
+import kondratkov.advocatesandnotariesrf.api_classes.ClientQuestion;
 import kondratkov.advocatesandnotariesrf.api_classes.Complaint;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
 import kondratkov.advocatesandnotariesrf.input.LogIN;
@@ -641,10 +642,22 @@ public class Advocate_profile extends Activity {
             OkHttpClient client = new OkHttpClient();
             MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
             //RequestBody formBody = RequestBody.create(JSON, json_signup);
-            Request request = new Request.Builder()
-                    .header("Authorization", in.get_token_type()+" "+in.get_token())
-                    .url("http://"+in.get_url()+"/JuristAccounts/GetJuristAccount/"+in.get_id_jur())
-                    .build();
+
+
+            Request request;
+
+            if(in.getType_jur() == ClientQuestion.AccountTypes.Jurist){
+                request= new Request.Builder()
+                        .header("Authorization", in.get_token_type()+" "+in.get_token())
+                        .url("http://"+in.get_url()+"/JuristAccounts/GetJuristAccount/"+in.get_id_jur())
+                        .build();
+            }else{
+                request= new Request.Builder()
+                        .header("Authorization", in.get_token_type()+" "+in.get_token())
+                        .url("http://"+in.get_url()+"/DutyJuristAccounts/GetDutyJuristAccount/"+in.get_id_jur())
+                        .build();
+            }
+
 
             try {
                 Response response = client.newCall(request).execute();
@@ -666,6 +679,8 @@ public class Advocate_profile extends Activity {
             super.onPostExecute(result);
         }
     }
+
+
     int code;
     class UrlConnectionTaskJaloba extends AsyncTask<String, Void, String> {
 

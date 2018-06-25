@@ -56,6 +56,14 @@ public class IN {
     public int get_id_jur(){return this.id_jur;}
     public void set_id_jur (int id_jur){this.id_jur = id_jur;}
 
+    public static ClientQuestion.AccountTypes type_jur;
+    public static ClientQuestion.AccountTypes getType_jur() {
+        return type_jur;
+    }
+    public static void setType_jur(ClientQuestion.AccountTypes type_jur) {
+        IN.type_jur = type_jur;
+    }
+
     public static String id_jurS = "";
     public String get_id_jurS(){return this.id_jurS;}
     public void set_id_jurS (String id_jurS){this.id_jurS = id_jurS;}

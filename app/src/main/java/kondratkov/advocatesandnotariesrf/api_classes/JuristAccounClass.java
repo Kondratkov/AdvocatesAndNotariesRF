@@ -54,7 +54,7 @@ public class JuristAccounClass {
     /// Наставничество (имеет ли помощников/стажеров) да/нет
     public boolean Tutorship;// { get; set; }
 
-    public accountType AccountType;
+    public ClientQuestion.AccountTypes AccountType;
     public String Name = "";
     public String Surename = "";
     public String Patronymic = "";
@@ -76,10 +76,4 @@ public class JuristAccounClass {
 
     public double dist = 0;
 
-    public enum accountType
-    {
-        Client,
-        Jurist,
-        DutyJurist
-    }
 }

@@ -106,7 +106,7 @@ public class My_frag_quest_forum extends Fragment {
 
                 Comment comment = new Comment();
                 comment.Date = clientQuestion_now[(int) id].Date;
-                comment.AccountType = Comment.AccountTypes.Client;
+                comment.AccountType = ClientQuestion.AccountTypes.Client;
                 comment.Message = clientQuestion_now[(int) id].Body;
                 in.setComment(comment);
                 Intent inte = new Intent(in.get_context(), AskAQuestion.class);

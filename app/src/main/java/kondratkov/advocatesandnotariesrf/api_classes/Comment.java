@@ -12,7 +12,7 @@ public class Comment {
     public String From="";
     public  String Message="";
     public int AccountId = -1;
-    public AccountTypes AccountType = AccountTypes.Client;
+    public ClientQuestion.AccountTypes AccountType;// = AccountTypes.Client;
 
     public enum CommentType1{
         Question,
@@ -24,11 +24,11 @@ public class Comment {
         Jurist,
         DutyJurist
     }
-    public int GetAccountTypes(){
-        int i =0;
-        if(AccountType==AccountTypes.Client){
-            i=0;
-        }else i=1;
-        return i;
-    }
+//    public int GetAccountTypes(){
+//        int i =0;
+//        if(AccountType==AccountTypes.Client){
+//            i=0;
+//        }else i=1;
+//        return i;
+//    }
 }
