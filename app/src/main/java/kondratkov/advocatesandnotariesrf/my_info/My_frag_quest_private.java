@@ -3,8 +3,10 @@ package kondratkov.advocatesandnotariesrf.my_info;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -86,6 +88,15 @@ public class My_frag_quest_private extends Fragment {
 
         context_view = in.get_context();
         arrayList = new ArrayList<Comment>();
+
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(view.getContext());//getPreferences(MODE_PRIVATE);
+
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt("pref_new_message", 0);
+        ed.commit();
+        SharedPreferences.Editor ed3 = sPref.edit();
+        ed3.putInt("pref_new_consul", 0);
+        ed3.commit();
 
         //t_db = new theme_data(in.get_context());
 

@@ -19,11 +19,6 @@ public class Comment {
         Consultation,
         DocumentOrder
     }
-    public enum AccountTypes{
-        Client,
-        Jurist,
-        DutyJurist
-    }
 //    public int GetAccountTypes(){
 //        int i =0;
 //        if(AccountType==AccountTypes.Client){

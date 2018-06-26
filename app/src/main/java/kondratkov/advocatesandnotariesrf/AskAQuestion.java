@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -22,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -123,6 +125,15 @@ public class AskAQuestion extends Activity {
         lila2 = (LinearLayout) findViewById(R.id.lila_vopros_lichca);
         boolean v = in.get_Tiptip();
 
+        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(this);//getPreferences(MODE_PRIVATE);
+
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putInt("pref_new_message", 0);
+        ed.commit();
+        SharedPreferences.Editor ed3 = sPref.edit();
+        ed3.putInt("pref_new_consul", 0);
+        ed3.commit();
+
         if(in.get_Tiptip()){
             lila1.setLayoutParams(
                     new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1), (float) 0));
@@ -212,6 +223,7 @@ public class AskAQuestion extends Activity {
         asked_progressBar.setVisibility(ProgressBar.VISIBLE);
 
         //new UrlConnectionTask().execute();
+        in.set_activity(this);
         in.set_date("0");
         potock(true);
     }
@@ -425,10 +437,10 @@ public class AskAQuestion extends Activity {
             CharSequence dateISNow = DateFormat.format("dd.MM", System.currentTimeMillis());
             CharSequence dateJSON = null;
 
-            if(comments1.get(position).AccountType == ClientQuestion.AccountTypes.Client){
-                rowView = inflater.inflate(R.layout.ask_item_user, parent, false);
+            try{
+                if(comments1.get(position).AccountType == ClientQuestion.AccountTypes.Client){
+                    rowView = inflater.inflate(R.layout.ask_item_user, parent, false);
 
-                try{
                     LinearLayout lilamess_jur_tv = (LinearLayout)rowView.findViewById(R.id.lilamess_jur_tv);
 
                     TextView tv_mess = (TextView) rowView.findViewById(R.id.mess_user_tv);
@@ -447,14 +459,10 @@ public class AskAQuestion extends Activity {
                     tv_nik_user_mess.setText("Вы");//list.get(position).get_name())
 
                     //imageView
-
-
                     //icon_user_mess.setBackgroundResource(Integer.parseInt(list.get(position).getString("iconuser")));
-                }catch (Exception e){}
+                } else{
+                    rowView = inflater.inflate(R.layout.ask_item_jur, parent, false);
 
-            } else{
-                rowView = inflater.inflate(R.layout.ask_item_jur, parent, false);
-                try{
                     LinearLayout lilamess_jur_tv = (LinearLayout)rowView.findViewById(R.id.lilamess_jur_tv);
                     ImageView icon_mess_jur = (ImageView)rowView.findViewById(R.id.mess_jur_icon);
                     TextView tv_surmname_mess_jur=(TextView) rowView.findViewById(R.id.mess_jur_tv_surmname);
@@ -519,9 +527,11 @@ public class AskAQuestion extends Activity {
                             startActivity(intent);
                         }
                     });
-                }catch (Exception e){}
+                }
+            }catch (Exception e){
 
             }
+
             return rowView;
         }
     }

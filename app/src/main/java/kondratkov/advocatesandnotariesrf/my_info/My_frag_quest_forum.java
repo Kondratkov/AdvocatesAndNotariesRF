@@ -92,6 +92,9 @@ public class My_frag_quest_forum extends Fragment {
         SharedPreferences.Editor ed = sPref.edit();
         ed.putInt("pref_new_message", 0);
         ed.commit();
+        SharedPreferences.Editor ed3 = sPref.edit();
+        ed3.putInt("pref_new_consul", 0);
+        ed3.commit();
 
         context_view = in.get_context();
 
