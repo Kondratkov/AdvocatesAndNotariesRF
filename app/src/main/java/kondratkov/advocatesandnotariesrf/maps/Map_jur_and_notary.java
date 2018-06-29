@@ -68,6 +68,7 @@ import kondratkov.advocatesandnotariesrf.R;
 import kondratkov.advocatesandnotariesrf.Sidebar;
 import kondratkov.advocatesandnotariesrf.account.Bup;
 import kondratkov.advocatesandnotariesrf.advocates.Advocate_profile;
+import kondratkov.advocatesandnotariesrf.api_classes.ClientQuestion;
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindByCoordinatesFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.Filter.FindJuristFilter;
 import kondratkov.advocatesandnotariesrf.api_classes.JuristAccounClass;
@@ -373,6 +374,7 @@ public class Map_jur_and_notary extends Activity implements GoogleMap.OnMapClick
                         public void onInfoWindowClick(Marker marker) {
                             Intent intent = new Intent(Map_jur_and_notary.this, Advocate_profile.class);
                             in.set_id_jur(map_jur.get(marker));
+                            in.setType_jur(ClientQuestion.AccountTypes.Jurist);
                             startActivity(intent);
                         }
                     });

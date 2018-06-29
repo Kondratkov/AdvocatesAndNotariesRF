@@ -296,32 +296,6 @@ public class AskAQuestion extends Activity {
         TextView tv_time    = (TextView) dialog.findViewById(R.id.cons_phone_tv_tipnew);
         final EditText editText1 = (EditText)dialog.findViewById(R.id.editTextnnn);
 
-
-        /*if(textView_time.getText().length()>4){
-            String sss = textView_time.getText().toString();
-            if(Integer.parseInt(String.valueOf(sss.charAt(1)))>2){
-                datetime = s+" PM";
-            }else {
-                datetime = s+" AM";
-            }
-        }else{
-            datetime = s+" AM";
-        }
-        s = String.valueOf(timePicker.getHour())+":";
-        if(timePicker.getMinute()<10) {
-            s += "0"+ String.valueOf(timePicker.getMinute())+ " ";
-        }else {
-            s += String.valueOf(timePicker.getMinute())+ " ";
-        }
-        s +=String.valueOf(datePicker.getDayOfMonth())+"."+String.valueOf(datePicker.getMonth()+1)+"."+String.valueOf(datePicker.getYear());
-
-        datetime = String.valueOf(datePicker.getDayOfMonth())+"/"+String.valueOf(datePicker.getMonth()+1)+"/"+String.valueOf(datePicker.getYear())+" ";
-        if(timePicker.getHour()>12){
-            datetime += String.valueOf(24-timePicker.getHour())+":"+String.valueOf(timePicker.getMinute())+ " PM";
-        }else{
-            datetime += String.valueOf(timePicker.getHour())+":"+String.valueOf(timePicker.getMinute())+" AM";
-        }
-*/
         editText1.setText("'" +arrayList.get(0).Message+"'");
         in.set_text(String.valueOf(editText1.getText()));
 
@@ -360,58 +334,6 @@ public class AskAQuestion extends Activity {
         });
 
         dialog.show();
-    }
-
-    class UrlConnectionTask11 extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String result = "";
-
-            OkHttpClient client = new OkHttpClient();
-
-            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
-            Log.d("qwerty_ask", "1- "+in.get_token_type()+" "+in.get_token());
-            Log.d("qwerty_ask", "2- "+params[0]);
-            Log.d("qwerty_ask", "3- "+"http://"+in.get_url()+"/ClientQuestions/PostClientQuestion");
-
-            Request request = new Request.Builder()
-                    .header("Authorization", in.get_token_type()+" "+in.get_token())
-                    .url("http://"+in.get_url()+"/ClientQuestions/PostClientQuestion")
-                    .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
-                    .build();
-
-            try {
-                Response response = client.newCall(request).execute();
-                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-                result = response.body().string();
-                code = response.code();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return result;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            Log.d("qwerty", result);
-            if (code>=200 && code<300) {
-                Toast.makeText(AskAQuestion.this,
-                        "Вопрос отправлен! Теперь общение с выбранным адвокатом будет в списке 'частные'!",
-                        Toast.LENGTH_LONG).show();
-                AskAQuestion.this.finish();
-            }else{
-                Toast.makeText(AskAQuestion.this,
-                        "Нет связи с сервером!",
-                        Toast.LENGTH_LONG).show();
-                AskAQuestion.this.finish();
-            }
-            super.onPostExecute(result);
-        }
     }
 
     class MyAdapterList extends ArrayAdapter {
@@ -536,18 +458,6 @@ public class AskAQuestion extends Activity {
         }
     }
 
-    public void stopProgressBar(){
-        asked_frameProg.setBackgroundResource(R.color.frameOff);
-        asked_frameProg.setClickable(false);
-        asked_progressBar.setVisibility(ProgressBar.INVISIBLE);
-
-        if(my_yes_no = true) {
-            asked_add_frameProg.setBackgroundResource(R.color.frameOff);
-            asked_add_frameProg.setClickable(false);
-            asked_add_progressBar.setVisibility(ProgressBar.INVISIBLE);
-        }
-    }
-
     public void onClickMess(View v){
         switch (v.getId()){
             case R.id.ask_but_cancel:
@@ -624,6 +534,58 @@ public class AskAQuestion extends Activity {
                     arrayList.add(msArraycomments[i]);
                 }
                 start_new_list();
+            }
+            super.onPostExecute(result);
+        }
+    }
+
+    class UrlConnectionTask11 extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            String result = "";
+
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse("application/json; charset=utf-8");
+            Log.d("qwerty_ask", "1- "+in.get_token_type()+" "+in.get_token());
+            Log.d("qwerty_ask", "2- "+params[0]);
+            Log.d("qwerty_ask", "3- "+"http://"+in.get_url()+"/ClientQuestions/PostClientQuestion");
+
+            Request request = new Request.Builder()
+                    .header("Authorization", in.get_token_type()+" "+in.get_token())
+                    .url("http://"+in.get_url()+"/ClientQuestions/PostClientQuestion")
+                    .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, params[0]))
+                    .build();
+
+            try {
+                Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                result = response.body().string();
+                code = response.code();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("qwerty", result);
+            if (code>=200 && code<300) {
+                Toast.makeText(AskAQuestion.this,
+                        "Вопрос отправлен! Теперь общение с выбранным адвокатом будет в списке 'частные'!",
+                        Toast.LENGTH_LONG).show();
+                AskAQuestion.this.finish();
+            }else{
+                Toast.makeText(AskAQuestion.this,
+                        "Нет связи с сервером!",
+                        Toast.LENGTH_LONG).show();
+                AskAQuestion.this.finish();
             }
             super.onPostExecute(result);
         }

@@ -52,6 +52,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import kondratkov.advocatesandnotariesrf.api_classes.ClientQuestion;
+import kondratkov.advocatesandnotariesrf.api_classes.Comment;
 import kondratkov.advocatesandnotariesrf.api_classes.NewPushMessage;
 import kondratkov.advocatesandnotariesrf.api_classes.Order;
 import kondratkov.advocatesandnotariesrf.input.SignUP;
@@ -262,8 +263,18 @@ public class Service_mess extends Service {
     public void start_client_quest(ClientQuestion clientQuestion) {
         if (clientQuestion.JuristId == 0) {
             in.set_Tiptip(false);
+            Comment comment = new Comment();
+            comment.Date = clientQuestion.Date;
+            comment.AccountType = ClientQuestion.AccountTypes.Client;
+            comment.Message = clientQuestion.Body;
+            in.setComment(comment);
         } else {
             in.set_Tiptip(true);
+            Comment comment = new Comment();
+            comment.Date = clientQuestion.Date;
+            comment.AccountType = ClientQuestion.AccountTypes.Client;
+            comment.Message = clientQuestion.Body;
+            in.setComment(comment);
         }
     }
 
