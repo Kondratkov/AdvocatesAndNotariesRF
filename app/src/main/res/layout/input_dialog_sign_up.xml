@@ -16,12 +16,13 @@
             android:background="#ffffff">
 
             <TextView
+                android:id="@+id/textViewDogovor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
                 android:textColor="#020429"
                 android:textSize="14dp"
-                android:text="@string/text_dogovor" />
+                android:text=" " />
 
             <LinearLayout
                 android:orientation="horizontal"

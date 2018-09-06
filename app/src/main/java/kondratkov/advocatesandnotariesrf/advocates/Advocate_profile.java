@@ -505,6 +505,28 @@ public class Advocate_profile extends Activity {
 
                 new UrlConnectionTaskJaloba().execute(JALOBA);
 
+
+
+                complaint.AccountType = Complaint.AccountTypes.Jurist;
+                complaint.JuristId = in.get_id_jur();
+                complaint.AccountId = in.get_id_user();
+                complaint.From = JALOBA_FROM;
+                complaint.Message = JALOBA_FROM+": \n"+String.valueOf(jaloba_et_text.getText());
+                complaint.Date = dateInString;
+
+                try{
+                    Intent intentEmail = new Intent(Intent.ACTION_SENDTO);
+                    intentEmail.setData(Uri.parse("mailto:"+"2211107@mmka.info"));
+                    intentEmail.putExtra(Intent.EXTRA_SUBJECT, "Жалоба на адвоката "+ j_1);
+                    intentEmail.putExtra(Intent.EXTRA_TEXT, JALOBA_FROM+": \n"+String.valueOf(jaloba_et_text.getText()));
+                    if (intentEmail.resolveActivity(getPackageManager()) != null) {
+                        startActivity(intentEmail);
+                    }
+                }catch (Exception e){}
+
+
+
+
                 dialog.dismiss();
             }
         });

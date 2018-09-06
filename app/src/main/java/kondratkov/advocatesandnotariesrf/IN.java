@@ -97,8 +97,9 @@ public class IN {
 
 
     //public static String url = "195.128.124.172/api";
-    public static String url = "app.mmka.info/api";
-    public String get_url(){return this.url;}
+    private static String url = "app.mmka.info";
+    public String get_url(){return this.url+"/api";}
+    public String get_url_token(){return this.url+"/token";}
     public void set_url (String url){this.url = url;}
 
     public static String token = "";

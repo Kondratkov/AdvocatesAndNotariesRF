@@ -92,6 +92,14 @@ public class Notary_profile extends Activity {
                 tvP[i].setText(in.get_not_prof()[i]);
             }
         }
+
+        not_tv_prof_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(not_tv_prof_4.getText())));
+                startActivity(browserIntent);
+            }
+        });
     }
 
     public void onClick(View v){

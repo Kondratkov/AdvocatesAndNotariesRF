@@ -912,6 +912,13 @@ public class SignUP extends Activity implements Dialog_region.i_dialog_region{
         dialog.setTitle("Лицензионное соглашение");
         dialog.setContentView(R.layout.input_dialog_sign_up);
 
+        TextView textView = (TextView)dialog.getWindow().findViewById(R.id.textViewDogovor);
+        try{
+            textView.setText(R.string.text_dogovor);
+        }catch (Exception e){
+            textView.setText((R.string.text_dogovor_mini));
+        }
+
         Button btnNO = (Button) dialog.getWindow().findViewById(
                 R.id.dl_but_no);
 

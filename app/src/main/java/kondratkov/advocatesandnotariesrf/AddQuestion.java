@@ -295,6 +295,10 @@ public class AddQuestion extends Activity implements View.OnTouchListener{
                     asked_frameProg.setClickable(true);
                     asked_progressBar.setVisibility(ProgressBar.VISIBLE);
 
+//                    Toast.makeText(AddQuestion.this,
+//                            "URL - "+"http://"+in.get_url()+"/ClientQuestions/PostClientQuestion"+" запрос "+params[0],
+//                            Toast.LENGTH_LONG).show();
+
                     new UrlConnectionTask().execute(JSON_POST);
                     //new AsyncTaskAddQuest().execute();
                 }
@@ -404,7 +408,6 @@ public class AddQuestion extends Activity implements View.OnTouchListener{
             Log.d("qwerty_addq", "1- "+in.get_token_type()+" "+in.get_token());
             Log.d("qwerty_addq", "2- "+params[0]);
             Log.d("qwerty_addq", "3- "+"http://"+in.get_url()+"/ClientQuestions/PostClientQuestion");
-
 
             Request request = new Request.Builder()
                     .header("Authorization", in.get_token_type()+" "+in.get_token())

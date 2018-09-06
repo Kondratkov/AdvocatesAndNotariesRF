@@ -52,6 +52,31 @@
                         android:layout_marginTop="15dp"
                         android:textColor="@color/sidebar_text" />
 
+                    <LinearLayout
+                        android:id="@+id/lial_setting_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/button_setting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Принять"/>
+
+                        <EditText
+                            android:id="@+id/editText_setting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:hint="app.mmka.info"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/color_darkgray"/>
+                    </LinearLayout>
+
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

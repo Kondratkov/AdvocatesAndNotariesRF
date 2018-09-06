@@ -535,6 +535,7 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             mcArrayJuristAccoun = new JuristAccounClass[mJuristAccounClasses.size()];
             for(int i = 0; i<mJuristAccounClasses.size(); i++){
                 mcArrayJuristAccoun[i] = mJuristAccounClasses.get(i);
+                mcArrayJuristAccounSearch[i] = mJuristAccounClasses.get(i);
             }
         }
 
@@ -710,10 +711,11 @@ public class Advocates_list extends Activity implements View.OnTouchListener, Se
             }catch (Exception e){}
         }
 
-            if(sort_bool_fuck[0]==true || sort_bool_fuck[1]==true || sort_bool_fuck[2]==true){
-                search_jurist_pos();
-            }
+        if(sort_bool_fuck[0]==true || sort_bool_fuck[1]==true || sort_bool_fuck[2]==true){
+            search_jurist_pos();
         }
+        mcArrayJuristAccounSearch = mcArrayJuristAccoun;
+    }
 
     public void stopProgressBar(){
         //asked_frameProg.setBackgroundResource(R.color.frameOff);

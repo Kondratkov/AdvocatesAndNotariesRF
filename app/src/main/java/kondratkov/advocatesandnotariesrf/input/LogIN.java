@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,10 @@ public class LogIN extends Activity {
 
     public Dialog dialog;
 
+    public EditText mEditText_test;
+    public Button mButton_test;
+    public LinearLayout mLinearLayout_test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +81,22 @@ public class LogIN extends Activity {
         tvPasswl = (TextView) findViewById(R.id.tvPasswl);
         cb_save = (CheckBox)findViewById(R.id.log_in_cb_save);
         tv_log_in_error = (TextView) findViewById(R.id.tv_log_in_error);
+
+
+        mEditText_test = (EditText)findViewById(R.id.editText_setting);
+        mButton_test = (Button)findViewById(R.id.button_setting);
+        mLinearLayout_test = (LinearLayout)findViewById(R.id.lial_setting_main);
+
+        mButton_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                in.set_url(String.valueOf(mEditText_test.getText()));
+            }
+        });
+
+        mLinearLayout_test.setVisibility(View.GONE);
+
+
 
 
         etPhoneEmail.setOnTouchListener(new View.OnTouchListener() {
@@ -333,7 +354,7 @@ public class LogIN extends Activity {
                     //.url("http://192.168.0.100/token")
                     //.url("http://vsundupey.vds.serverdale.com/token")
                     //.url("http://195.128.124.172/token")
-                    .url("http://app.mmka.info/token")
+                    .url("http://"+in.get_url_token())
                     .post(formBody)
                     .build();
 
